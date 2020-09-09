@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="35px" height="34px" viewBox="0 0 35 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Path</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-28.1%" y="-28.1%" width="156.2%" height="156.2%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.819607843   0 0 0 0 0.819607843   0 0 0 0 0.819607843  0 0 0 1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Conversation" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home" transform="translate(-319.000000, -613.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="plus-2-copy" filter="url(#filter-1)" transform="translate(312.000000, 604.000000)">
+                <path d="M35.9495192,23.0217391 L25.4350962,23.0217391 L25.4350962,12.4565217 C25.4350962,11.9162283 24.9992344,11.4782609 24.4615385,11.4782609 C23.9238425,11.4782609 23.4879808,11.9162283 23.4879808,12.4565217 L23.4879808,23.0217391 L12.9735577,23.0217391 C12.4358618,23.0217391 12,23.4597065 12,24 C12,24.5402935 12.4358618,24.9782609 12.9735577,24.9782609 L23.4879808,24.9782609 L23.4879808,35.5434783 C23.4879808,36.0837717 23.9238425,36.5217391 24.4615385,36.5217391 C24.9992344,36.5217391 25.4350962,36.0837717 25.4350962,35.5434783 L25.4350962,24.9782609 L35.9495192,24.9782609 C36.4872151,24.9782609 36.9230769,24.5402935 36.9230769,24 C36.9230769,23.4597065 36.4872151,23.0217391 35.9495192,23.0217391 Z" id="Path"></path>
+            </g>
+        </g>
+    </g>
+</svg>

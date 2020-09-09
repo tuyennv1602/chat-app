@@ -1,0 +1,11 @@
+{
+  "label": {
+    "welcome": "WELCOME",
+    "student": "Học viên",
+    "manage": "Quản lý",
+    "email_or_mobile": "Email hoặc Số điện thoại",
+    "password": "Mật khẩu",
+    "forgot_password": "Quên mật khẩu?",
+    "notification": "Thông báo"
+  }
+}
