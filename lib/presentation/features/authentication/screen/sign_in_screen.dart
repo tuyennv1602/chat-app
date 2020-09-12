@@ -1,8 +1,10 @@
-import 'package:chat_app/common/blocs/loading_bloc/loading_bloc.dart';
-import 'package:chat_app/common/blocs/loading_bloc/loading_event.dart';
-import 'package:chat_app/common/injector/injector.dart';
+import 'package:chat_app/common/constants/images.dart';
+import 'package:chat_app/common/utils/alert_utils.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
+import 'package:chat_app/common/widgets/button_widget.dart';
+import 'package:chat_app/common/widgets/custom_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SignInScreen extends StatelessWidget {
   static const String route = '/sign_in';
@@ -11,18 +13,21 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          InkWell(
-            onTap: () async {
-              Injector.resolve<LoadingBloc>().add(StartLoading());
-              await Future.delayed(const Duration(seconds: 2));
-              Injector.resolve<LoadingBloc>().add(FinishLoading());
-            },
-            child: const Text('Loading'),
-          ),
-        ],
+      child: SizedBox.expand(
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: SvgPicture.asset(
+                ImageConst.background,
+                fit: BoxFit.fill,
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -25,6 +25,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.white,
       body: BlocListener<LoadingBloc, LoadingState>(
         listener: (context, state) {

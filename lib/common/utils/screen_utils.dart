@@ -27,8 +27,12 @@ class ScreenUtil {
 
   ScreenUtil._();
 
-  static void init(BuildContext context,
-      {num width = defaultWidth, num height = defaultHeight, bool allowFontScaling = false}) {
+  static void init(
+    BuildContext context, {
+    num width = defaultWidth,
+    num height = defaultHeight,
+    bool allowFontScaling = false,
+  }) {
     _instance ??= ScreenUtil._();
     _instance.uiWidthPx = width;
     _instance.uiHeightPx = height;
