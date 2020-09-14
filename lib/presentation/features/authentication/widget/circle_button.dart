@@ -21,7 +21,7 @@ class CircleButtonWidget extends StatelessWidget {
       child: Container(
         width: 60.w,
         height: 60.w,
-        padding: EdgeInsets.all(18.w),
+        padding: EdgeInsets.all(20.w),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(

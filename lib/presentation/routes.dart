@@ -1,5 +1,6 @@
 import 'package:chat_app/common/navigation/fade_in_route.dart';
 import 'package:chat_app/presentation/features/authentication/screen/sign_in_screen.dart';
+import 'package:chat_app/presentation/features/home/screen/home.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -49,6 +50,8 @@ class Routes {
     switch (settings.name) {
       case SignInScreen.route:
         return FadeInRoute(widget: const SignInScreen());
+      case HomeScreen.route:
+        return FadeInRoute(widget: const HomeScreen());
       default:
         return _emptyRoute(settings);
     }
