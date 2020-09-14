@@ -5,4 +5,5 @@ class IconConst {
   static const String checked = '${path}checked.svg';
   static const String error = '${path}error.svg';
   static const String warning = '${path}warning.svg';
+  static const String back = '${path}back.svg';
 }

@@ -1,9 +1,7 @@
 import 'dart:math';
 
-import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class AnimatedButtonWidget extends StatefulWidget {
   final double buttonSize;
@@ -29,7 +27,7 @@ class _AnimatedButtonWidgetState extends State<AnimatedButtonWidget>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 50),
     );
     angle = Tween<double>(begin: 0, end: 1).animate(_animationController);
     super.initState();
@@ -72,10 +70,10 @@ class _AnimatedButtonWidgetState extends State<AnimatedButtonWidget>
           animation: _animationController,
           builder: (_, __) => Transform.rotate(
             angle: angle.value * (pi / 4),
-            child: SvgPicture.asset(
-              IconConst.add,
-              width: widget.buttonSize / 2,
-              height: widget.buttonSize / 2,
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 32,
             ),
           ),
         ),

@@ -72,7 +72,7 @@ class CustomAlertWidget extends StatelessWidget {
             margin: EdgeInsets.symmetric(
               horizontal: 25.w,
             ),
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.w),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
@@ -141,7 +141,7 @@ class CustomAlertWidget extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 15.w, right: 25.w),
+                  padding: EdgeInsets.only(top: 15.h, right: 25.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -152,7 +152,7 @@ class CustomAlertWidget extends StatelessWidget {
                             onCancel?.call();
                           },
                           child: Container(
-                            height: 35.w,
+                            height: 32.h,
                             alignment: Alignment.center,
                             // ignore: lines_longer_than_80_chars
                             padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -177,7 +177,7 @@ class CustomAlertWidget extends StatelessWidget {
                             onConfirmed?.call();
                           },
                           child: Container(
-                            height: 35.w,
+                            height: 32.h,
                             margin: EdgeInsets.only(left: 10.w),
                             alignment: Alignment.center,
                             // ignore: lines_longer_than_80_chars
