@@ -1,6 +1,7 @@
 import 'package:chat_app/common/navigation/fade_in_route.dart';
 import 'package:chat_app/common/navigation/route_name.dart';
 import 'package:chat_app/presentation/features/authentication/forgot_password/presentation/pages/forgot_password.dart';
+import 'package:chat_app/presentation/features/home/screen/home.dart';
 import 'package:flutter/material.dart';
 
 import 'features/authentication/sign_in/screen/sign_in_screen.dart';
@@ -57,6 +58,8 @@ class Routes {
         return FadeInRoute(widget: SignUpScreen());
       case RouteName.forgotPass:
         return FadeInRoute(widget: ForgotPassword());
+      case HomeScreen.route:
+        return FadeInRoute(widget: const HomeScreen());
       default:
         return _emptyRoute(settings);
     }

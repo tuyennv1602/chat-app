@@ -1,4 +1,3 @@
-import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
@@ -25,7 +24,7 @@ class CircleButtonWidget extends StatelessWidget {
       child: Container(
         width: size.w,
         height: size.w,
-        padding: EdgeInsets.all(18.w),
+        padding: EdgeInsets.all(20.w),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(
