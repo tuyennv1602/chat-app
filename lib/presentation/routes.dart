@@ -1,6 +1,10 @@
 import 'package:chat_app/common/navigation/fade_in_route.dart';
-import 'package:chat_app/presentation/features/authentication/screen/sign_in_screen.dart';
+import 'package:chat_app/common/navigation/route_name.dart';
+import 'package:chat_app/presentation/features/authentication/forgot_password/presentation/pages/forgot_password.dart';
 import 'package:flutter/material.dart';
+
+import 'features/authentication/sign_in/screen/sign_in_screen.dart';
+import 'features/authentication/sign_up/presentation/pages/sign_up_screen.dart';
 
 class Routes {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -47,8 +51,12 @@ class Routes {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case SignInScreen.route:
-        return FadeInRoute(widget: const SignInScreen());
+      case RouteName.signIn:
+        return FadeInRoute(widget: SignInScreen());
+      case RouteName.signUp:
+        return FadeInRoute(widget: SignUpScreen());
+      case RouteName.forgotPass:
+        return FadeInRoute(widget: ForgotPassword());
       default:
         return _emptyRoute(settings);
     }

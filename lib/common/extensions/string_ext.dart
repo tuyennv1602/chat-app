@@ -18,5 +18,7 @@ extension StringExt on String {
 
   bool get isValidPassword => isEmptyOrNull && length > 6;
 
-  double toPrice() => double.parse(replaceAll(RegExp(RegexConst.notDigitRegex), ''));
+  // ignore: lines_longer_than_80_chars
+  double toPrice() =>
+      double.parse(replaceAll(RegExp(RegexConst.notDigitRegex), ''));
 }

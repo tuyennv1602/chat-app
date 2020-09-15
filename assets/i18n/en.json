@@ -1,0 +1,14 @@
+{
+    "label": {
+        "sign_in": "Sign in",
+        "email": "Email",
+        "password": "Password",
+        "forgot_password": "Forgot Password?",
+        "notification": "Notifications",
+        "sign_up": "Sign up",
+        "full_name": "Full name",
+        "nick_name": "Nickname",
+        "phone": "Phone number",
+        "confirm_password": "Confirm password"
+    }
+}
