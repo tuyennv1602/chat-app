@@ -54,19 +54,22 @@ class _SignInScreenState extends State<SignInScreen> {
                             placeHolder: translate(StringConst.password),
                           ),
                           SizedBox(height: 15.h),
-                          InkWell(
-                            onTap: () =>
-                                Routes.instance.navigate(RouteName.forgotPass),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                translate(StringConst.forgotPass),
-                                style: textStyleInput.copyWith(
-                                  color: AppColors.warmGrey,
-                                  fontStyle: FontStyle.italic,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const SizedBox(),
+                              InkWell(
+                                onTap: () => Routes.instance
+                                    .navigate(RouteName.forgotPass),
+                                child: Text(
+                                  translate(StringConst.forgotPass),
+                                  style: textStyleInput.copyWith(
+                                    color: AppColors.warmGrey,
+                                    fontStyle: FontStyle.italic,
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
                           SizedBox(height: 45.h),
                           Row(
