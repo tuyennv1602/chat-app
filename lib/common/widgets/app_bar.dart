@@ -10,6 +10,8 @@ class AppBarWidget extends StatelessWidget {
   final Widget center;
   final Function onTapLeading;
   final Function onTapTrailing;
+  final EdgeInsets leadingPadding;
+  final EdgeInsets trailingPadding;
 
   const AppBarWidget({
     Key key,
@@ -17,6 +19,8 @@ class AppBarWidget extends StatelessWidget {
     this.trailing,
     this.onTapLeading,
     this.onTapTrailing,
+    this.leadingPadding,
+    this.trailingPadding,
     @required this.center,
   }) : super(key: key);
 
@@ -42,11 +46,11 @@ class AppBarWidget extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            onTap: onTapLeading ?? () => Navigator.of(context).pop(),
+            onTap: onTapLeading,
             child: Container(
               width: 60.w,
               height: 60.w,
-              padding: EdgeInsets.all(20.w),
+              padding: leadingPadding ?? EdgeInsets.all(20.w),
               child: leading ?? SvgPicture.asset(IconConst.back),
             ),
           ),
@@ -57,7 +61,7 @@ class AppBarWidget extends StatelessWidget {
               child: Container(
                 width: 60.w,
                 height: 60.w,
-                padding: EdgeInsets.all(20.w),
+                padding: trailingPadding ?? EdgeInsets.all(20.w),
                 child: trailing,
               ),
             ),
