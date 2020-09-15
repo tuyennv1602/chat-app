@@ -9,7 +9,7 @@ final TextStyle textStyleAppbar = TextStyle(
 );
 
 final TextStyle textStyleLabel = TextStyle(
-  fontSize: ScreenUtil().setSp(17),
+  fontSize: ScreenUtil().setSp(15),
   color: AppColors.black,
   fontWeight: FontWeight.w600,
 );
@@ -37,4 +37,10 @@ final TextStyle textStyleRegular = TextStyle(
   fontSize: ScreenUtil().setSp(14),
   color: AppColors.black,
   fontWeight: FontWeight.w400,
+);
+
+final TextStyle textStyleMedium = TextStyle(
+  fontSize: ScreenUtil().setSp(14),
+  color: AppColors.black,
+  fontWeight: FontWeight.w500,
 );
