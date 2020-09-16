@@ -86,12 +86,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 100.h),
                     Expanded(
                       child: KeyboardAvoider(
                         autoScroll: true,
                         child: Column(
                           children: [
-                            SizedBox(height: 100.h),
                             InputWidget(
                               placeHolder: translate(StringConst.fullName),
                               validator: Validator.validFullName,

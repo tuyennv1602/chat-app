@@ -36,7 +36,11 @@ class _BaseScaffoldState extends State<BaseScaffold> {
             _progressDialog.hide();
           }
         },
-        child: widget.child,
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+          behavior: HitTestBehavior.deferToChild,
+          child: widget.child,
+        ),
       ),
     );
   }
