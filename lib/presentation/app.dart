@@ -1,9 +1,9 @@
 import 'package:chat_app/common/blocs/loading_bloc/loading_bloc.dart';
 import 'package:chat_app/common/blocs/loading_bloc/loading_state.dart';
 import 'package:chat_app/common/injector/injector.dart';
-import 'package:chat_app/common/navigation/route_name.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/utils/screen_utils.dart';
+import 'package:chat_app/presentation/features/home/screen/home.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -34,11 +34,7 @@ class App extends StatelessWidget {
         navigatorKey: Routes.instance.navigatorKey,
         title: 'Chat',
         onGenerateRoute: Routes.generateRoute,
-<<<<<<< HEAD
-        initialRoute: RouteName.signIn,
-=======
         initialRoute: HomeScreen.route,
->>>>>>> 6d93a869b741fb6f5f86ca47084f28db17db2fd7
         theme: ThemeData(
           primaryColor: AppColors.primaryColor,
           fontFamily: 'Avenir',
