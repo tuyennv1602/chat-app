@@ -9,7 +9,10 @@ class Client {
     this.header = header;
   }
 
-  Future<Response<dynamic>> get(String endPoint, {Map<String, dynamic> queryParams}) async {
+  Future<Response<dynamic>> get(
+    String endPoint, {
+    Map<String, dynamic> queryParams,
+  }) async {
     return dio.get(
       endPoint,
       queryParameters: queryParams,
@@ -39,7 +42,10 @@ class Client {
     );
   }
 
-  Future<Response<dynamic>> delete(String endPoint, {Map<String, dynamic> queryParams}) async {
+  Future<Response<dynamic>> delete(
+    String endPoint, {
+    Map<String, dynamic> queryParams,
+  }) async {
     return dio.delete(
       endPoint,
       queryParameters: queryParams,

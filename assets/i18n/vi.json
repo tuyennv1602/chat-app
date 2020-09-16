@@ -1,12 +1,31 @@
 {
   "label": {
-    "welcome": "WELCOME",
-    "student": "Học viên",
-    "manage": "Quản lý",
-    "email_or_mobile": "Email hoặc Số điện thoại",
+    "sign_in": "Đăng nhập",
+    "email": "Email",
     "password": "Mật khẩu",
-    "forgot_password": "Quên mật khẩu?",
-    "notification": "Thông báo"
+    "forgot_password": "Quên mật khẩu? ",
+    "notification": "Thông báo",
+    "sign_up": "Đăng ký",
+    "full_name": "Họ và tên",
+    "nick_name": "Biệt danh",
+    "phone": "Số điện thoại",
+    "confirm_password": "Nhập lại mật khẩu",
+    "code": "Mã quân nhân"
+  },
+  "message": {
+    "error_full_name": "Họ và tên không đúng định dạng",
+    "error_email": "Email không đúng định dạng",
+    "error_password": "Mật khẩu không đúng định dạng",
+    "error_phone": "Số điện thoại không đúng định dạng",
+    "error_nick_name": "Biệt danh không đúng định dạng",
+    "enter_email": "Hãy nhập địa chỉ email",
+    "enter_full_name": "Hãy nhập họ và tên",
+    "enter_nick_name": "Hãy nhập biệt danh",
+    "enter_phone": "Hãy nhập số điện thoại",
+    "enter_password": "Hãy nhập mật khẩu",
+    "enter_confirm_password": "Hãy nhập xác nhận mật khẩu",
+    "password_not_match": "Xác nhận mật khẩu không khớp",
+    "enter_code": "Hãy nhập mã quân nhân"
   },
   "time": {
     "just_now": "vừa xong",
