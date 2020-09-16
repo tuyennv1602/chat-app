@@ -22,7 +22,7 @@ final TextStyle textStyleInput = TextStyle(
 );
 
 final TextStyle textStyleInputError = TextStyle(
-  fontSize: ScreenUtil().setSp(14),
+  fontSize: ScreenUtil().setSp(10),
   color: AppColors.red,
   height: 0.5,
 );

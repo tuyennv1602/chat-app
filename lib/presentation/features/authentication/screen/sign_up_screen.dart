@@ -2,11 +2,10 @@ import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/images.dart';
 import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
-import 'package:chat_app/common/utils/alert_utils.dart';
+import 'package:chat_app/common/utils/screen_utils.dart';
 import 'package:chat_app/common/utils/validator.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/circle_button.dart';
-import 'package:chat_app/common/widgets/custom_alert.dart';
 import 'package:chat_app/common/widgets/input_widget.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
@@ -23,30 +22,32 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController code = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController fullName = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController phone = TextEditingController();
-  TextEditingController confirmPassword = TextEditingController();
   TextEditingController nickName = TextEditingController();
   bool _enableButton = false;
-  bool autoValidate = false;
 
   void _checkEnableButton() {
-    if (email.text.isNotEmpty &&
+    if (code.text.isNotEmpty &&
+        email.text.isNotEmpty &&
         password.text.isNotEmpty &&
         fullName.text.isNotEmpty &&
         phone.text.isNotEmpty &&
-        nickName.text.isNotEmpty &&
-        confirmPassword.text.isNotEmpty) {
-      _enableButton = true;
+        nickName.text.isNotEmpty) {
+      setState(() {
+        _enableButton = true;
+      });
     } else {
-      _enableButton = false;
+      setState(() {
+        _enableButton = false;
+      });
     }
-    setState(() {});
   }
 
-  bool get validateAndSave {
+  bool get _validateAndSave {
     final form = _formKey.currentState;
     if (form.validate()) {
       form.save();
@@ -71,27 +72,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
               padding: EdgeInsets.symmetric(horizontal: 25.w),
               child: Form(
                 key: _formKey,
-                autovalidate: autoValidate,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).padding.top + 16,
+                        top: ScreenUtil.statusBarHeight + 16,
                       ),
                       child: InkWell(
                         onTap: () => Routes.instance.pop(),
                         child: SvgPicture.asset(
                           IconConst.back,
+                          color: Colors.white,
                         ),
                       ),
                     ),
-                    SizedBox(height: 100.h),
+                    SizedBox(height: 110.h),
                     Expanded(
                       child: KeyboardAvoider(
                         autoScroll: true,
                         child: Column(
                           children: [
+                            InputWidget(
+                              placeHolder: translate(StringConst.code),
+                              validator: Validator.validCode,
+                              controller: code,
+                              onChanged: (t) {
+                                _checkEnableButton();
+                              },
+                            ),
+                            SizedBox(height: 15.h),
                             InputWidget(
                               placeHolder: translate(StringConst.fullName),
                               validator: Validator.validFullName,
@@ -136,22 +146,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 _checkEnableButton();
                               },
                             ),
-                            SizedBox(height: 15.h),
-                            InputWidget(
-                              placeHolder: translate(StringConst.confirmPass),
-                              validator: Validator.validPassword,
-                              controller: confirmPassword,
-                              onChanged: (t) {
-                                _checkEnableButton();
-                              },
-                            ),
                           ],
                         ),
                       ),
                     ),
-                    SizedBox(height: 30.h),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 40.h),
+                      padding: EdgeInsets.only(bottom: 40.h, top: 15.h),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -165,24 +165,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             isEnable: _enableButton,
                             urlIcon: IconConst.next,
                             onTap: () {
-                              if (validateAndSave) {
-                                if (password.text != confirmPassword.text) {
-                                  AlertUtil.show(
-                                    context,
-                                    child: CustomAlertWidget(
-                                      title: 'Thông báo',
-                                      message: translate(
-                                        StringConst.passwordNotMatch,
-                                      ),
-                                      alertType: AlertType.error,
-                                    ),
-                                  );
-                                }
-                              } else {
-                                setState(() {
-                                  autoValidate = true;
-                                });
-                              }
+                              if (_validateAndSave) {}
                             },
                           ),
                         ],

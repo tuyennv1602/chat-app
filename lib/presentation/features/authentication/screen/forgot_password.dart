@@ -2,7 +2,7 @@ import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/images.dart';
 import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
-import 'package:chat_app/common/utils/screen_utils.dart';
+import 'package:chat_app/common/utils/validator.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/circle_button.dart';
 import 'package:chat_app/common/widgets/input_widget.dart';
@@ -19,6 +19,25 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController email = TextEditingController();
+  bool _enableButton = false;
+
+  void _checkEnableButton() {
+    setState(() {
+      _enableButton = email.text.isNotEmpty;
+    });
+  }
+
+  bool get _validateAndSave {
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
@@ -44,16 +63,26 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       onTap: () => Routes.instance.pop(),
                       child: SvgPicture.asset(
                         IconConst.back,
+                        color: Colors.white,
                       ),
                     ),
                   ),
                   const Spacer(),
-                  InputWidget(
-                    placeHolder: translate(StringConst.email),
+                  Form(
+                    key: _formKey,
+                    child: InputWidget(
+                      placeHolder: translate(StringConst.email),
+                      validator: Validator.validEmail,
+                      onChanged: (value) {
+                        _checkEnableButton();
+                      },
+                      controller: email,
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        bottom: ScreenUtil.screenHeightDp / 3, top: 80.h),
+                      top: 80.h,
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -64,11 +93,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           ),
                         ),
                         CircleButtonWidget(
+                          isEnable: _enableButton,
                           urlIcon: IconConst.next,
+                          onTap: () {
+                            if (_validateAndSave) {}
+                          },
                         ),
                       ],
                     ),
                   ),
+                  const Spacer(),
                 ],
               ),
             ),

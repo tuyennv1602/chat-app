@@ -1,9 +1,10 @@
 import 'package:chat_app/common/navigation/fade_in_route.dart';
-import 'package:chat_app/presentation/features/authentication/forgot_password/presentation/screen.dart/forgot_password.dart';
-import 'package:chat_app/presentation/features/home/screen/home.dart';
+import 'package:chat_app/common/navigation/slide_left_route.dart';
+import 'package:chat_app/presentation/features/home/screen/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'features/authentication/sign_in/screen/sign_in_screen.dart';
-import 'features/authentication/sign_up/presentation/screen.dart/sign_up_screen.dart';
+import 'features/authentication/screen/forgot_password.dart';
+import 'features/authentication/screen/sign_in_screen.dart';
+import 'features/authentication/screen/sign_up_screen.dart';
 
 class Routes {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -53,9 +54,9 @@ class Routes {
       case SignInScreen.route:
         return FadeInRoute(widget: SignInScreen());
       case SignUpScreen.route:
-        return FadeInRoute(widget: SignUpScreen());
+        return SlideLeftRoute(widget: SignUpScreen());
       case ForgotPasswordScreen.route:
-        return FadeInRoute(widget: ForgotPasswordScreen());
+        return SlideLeftRoute(widget: ForgotPasswordScreen());
       case HomeScreen.route:
         return FadeInRoute(widget: const HomeScreen());
       default:

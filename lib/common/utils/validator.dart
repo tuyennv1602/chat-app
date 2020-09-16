@@ -46,4 +46,11 @@ class Validator {
     }
     return null;
   }
+
+  static String validCode(String fullName) {
+    if (fullName.isEmptyOrNull) {
+      return translate(StringConst.enterCode);
+    }
+    return null;
+  }
 }
