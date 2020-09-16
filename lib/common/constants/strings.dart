@@ -13,4 +13,9 @@ class StringConst {
   static const forgotPass = 'label.forgot_password';
   static const signIn = 'label.sign_in';
   static const signUp = 'label.sign_up';
+  static const joinConversation = 'home.join_conversation';
+  static const createConversation = 'home.create_conversation';
+  static const justNow = 'time.just_now';
+  static const minAgo = 'time.min_ago';
+  static const hourAgo = 'time.hour_ago';
 }

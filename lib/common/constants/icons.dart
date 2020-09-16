@@ -6,4 +6,9 @@ class IconConst {
   static const String error = '${path}error.svg';
   static const String warning = '${path}warning.svg';
   static const String back = '${path}back.svg';
+  static const String user = '${path}user.svg';
+  static const String search = '${path}search.svg';
+  static const String bell = '${path}bell.svg';
+  static const String group = '${path}group.svg';
+  static const String createConversation = '${path}create_conversation.svg';
 }

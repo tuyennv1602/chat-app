@@ -4,11 +4,24 @@
     "email": "Email",
     "password": "Mật khẩu",
     "forgot_password": "Quên mật khẩu?",
+<<<<<<< HEAD
     "notification": "Thông báo",
     "sign_up": "Đăng ký",
     "full_name": "Họ và tên",
     "nick_name": "Biệt danh",
     "phone": "Số điện thoại",
     "confirm_password": "Nhập lại mật khẩu"
+=======
+    "notification": "Thông báo"
+  },
+  "time": {
+    "just_now": "vừa xong",
+    "min_ago": "phút trước",
+    "hour_ago": "giờ trước"
+  },
+  "home": {
+    "join_conversation": "Tham gia tác chiến",
+    "create_conversation": "Tạo phòng tác chiến"
+>>>>>>> 6d93a869b741fb6f5f86ca47084f28db17db2fd7
   }
 }

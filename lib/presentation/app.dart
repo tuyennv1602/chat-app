@@ -34,7 +34,11 @@ class App extends StatelessWidget {
         navigatorKey: Routes.instance.navigatorKey,
         title: 'Chat',
         onGenerateRoute: Routes.generateRoute,
+<<<<<<< HEAD
         initialRoute: RouteName.signIn,
+=======
+        initialRoute: HomeScreen.route,
+>>>>>>> 6d93a869b741fb6f5f86ca47084f28db17db2fd7
         theme: ThemeData(
           primaryColor: AppColors.primaryColor,
           fontFamily: 'Avenir',
