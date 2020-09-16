@@ -27,4 +27,9 @@ class StringConst {
   static const enterFullName = 'message.enter_full_name';
 
   static const passwordNotMatch = 'message.password_not_match';
+  static const joinConversation = 'home.join_conversation';
+  static const createConversation = 'home.create_conversation';
+  static const justNow = 'time.just_now';
+  static const minAgo = 'time.min_ago';
+  static const hourAgo = 'time.hour_ago';
 }

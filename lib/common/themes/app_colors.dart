@@ -11,4 +11,7 @@ class AppColors {
   static const grey = Color(0xffAEAEAE);
   static const gradientButton = [Color(0xff0DBB59), Color(0xff069504)];
   static const greyText = Color.fromRGBO(120, 142, 164, 1);
+  static const lightGreen = Color(0xff05CB07);
+  static const line = Color(0xffd8d8d8);
+  static const overlay = Color.fromRGBO(0, 0, 0, 0.3);
 }

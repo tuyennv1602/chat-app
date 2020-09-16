@@ -10,14 +10,14 @@ class AnimatedButtonWidget extends StatefulWidget {
   AnimatedButtonWidget({
     Key key,
     this.buttonSize = 45,
-    this.onTap,
+    @required this.onTap,
   }) : super(key: key);
 
   @override
-  _AnimatedButtonWidgetState createState() => _AnimatedButtonWidgetState();
+  AnimatedButtonWidgetState createState() => AnimatedButtonWidgetState();
 }
 
-class _AnimatedButtonWidgetState extends State<AnimatedButtonWidget>
+class AnimatedButtonWidgetState extends State<AnimatedButtonWidget>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   Animation<double> angle;
@@ -27,7 +27,7 @@ class _AnimatedButtonWidgetState extends State<AnimatedButtonWidget>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 50),
+      duration: const Duration(milliseconds: 100),
     );
     angle = Tween<double>(begin: 0, end: 1).animate(_animationController);
     super.initState();
@@ -39,14 +39,23 @@ class _AnimatedButtonWidgetState extends State<AnimatedButtonWidget>
     super.dispose();
   }
 
+  void open() {
+    _animationController.forward();
+    _isOpening = true;
+  }
+
+  void close() {
+    _animationController.reverse();
+    _isOpening = false;
+  }
+
   void _handlePressed() {
-    if (_isOpening) {
-      _animationController.forward();
-    } else {
-      _animationController.reverse();
-    }
-    _isOpening = !_isOpening;
     widget.onTap?.call(_isOpening);
+    if (_isOpening) {
+      close();
+    } else {
+      open();
+    }
   }
 
   @override
@@ -65,6 +74,13 @@ class _AnimatedButtonWidgetState extends State<AnimatedButtonWidget>
             end: Alignment.bottomCenter,
             colors: AppColors.gradientButton,
           ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: 5,
+              offset: Offset(0, 2),
+            ),
+          ],
         ),
         child: AnimatedBuilder(
           animation: _animationController,
