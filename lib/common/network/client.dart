@@ -9,9 +9,10 @@ class Client {
     this.header = header;
   }
 
-  // ignore: lines_longer_than_80_chars
-  Future<Response<dynamic>> get(String endPoint,
-      {Map<String, dynamic> queryParams}) async {
+  Future<Response<dynamic>> get(
+    String endPoint, {
+    Map<String, dynamic> queryParams,
+  }) async {
     return dio.get(
       endPoint,
       queryParameters: queryParams,
@@ -41,9 +42,10 @@ class Client {
     );
   }
 
-  // ignore: lines_longer_than_80_chars
-  Future<Response<dynamic>> delete(String endPoint,
-      {Map<String, dynamic> queryParams}) async {
+  Future<Response<dynamic>> delete(
+    String endPoint, {
+    Map<String, dynamic> queryParams,
+  }) async {
     return dio.delete(
       endPoint,
       queryParameters: queryParams,

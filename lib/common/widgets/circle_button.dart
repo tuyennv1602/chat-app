@@ -21,7 +21,7 @@ class CircleButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(60.w / 2),
+      borderRadius: BorderRadius.circular(size.w / 2),
       child: Container(
         width: size.w,
         height: size.w,

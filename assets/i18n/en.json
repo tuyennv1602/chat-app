@@ -3,12 +3,26 @@
         "sign_in": "Sign in",
         "email": "Email",
         "password": "Password",
-        "forgot_password": "Forgot Password?",
+        "forgot_password": "Forgot Password? ",
         "notification": "Notifications",
         "sign_up": "Sign up",
         "full_name": "Full name",
         "nick_name": "Nickname",
         "phone": "Phone number",
         "confirm_password": "Confirm password"
+    },
+    "message": {
+        "error_full_name": "Full name is not in the correct format",
+        "error_email": "Email is not in the correct format",
+        "error_password": "Password is not in the correct format",
+        "error_phone": "Phone number is not in the correct format",
+        "error_nick_name": "Nick name is not in the correct format",
+        "enter_email": "Full name is required",
+        "enter_full_name": "Full name is required",
+        "enter_nick_name": "Nick name is required",
+        "enter_phone": "Phone number is required",
+        "enter_password": "Password is required",
+        "enter_confirm_password": "Confirm password is required",
+        "password_not_match": "Confirm password  does not match"
     }
 }

@@ -17,8 +17,4 @@ extension StringExt on String {
       this != null && RegExp(RegexConst.validPhoneRegex).hasMatch(trim());
 
   bool get isValidPassword => isEmptyOrNull && length > 6;
-
-  // ignore: lines_longer_than_80_chars
-  double toPrice() =>
-      double.parse(replaceAll(RegExp(RegexConst.notDigitRegex), ''));
 }
