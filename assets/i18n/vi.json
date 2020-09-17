@@ -1,5 +1,6 @@
 {
   "label": {
+    "welcome": "Chào mừng",
     "sign_in": "Đăng nhập",
     "email": "Email",
     "password": "Mật khẩu",
@@ -10,7 +11,8 @@
     "nick_name": "Biệt danh",
     "phone": "Số điện thoại",
     "confirm_password": "Nhập lại mật khẩu",
-    "code": "Mã quân nhân"
+    "code": "Mã quân nhân",
+    "verify_code": "Mã xác thực"
   },
   "message": {
     "error_full_name": "Họ và tên không đúng định dạng",
@@ -25,7 +27,9 @@
     "enter_password": "Hãy nhập mật khẩu",
     "enter_confirm_password": "Hãy nhập xác nhận mật khẩu",
     "password_not_match": "Xác nhận mật khẩu không khớp",
-    "enter_code": "Hãy nhập mã quân nhân"
+    "enter_code": "Hãy nhập mã quân nhân",
+    "register_success": "Đăng ký thành công! Vui lòng kiểm tra email để kích hoạt tài khoản.",
+    "forgot_password_done": "Một mật khẩu đã được gửi tới email của bạn! Vui lòng kiểm tra email để lấy lại mật khẩu."
   },
   "time": {
     "just_now": "vừa xong",
@@ -35,5 +39,8 @@
   "home": {
     "join_conversation": "Tham gia tác chiến",
     "create_conversation": "Tạo phòng tác chiến"
+  },
+  "button": {
+    "verify": "Xác thực"
   }
 }
