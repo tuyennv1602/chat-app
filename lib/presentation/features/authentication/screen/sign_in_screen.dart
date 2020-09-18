@@ -9,6 +9,7 @@ import 'package:chat_app/common/utils/validator.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/circle_button.dart';
 import 'package:chat_app/common/widgets/input_widget.dart';
+import 'package:chat_app/presentation/features/authentication/screen/active_account_screen.dart';
 import 'package:chat_app/presentation/features/authentication/screen/forgot_password.dart';
 import 'package:chat_app/presentation/features/authentication/screen/sign_up_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
