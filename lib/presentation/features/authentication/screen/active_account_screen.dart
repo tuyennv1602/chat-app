@@ -1,4 +1,4 @@
-import 'package:chat_app/common/constants/images.dart';
+import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
@@ -11,6 +11,7 @@ import 'package:chat_app/presentation/features/authentication/screen/sign_in_scr
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 
@@ -28,8 +29,8 @@ class ActiveAccountScreen extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: ScreenUtil.statusBarHeight + 80.h),
-              Image.asset(
-                ImageConst.clipboard,
+              SvgPicture.asset(
+                IconConst.registerDone,
                 width: 150.w,
                 height: 150.w,
               ),

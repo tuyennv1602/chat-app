@@ -1,4 +1,4 @@
-import 'package:chat_app/common/constants/images.dart';
+import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/utils/screen_utils.dart';
@@ -6,6 +6,7 @@ import 'package:chat_app/common/widgets/button_widget.dart';
 import 'package:chat_app/presentation/features/authentication/screen/sign_in_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 
@@ -19,8 +20,8 @@ class ForgotPasswordSuccessScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: ScreenUtil.statusBarHeight + 80.w),
-            Image.asset(
-              ImageConst.activeSuccess,
+            SvgPicture.asset(
+              IconConst.success,
               width: 150.w,
               height: 150.w,
             ),
