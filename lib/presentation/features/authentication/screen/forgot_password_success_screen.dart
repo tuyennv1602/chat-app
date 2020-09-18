@@ -27,7 +27,10 @@ class ForgotPasswordSuccessScreen extends StatelessWidget {
             SizedBox(height: 50.h),
             Text(
               translate(StringConst.forgotPasswordDone),
-              style: textStyleLabel.copyWith(fontSize: 18.sp),
+              style: textStyleLabel.copyWith(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w500,
+              ),
               textAlign: TextAlign.center,
             ),
             const Spacer(),

@@ -44,7 +44,8 @@ class ActiveAccountScreen extends StatelessWidget {
               SizedBox(height: 20.h),
               Text(
                 translate(StringConst.registerSuccess),
-                style: textStyleLabel.copyWith(fontSize: 18.sp),
+                style: textStyleLabel.copyWith(
+                    fontSize: 18.sp, fontWeight: FontWeight.w500),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 25.h),
