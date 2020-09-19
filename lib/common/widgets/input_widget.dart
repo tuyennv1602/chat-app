@@ -94,25 +94,25 @@ class InputWidget extends StatelessWidget {
         errorStyle: textStyleInputError,
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            width: 0.7,
+            width: 0.5,
             color: AppColors.warmGrey,
           ),
         ),
         errorBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            width: 0.7,
+            width: 0.5,
             color: AppColors.red,
           ),
         ),
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            width: 0.7,
+            width: 0.5,
             color: AppColors.primaryColor,
           ),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            width: 0.7,
+            width: 0.5,
             color: AppColors.red,
           ),
         ),

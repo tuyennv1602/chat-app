@@ -37,7 +37,7 @@ class NotificationBadgeWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.red,
                   borderRadius: BorderRadius.circular(15.h / 2),
-                  border: Border.all(color: Colors.white, width: 1.5),
+                  border: Border.all(color: Colors.white, width: 1),
                 ),
                 child: Center(
                   child: Text(

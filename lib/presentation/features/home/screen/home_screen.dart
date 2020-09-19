@@ -1,10 +1,13 @@
 import 'package:chat_app/common/constants/icons.dart';
+import 'package:chat_app/common/utils/alert_utils.dart';
 import 'package:chat_app/common/widgets/animated_button.dart';
 import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
+import 'package:chat_app/presentation/features/home/screen/create_room_screen.dart';
 import 'package:chat_app/presentation/features/home/widget/fab_menu/fab_menu_overlay.dart';
 import 'package:chat_app/presentation/features/home/widget/item_conversation.dart';
+import 'package:chat_app/presentation/features/home/widget/join_room_dialog.dart';
 import 'package:chat_app/presentation/features/home/widget/notification_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
@@ -13,7 +16,7 @@ import 'package:flutter_svg/svg.dart';
 class HomeScreen extends StatefulWidget {
   static const String route = '/home';
 
-  const HomeScreen({Key key}) : super(key: key);
+  HomeScreen({Key key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -30,12 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
       context,
       keyItem: _keyFabButton,
       onTapCreateConversation: () {
-        _fabMenu?.hide();
-        _keyFabButton?.currentState?.close();
+        _hide();
+        _createRoom();
       },
       onTapJoinConversation: () {
-        _fabMenu?.hide();
-        _keyFabButton?.currentState?.close();
+        _hide();
+        _joinRoom();
       },
     );
     super.initState();
@@ -45,6 +48,19 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _fabMenu?.hide();
     super.dispose();
+  }
+
+  void _hide() {
+    _fabMenu?.hide();
+    _keyFabButton?.currentState?.close();
+  }
+
+  void _joinRoom() {
+    AlertUtil.show(context, child: JoinRoomDialog());
+  }
+
+  void _createRoom() {
+    Navigator.of(context).pushNamed(CreateRoomScreen.route);
   }
 
   @override

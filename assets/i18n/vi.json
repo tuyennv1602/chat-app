@@ -12,6 +12,16 @@
     "phone": "Số điện thoại",
     "confirm_password": "Nhập lại mật khẩu",
     "code": "Mã quân nhân",
+    "room_id": "Mã phòng",
+    "cancel": "Huỷ",
+    "send_request": "Gửi yêu cầu",
+    "create_room": "Tạo phòng",
+    "member": "Thành viên",
+    "add_member": "Thêm thành viên",
+    "input_member_name": "Nhập tên thành viên",
+    "selected": "Đã chọn",
+    "room_name": "Tên phòng",
+    "all_member": "Tất cả thành viên",
     "verify_code": "Mã xác thực"
   },
   "message": {
@@ -28,6 +38,8 @@
     "enter_confirm_password": "Hãy nhập xác nhận mật khẩu",
     "password_not_match": "Xác nhận mật khẩu không khớp",
     "enter_code": "Hãy nhập mã quân nhân",
+    "enter_room_id": "Hãy nhập mã phòng",
+    "enter_room_name": "Hãy nhập tên phòng",
     "register_success": "Đăng ký thành công! Vui lòng kiểm tra email để kích hoạt tài khoản.",
     "forgot_password_done": "Một mật khẩu đã được gửi tới email của bạn! Vui lòng kiểm tra email để lấy lại mật khẩu."
   },

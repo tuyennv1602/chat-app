@@ -1,7 +1,5 @@
 class StringConst {
   static const notification = 'label.notification';
-  static const cancel = 'button.cancel';
-  static const ok = 'button.ok';
   static const connectLost = 'message.connection_lost';
   static const unknowError = 'message.unknow_error';
   static const email = 'label.email';
@@ -14,6 +12,16 @@ class StringConst {
   static const signIn = 'label.sign_in';
   static const signUp = 'label.sign_up';
   static const code = 'label.code';
+  static const roomId = 'label.room_id';
+  static const cancel = 'label.cancel';
+  static const sendRequest = 'label.send_request';
+  static const createRoom = 'label.create_room';
+  static const member = 'label.member';
+  static const addMember = 'label.add_member';
+  static const inputMemberName = 'label.input_member_name';
+  static const selected = 'label.selected';
+  static const roomName = 'label.room_name';
+  static const allMember = 'label.all_member';
   static const welcome = 'label.welcome';
   static const verifyCode = 'label.verify_code';
 
@@ -29,6 +37,8 @@ class StringConst {
   static const enterPhone = 'message.enter_phone';
   static const enterFullName = 'message.enter_full_name';
   static const enterCode = 'message.enter_code';
+  static const enterRoomId = 'message.enter_room_id';
+  static const enterRoomName = 'message.enter_room_name';
   static const registerSuccess = 'message.register_success';
   static const forgotPasswordDone = 'message.forgot_password_done';
 

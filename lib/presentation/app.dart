@@ -4,6 +4,7 @@ import 'package:chat_app/common/injector/injector.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/utils/screen_utils.dart';
 import 'package:chat_app/presentation/features/authentication/screen/sign_in_screen.dart';
+import 'package:chat_app/presentation/features/home/screen/home_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -37,7 +38,7 @@ class App extends StatelessWidget {
         initialRoute: SignInScreen.route,
         theme: ThemeData(
           primaryColor: AppColors.primaryColor,
-          fontFamily: 'Avenir',
+          fontFamily: 'Roboto',
         ),
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,

@@ -12,6 +12,7 @@ import 'package:chat_app/common/widgets/input_widget.dart';
 import 'package:chat_app/presentation/features/authentication/screen/active_account_screen.dart';
 import 'package:chat_app/presentation/features/authentication/screen/forgot_password.dart';
 import 'package:chat_app/presentation/features/authentication/screen/sign_up_screen.dart';
+import 'package:chat_app/presentation/features/home/screen/home_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -121,7 +122,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           isEnable: _enableButton,
                           urlIcon: IconConst.next,
                           onTap: () {
-                            if (_validateAndSave) {}
+                            if (_validateAndSave) {
+                              Navigator.of(context).pushNamed(HomeScreen.route);
+                            }
                           },
                         ),
                       ],
