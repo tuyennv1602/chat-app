@@ -8,6 +8,7 @@ class CircleButtonWidget extends StatelessWidget {
   final bool isEnable;
   final double size;
   final String urlIcon;
+  final EdgeInsets padding;
 
   CircleButtonWidget({
     Key key,
@@ -15,6 +16,7 @@ class CircleButtonWidget extends StatelessWidget {
     this.isEnable = false,
     this.size = 60,
     this.urlIcon,
+    this.padding,
   }) : super(key: key);
 
   @override
@@ -25,7 +27,7 @@ class CircleButtonWidget extends StatelessWidget {
       child: Container(
         width: size.w,
         height: size.w,
-        padding: EdgeInsets.all(20.w),
+        padding: padding ?? EdgeInsets.all(20.w),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(
@@ -39,7 +41,9 @@ class CircleButtonWidget extends StatelessWidget {
                   ],
           ),
         ),
-        child: SvgPicture.asset(urlIcon),
+        child: Center(
+          child: SvgPicture.asset(urlIcon),
+        ),
       ),
     );
   }
