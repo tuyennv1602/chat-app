@@ -70,7 +70,7 @@ class ItemConversationWidget extends StatelessWidget {
                 ),
                 Text(
                   lastMessage,
-                  style: textStyleMedium.copyWith(
+                  style: textStyleRegular.copyWith(
                     fontSize: 13.sp,
                     color: AppColors.greyText,
                   ),

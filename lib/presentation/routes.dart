@@ -1,6 +1,8 @@
 import 'package:chat_app/common/navigation/fade_in_route.dart';
 import 'package:chat_app/common/navigation/slide_left_route.dart';
 import 'package:chat_app/presentation/features/home/screen/create_room_screen.dart';
+import 'package:chat_app/presentation/features/authentication/screen/active_account_screen.dart';
+import 'package:chat_app/presentation/features/authentication/screen/forgot_password_success_screen.dart';
 import 'package:chat_app/presentation/features/home/screen/home_screen.dart';
 import 'package:chat_app/presentation/features/select_member/screen/select_member_screen.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +67,10 @@ class Routes {
         return SlideLeftRoute(widget: CreateRoomScreen());
       case SelectMemberScreen.route:
         return SlideLeftRoute(widget: SelectMemberScreen());
+      case ForgotPasswordSuccessScreen.router:
+        return FadeInRoute(widget: ForgotPasswordSuccessScreen());
+      case ActiveAccountScreen.router:
+        return FadeInRoute(widget: ActiveAccountScreen());
       default:
         return _emptyRoute(settings);
     }

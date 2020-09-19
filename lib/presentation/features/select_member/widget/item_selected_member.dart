@@ -41,7 +41,7 @@ class ItemSelectedMember extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: 0,
+          right: -3,
           child: InkWell(
             onTap: onDelete,
             child: Padding(

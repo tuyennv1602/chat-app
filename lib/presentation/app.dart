@@ -35,10 +35,10 @@ class App extends StatelessWidget {
         navigatorKey: Routes.instance.navigatorKey,
         title: 'Chat',
         onGenerateRoute: Routes.generateRoute,
-        initialRoute: HomeScreen.route,
+        initialRoute: SignInScreen.route,
         theme: ThemeData(
           primaryColor: AppColors.primaryColor,
-          fontFamily: 'Avenir',
+          fontFamily: 'Roboto',
         ),
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,

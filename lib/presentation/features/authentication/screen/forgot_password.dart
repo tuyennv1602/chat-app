@@ -6,6 +6,7 @@ import 'package:chat_app/common/utils/validator.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/circle_button.dart';
 import 'package:chat_app/common/widgets/input_widget.dart';
+import 'package:chat_app/presentation/features/authentication/screen/forgot_password_success_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -96,7 +97,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           isEnable: _enableButton,
                           urlIcon: IconConst.next,
                           onTap: () {
-                            if (_validateAndSave) {}
+                            if (_validateAndSave) {
+                              Routes.instance
+                                  .navigate(ForgotPasswordSuccessScreen.router);
+                            }
                           },
                         ),
                       ],

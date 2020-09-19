@@ -12,4 +12,6 @@ class IconConst {
   static const String group = '${path}group.svg';
   static const String createConversation = '${path}create_conversation.svg';
   static const String close = '${path}close.svg';
+  static const String success = '${path}success.svg';
+  static const String registerDone = '${path}register_done.svg';
 }

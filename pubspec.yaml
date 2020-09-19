@@ -41,13 +41,25 @@ flutter:
     - assets/i18n/
 
   fonts:
-    - family: Avenir
+    - family: Roboto
       fonts:
-        - asset: assets/fonts/avenir_regular.ttf
+        - asset: assets/fonts/Roboto_Light.ttf
           weight: 400
-        - asset: assets/fonts/avenir_medium.ttf
+        - asset: assets/fonts/Roboto_LightItalic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/Roboto_Regular.ttf
           weight: 500
-        - asset: assets/fonts/avenir_demi_bold.ttf
+        - asset: assets/fonts/Roboto_Italic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Roboto_Medium.ttf
           weight: 600
-        - asset: assets/fonts/avenir_bold.ttf
+        - asset: assets/fonts/Roboto_MediumItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/Roboto_Bold.ttf
           weight: 700
+        - asset: assets/fonts/Roboto_BoldItalic.ttf
+          weight: 700
+          style: italic

@@ -22,6 +22,8 @@ class StringConst {
   static const selected = 'label.selected';
   static const roomName = 'label.room_name';
   static const allMember = 'label.all_member';
+  static const welcome = 'label.welcome';
+  static const verifyCode = 'label.verify_code';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';
@@ -37,6 +39,8 @@ class StringConst {
   static const enterCode = 'message.enter_code';
   static const enterRoomId = 'message.enter_room_id';
   static const enterRoomName = 'message.enter_room_name';
+  static const registerSuccess = 'message.register_success';
+  static const forgotPasswordDone = 'message.forgot_password_done';
 
   static const passwordNotMatch = 'message.password_not_match';
   static const joinConversation = 'home.join_conversation';
@@ -44,4 +48,6 @@ class StringConst {
   static const justNow = 'time.just_now';
   static const minAgo = 'time.min_ago';
   static const hourAgo = 'time.hour_ago';
+
+  static const verify = 'button.verify';
 }

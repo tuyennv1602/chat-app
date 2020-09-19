@@ -17,7 +17,7 @@ final TextStyle textStyleLabel = TextStyle(
 final TextStyle textStyleInput = TextStyle(
   fontSize: ScreenUtil().setSp(15),
   color: AppColors.black,
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.w400,
   height: 1.5,
 );
 
