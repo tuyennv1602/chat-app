@@ -26,6 +26,7 @@ class StringConst {
   static const welcome = 'label.welcome';
   static const verifyCode = 'label.verify_code';
   static const signInFailed = 'label.sign_in_failed';
+  static const signUpFailed = 'label.sign_un_failed';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';
@@ -53,4 +54,5 @@ class StringConst {
 
   static const verify = 'button.verify';
   static const accountInActive = 'message.account_inactive';
+  static const accountExisted = 'message.account_existed';
 }
