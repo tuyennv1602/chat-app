@@ -12,4 +12,14 @@ class AuthenticationRemoteDataSource {
     });
     return LoginResponseModel.fromJson(resp.data['data']);
   }
+
+  Future<void> activeAccount(
+    String email,
+    String verifyCode,
+  ) async {
+    await client.post('account/activate', body: {
+      'email': email,
+      'activation_code': verifyCode,
+    });
+  }
 }

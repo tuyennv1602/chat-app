@@ -27,4 +27,13 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       throw NetworkException();
     }
   }
+
+  @override
+  Future<void> activeAccount(String email, String verifyCode) async {
+    if (await networkInfo.isConnected) {
+      await remoteDataSource.activeAccount(email, verifyCode);
+    } else {
+      throw NetworkException();
+    }
+  }
 }

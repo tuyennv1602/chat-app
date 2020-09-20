@@ -8,4 +8,7 @@ class AuthenticationUseCase {
 
   Future<LoginResponseModel> login(String email, String password) =>
       authenticationRepository.login(email, password);
+
+  Future<void> activeAccount(String email, String verifyCode) =>
+      authenticationRepository.activeAccount(email, verifyCode);
 }
