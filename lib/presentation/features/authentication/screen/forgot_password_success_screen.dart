@@ -30,7 +30,7 @@ class ForgotPasswordSuccessScreen extends StatelessWidget {
               translate(StringConst.forgotPasswordDone),
               style: textStyleLabel.copyWith(
                 fontSize: 18.sp,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
               ),
               textAlign: TextAlign.center,
             ),

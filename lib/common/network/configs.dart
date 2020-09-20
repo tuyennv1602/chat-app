@@ -1,5 +1,5 @@
 class Configurations {
-  static const String host = 'https://api.openweathermap.org/data/2.5';
+  static const String host = 'http://54.249.191.109:5000/api/v1/';
   static const int connectTimeout = 30000;
   static const int responseTimeout = 30000;
 }

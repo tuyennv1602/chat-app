@@ -21,13 +21,16 @@ class Routes {
 
   BuildContext get currentContext => navigatorKey.currentContext;
 
-  Future<dynamic> navigate(String routeName, {dynamic arguments}) async =>
-      navigatorKey.currentState.pushNamed(routeName, arguments: arguments);
+  Future<dynamic> navigate(String routeName, {dynamic arguments}) async {
+    await Future.delayed(const Duration(milliseconds: 5));
+    return navigatorKey.currentState.pushNamed(routeName, arguments: arguments);
+  }
 
   Future<dynamic> navigateAndRemove(
     String routeName, {
     dynamic arguments,
   }) async {
+    await Future.delayed(const Duration(milliseconds: 5));
     return navigatorKey.currentState.pushNamedAndRemoveUntil(
       routeName,
       (Route<dynamic> route) => false,
@@ -39,6 +42,7 @@ class Routes {
     String routeName, {
     dynamic arguments,
   }) async {
+    await Future.delayed(const Duration(milliseconds: 5));
     return navigatorKey.currentState.pushReplacementNamed(
       routeName,
       arguments: arguments,
@@ -63,8 +67,13 @@ class Routes {
         return FadeInRoute(widget: const HomeScreen());
       case ForgotPasswordSuccessScreen.router:
         return FadeInRoute(widget: ForgotPasswordSuccessScreen());
-      case ActiveAccountScreen.router:
-        return FadeInRoute(widget: ActiveAccountScreen());
+      case ActiveAccountScreen.route:
+        final Map arguments = settings.arguments;
+        return FadeInRoute(
+          widget: ActiveAccountScreen(
+            email: arguments['email'],
+          ),
+        );
       default:
         return _emptyRoute(settings);
     }

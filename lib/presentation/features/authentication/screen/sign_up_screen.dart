@@ -167,8 +167,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             urlIcon: IconConst.next,
                             onTap: () {
                               if (_validateAndSave) {
-                                Routes.instance
-                                    .navigate(ActiveAccountScreen.router);
+                                Routes.instance.navigate(
+                                  ActiveAccountScreen.route,
+                                );
                               }
                             },
                           ),

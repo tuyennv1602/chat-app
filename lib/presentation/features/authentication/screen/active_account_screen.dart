@@ -16,8 +16,12 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 
 class ActiveAccountScreen extends StatelessWidget {
-  static const String router = '/active_account';
-  TextEditingController verifyCode = TextEditingController();
+  static const String route = '/active_account';
+  final TextEditingController verifyCode = TextEditingController();
+  final String email;
+
+  ActiveAccountScreen({Key key, this.email}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +50,9 @@ class ActiveAccountScreen extends StatelessWidget {
               Text(
                 translate(StringConst.registerSuccess),
                 style: textStyleLabel.copyWith(
-                    fontSize: 18.sp, fontWeight: FontWeight.w500),
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w400,
+                ),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 25.h),
@@ -64,8 +70,7 @@ class ActiveAccountScreen extends StatelessWidget {
                       child: CustomAlertWidget(
                         confirmTitle: translate(StringConst.signIn),
                         title: 'Thành công',
-                        message:
-                            'Tài khoản đã được kích hoạt. Vui lòng đăng nhập lại.',
+                        message: 'Tài khoản đã được kích hoạt. Vui lòng đăng nhập lại.',
                         onConfirmed: () {
                           Routes.instance.navigateAndRemove(SignInScreen.route);
                         },

@@ -265,7 +265,11 @@ Every module has separate methods for:
 3. You will get a dependency graph generated in `lib/common/injector/injector.g.dart`
 
 4. As use cases belong to domain layer and takes abstract Repository class as dependency hence in the file the`injector.g.dart`
-   add the postfix `Impl` to all the repository dependency
+   add `from` in Register
+
+```dart
+   @Register.singleton(AuthenticationRepository, from: AuthenticationRepositoryImpl)
+```
 
 5. In your screen or anywhere else resolve the dependency as follows:
 

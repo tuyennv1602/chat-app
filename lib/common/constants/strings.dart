@@ -1,9 +1,9 @@
 class StringConst {
   static const notification = 'label.notification';
-  static const cancel = 'button.cancel';
+  static const cancel = 'label.cancel';
   static const ok = 'button.ok';
   static const connectLost = 'message.connection_lost';
-  static const unknowError = 'message.unknow_error';
+  static const unknowError = 'message.network_error';
   static const email = 'label.email';
   static const password = 'label.password';
   static const phone = 'label.phone';
@@ -16,6 +16,7 @@ class StringConst {
   static const code = 'label.code';
   static const welcome = 'label.welcome';
   static const verifyCode = 'label.verify_code';
+  static const signInFailed = 'label.sign_in_failed';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';
@@ -40,4 +41,5 @@ class StringConst {
   static const hourAgo = 'time.hour_ago';
 
   static const verify = 'button.verify';
+  static const accountInActive = 'message.account_inactive';
 }

@@ -1,3 +1,4 @@
+import 'package:chat_app/common/blocs/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/common/blocs/loading_bloc/loading_bloc.dart';
 import 'package:chat_app/common/blocs/loading_bloc/loading_state.dart';
 import 'package:chat_app/common/injector/injector.dart';
@@ -16,6 +17,9 @@ class App extends StatelessWidget {
         BlocProvider<LoadingBloc>(
           create: (_) => Injector.resolve<LoadingBloc>(),
         ),
+        BlocProvider<AuthBloc>(
+          create: (_) => Injector.resolve<AuthBloc>(),
+        )
       ];
 
   // Global bloc listener

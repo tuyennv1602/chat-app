@@ -91,14 +91,12 @@ class _BodyState extends State<_Body> {
         Container(
           width: 50.w,
           height: 50.w,
-          alignment: Alignment.center,
+          padding: EdgeInsets.all(5.w),
           decoration: BoxDecoration(
             color: Colors.grey[300],
             borderRadius: BorderRadius.circular(25.w),
-            image: const DecorationImage(
-              image: AssetImage(ImageConst.circleLoading),
-            ),
           ),
+          child: Center(child: Image.asset(ImageConst.circleLoading)),
         )
       ],
     );
