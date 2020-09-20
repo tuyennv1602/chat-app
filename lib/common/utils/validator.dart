@@ -47,9 +47,23 @@ class Validator {
     return null;
   }
 
-  static String validCode(String fullName) {
-    if (fullName.isEmptyOrNull) {
+  static String validCode(String code) {
+    if (code.isEmptyOrNull) {
       return translate(StringConst.enterCode);
+    }
+    return null;
+  }
+
+  static String validRoomId(String roomId) {
+    if (roomId.isEmptyOrNull) {
+      return translate(StringConst.enterRoomId);
+    }
+    return null;
+  }
+
+  static String validRoomName(String roomName) {
+    if (roomName.isEmptyOrNull) {
+      return translate(StringConst.enterRoomName);
     }
     return null;
   }

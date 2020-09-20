@@ -35,7 +35,7 @@ class ItemConversationWidget extends StatelessWidget {
           child: Container(
             decoration: const BoxDecoration(
               border: Border(
-                bottom: BorderSide(color: AppColors.line, width: 0.7),
+                bottom: BorderSide(color: AppColors.line, width: 0.5),
               ),
             ),
             padding: EdgeInsets.only(bottom: 10.h),
@@ -61,7 +61,7 @@ class ItemConversationWidget extends StatelessWidget {
                             )
                             .timeAgo(),
                         style: TextStyle(
-                          color: AppColors.greyText,
+                          color: AppColors.grey,
                           fontSize: 12.sp,
                         ),
                       )
@@ -70,7 +70,10 @@ class ItemConversationWidget extends StatelessWidget {
                 ),
                 Text(
                   lastMessage,
-                  style: textStyleMedium,
+                  style: textStyleRegular.copyWith(
+                    fontSize: 13.sp,
+                    color: AppColors.greyText,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 )

@@ -3,9 +3,9 @@ import 'package:chat_app/common/utils/screen_utils.dart';
 import 'package:flutter/material.dart';
 
 final TextStyle textStyleAppbar = TextStyle(
-  fontSize: ScreenUtil().setSp(22.5),
-  color: Colors.white,
-  fontWeight: FontWeight.w700,
+  fontSize: ScreenUtil().setSp(17),
+  color: AppColors.black,
+  fontWeight: FontWeight.w500,
 );
 
 final TextStyle textStyleLabel = TextStyle(
@@ -17,7 +17,7 @@ final TextStyle textStyleLabel = TextStyle(
 final TextStyle textStyleInput = TextStyle(
   fontSize: ScreenUtil().setSp(15),
   color: AppColors.black,
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.w400,
   height: 1.5,
 );
 
@@ -40,7 +40,7 @@ final TextStyle textStyleRegular = TextStyle(
 );
 
 final TextStyle textStyleMedium = TextStyle(
-  fontSize: ScreenUtil().setSp(14),
+  fontSize: ScreenUtil().setSp(15),
   color: AppColors.black,
   fontWeight: FontWeight.w500,
 );
