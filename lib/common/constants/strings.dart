@@ -2,8 +2,8 @@ class StringConst {
   static const notification = 'label.notification';
   static const cancel = 'label.cancel';
   static const ok = 'button.ok';
-  static const connectLost = 'message.connection_lost';
-  static const unknowError = 'message.network_error';
+  static const connectLost = 'message.network_error';
+  static const unknowError = 'message.unknow_error';
   static const email = 'label.email';
   static const password = 'label.password';
   static const phone = 'label.phone';

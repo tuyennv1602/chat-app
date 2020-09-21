@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 
 bool _isShowing = false;
-BuildContext _context, _dismissingContext;
+BuildContext _context;
 bool _barrierDismissible = true;
 
 class ProgressDialog {
@@ -22,8 +22,8 @@ class ProgressDialog {
     if (_isShowing) {
       try {
         _isShowing = false;
-        if (Navigator.of(_dismissingContext).canPop()) {
-          Navigator.of(_dismissingContext).pop();
+        if (Navigator.of(_context).canPop()) {
+          Navigator.of(_context).pop();
         }
       } catch (_) {}
     }
@@ -33,7 +33,7 @@ class ProgressDialog {
     if (_isShowing) {
       try {
         _isShowing = false;
-        Navigator.of(_dismissingContext).pop(true);
+        Navigator.of(_context).pop(true);
         return Future.value(true);
       } catch (_) {
         return Future.value(false);
@@ -52,7 +52,6 @@ class ProgressDialog {
         context: _context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          _dismissingContext = context;
           return WillPopScope(
             onWillPop: () {
               return Future.value(_barrierDismissible);
