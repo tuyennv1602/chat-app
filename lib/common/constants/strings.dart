@@ -27,6 +27,7 @@ class StringConst {
   static const verifyCode = 'label.verify_code';
   static const signInFailed = 'label.sign_in_failed';
   static const activeAccountFailed = 'label.active_account_failed';
+  static const mission = 'label.mission';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';

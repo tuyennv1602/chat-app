@@ -14,4 +14,8 @@ class IconConst {
   static const String close = '${path}close.svg';
   static const String success = '${path}success.svg';
   static const String registerDone = '${path}register_done.svg';
+  static const String pending = '${path}pending.svg';
+  static const String done = '${path}done.svg';
+  static const String cancel = '${path}cancel.svg';
+  static const String addTask = '${path}add_task.svg';
 }
