@@ -42,6 +42,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       loadingBloc.add(FinishLoading());
       if (resp) {
         yield SignedUpState();
+      } else {
+        yield* _handleError(translate(StringConst.unknowError));
       }
     } on DioError catch (e) {
       yield* _handleError(e.errorMessage);
