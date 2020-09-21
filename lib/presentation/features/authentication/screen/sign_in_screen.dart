@@ -141,6 +141,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             _checkEnableButton();
                           },
                           controller: passwordCtrl,
+                          obscureText: true,
                         ),
                         SizedBox(height: 15.h),
                         Align(
