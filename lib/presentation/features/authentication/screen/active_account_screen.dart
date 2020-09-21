@@ -11,7 +11,6 @@ import 'package:chat_app/common/widgets/custom_alert.dart';
 import 'package:chat_app/common/widgets/input_widget.dart';
 import 'package:chat_app/presentation/features/authentication/bloc/active_account/active_account_bloc.dart';
 import 'package:chat_app/presentation/features/authentication/screen/sign_in_screen.dart';
-import 'package:chat_app/presentation/features/home/screen/home_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
@@ -37,7 +36,7 @@ class ActiveAccountScreen extends StatelessWidget {
         value: activeAccountBloc,
         child: BlocListener<ActiveAccountBloc, ActiveAccountState>(
           listener: (_, state) {
-            if (state is ActiveAccountSuccess) {
+            if (state is ActiveAccountSuccessState) {
               AlertUtil.show(
                 context,
                 child: CustomAlertWidget(

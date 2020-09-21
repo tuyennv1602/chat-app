@@ -13,13 +13,14 @@ class AuthenticationRemoteDataSource {
     return LoginResponseModel.fromJson(resp.data['data']);
   }
 
-  Future<void> activeAccount(
+  Future<bool> activeAccount(
     String email,
     String verifyCode,
   ) async {
-    await client.post('account/activate', body: {
+    final res = await client.post('account/activate', body: {
       'email': email,
       'activation_code': verifyCode,
     });
+    return res.data['data']['is_activated'];
   }
 }

@@ -16,10 +16,12 @@ part 'active_account_state.dart';
 class ActiveAccountBloc extends Bloc<ActiveAccountEvent, ActiveAccountState> {
   final LoadingBloc loadingBloc;
   final AuthenticationUseCase authenticationUseCase;
+
   ActiveAccountBloc({
     this.loadingBloc,
     this.authenticationUseCase,
-  }) : super(ActiveAccountInitial());
+  }) : super(ActiveAccountInitialState());
+
   @override
   Stream<ActiveAccountState> mapEventToState(
     ActiveAccountEvent event,
@@ -36,19 +38,16 @@ class ActiveAccountBloc extends Bloc<ActiveAccountEvent, ActiveAccountState> {
       SubmitActiveAccountEvent event) async* {
     try {
       loadingBloc.add(StartLoading());
-      await authenticationUseCase.activeAccount(
+      final res = await authenticationUseCase.activeAccount(
         event.email,
         event.verifyCode,
       );
       loadingBloc.add(FinishLoading());
-      yield ActiveAccountSuccess();
-    } on DioError catch (e) {
-      if (e.response.data['code'] == ErrorUtils.accountInActive) {
-        loadingBloc.add(FinishLoading());
-        yield ErroredActiveAccountState(e.errorMessage);
-      } else {
-        yield* _handleError(e.errorMessage);
+      if (res) {
+        yield ActiveAccountSuccessState();
       }
+    } on DioError catch (e) {
+      yield* _handleError(e.errorMessage);
     } on NetworkException catch (e) {
       yield* _handleError(e.message);
     } catch (e) {

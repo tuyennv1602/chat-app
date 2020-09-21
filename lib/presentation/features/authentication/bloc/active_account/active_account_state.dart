@@ -3,9 +3,9 @@ part of 'active_account_bloc.dart';
 @immutable
 abstract class ActiveAccountState {}
 
-class ActiveAccountInitial extends ActiveAccountState {}
+class ActiveAccountInitialState extends ActiveAccountState {}
 
-class ActiveAccountSuccess extends ActiveAccountState {}
+class ActiveAccountSuccessState extends ActiveAccountState {}
 
 class ErroredActiveAccountState extends ActiveAccountState {
   final String error;
