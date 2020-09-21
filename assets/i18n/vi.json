@@ -14,6 +14,7 @@
     "code": "Mã quân nhân",
     "sign_in_failed": "Đăng nhập thất bại",
     "sign_up_failed": "Đăng ký thất bại",
+    "active_account_failed": "Kích hoạt thất bại",
     "room_id": "Mã phòng",
     "cancel": "Huỷ",
     "send_request": "Gửi yêu cầu",
@@ -44,10 +45,12 @@
     "enter_code": "Hãy nhập mã quân nhân",
     "enter_room_id": "Hãy nhập mã phòng",
     "enter_room_name": "Hãy nhập tên phòng",
+    "enter_verify_code": "Hãy nhập mã xác thực",
     "register_success": "Đăng ký thành công! Vui lòng kiểm tra email để kích hoạt tài khoản.",
     "forgot_password_done": "Một mật khẩu đã được gửi tới email của bạn! Vui lòng kiểm tra email để lấy lại mật khẩu.",
     "account_inactive": "Tài khoản của bạn chưa được xác thực",
-    "account_existed": "Tài khoản này đang tồn tại. Vui lòng kiểm tra email, mã quân nhân hoặc biệt danh"
+    "account_existed": "Tài khoản này đang tồn tại. Vui lòng kiểm tra email, mã quân nhân hoặc biệt danh",
+    "error_verify_code": "Không thể xác minh mã cho tài khoản này. Vui lòng kiểm tra kích hoạt mã và kích hoạt lại tài khoản của bạn."
   },
   "time": {
     "just_now": "vừa xong",

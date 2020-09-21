@@ -54,6 +54,13 @@ class Validator {
     return null;
   }
 
+  static String validVerifyCode(String code) {
+    if (code.isEmptyOrNull) {
+      return translate(StringConst.enterVerifyCode);
+    }
+    return null;
+  }
+
   static String validRoomId(String roomId) {
     if (roomId.isEmptyOrNull) {
       return translate(StringConst.enterRoomId);

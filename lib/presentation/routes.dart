@@ -78,6 +78,7 @@ class Routes {
         return FadeInRoute(
           widget: ActiveAccountScreen(
             email: arguments['email'],
+            name: arguments['name'],
           ),
         );
       default:

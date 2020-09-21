@@ -5,6 +5,7 @@ class ErrorUtils {
   static const int wrongLoginData = 1000;
   static const int accountInActive = 1003;
   static const int accountExisted = 1001;
+  static const int errorVerifyCode = 1004;
 
   static String getErrorMessage(int code, String message) {
     if (code == accountInActive) {
@@ -12,6 +13,9 @@ class ErrorUtils {
     }
     if (code == accountExisted) {
       return translate(StringConst.accountExisted);
+    }
+    if (code == errorVerifyCode) {
+      return translate(StringConst.errorVerifyCode);
     }
     return message;
   }

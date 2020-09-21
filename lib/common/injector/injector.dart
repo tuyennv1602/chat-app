@@ -8,6 +8,7 @@ import 'package:chat_app/data/datasource/remote/authentication_remote_datasource
 import 'package:chat_app/data/repositories/authentication_repository_impl.dart';
 import 'package:chat_app/domain/repositories/authentication_repository.dart';
 import 'package:chat_app/domain/usecases/authentication_usecase.dart';
+import 'package:chat_app/presentation/features/authentication/bloc/active_account/active_account_bloc.dart';
 import 'package:chat_app/presentation/features/authentication/bloc/sign_in/sign_in_bloc.dart';
 import 'package:chat_app/presentation/features/authentication/bloc/sign_up/sign_up_bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -40,6 +41,7 @@ abstract class Injector {
   @Register.singleton(LoadingBloc)
   @Register.factory(SignInBloc)
   @Register.factory(SignUpBloc)
+  @Register.factory(ActiveAccountBloc)
   void _configureBlocs();
 
   // ============USE CASES==============

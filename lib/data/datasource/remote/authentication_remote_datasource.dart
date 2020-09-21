@@ -21,4 +21,18 @@ class AuthenticationRemoteDataSource {
     final resp = await client.post('account/register', body: reg.toJson());
     return resp.data['success'];
   }
+
+  Future<bool> activeAccount(
+    String email,
+    String verifyCode,
+  ) async {
+    final res = await client.post(
+      'account/activate',
+      body: {
+        'email': email,
+        'activation_code': verifyCode,
+      },
+    );
+    return res.data['data']['is_activated'];
+  }
 }

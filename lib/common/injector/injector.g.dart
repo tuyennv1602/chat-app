@@ -19,6 +19,9 @@ class _$Injector extends Injector {
     container.registerFactory((c) => SignUpBloc(
         loadingBloc: c<LoadingBloc>(),
         authenticationUseCase: c<AuthenticationUseCase>()));
+    container.registerFactory((c) => ActiveAccountBloc(
+        loadingBloc: c<LoadingBloc>(),
+        authenticationUseCase: c<AuthenticationUseCase>()));
   }
 
   void _configureUseCases() {

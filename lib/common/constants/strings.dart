@@ -2,8 +2,8 @@ class StringConst {
   static const notification = 'label.notification';
   static const cancel = 'label.cancel';
   static const ok = 'button.ok';
-  static const connectLost = 'message.connection_lost';
-  static const unknowError = 'message.network_error';
+  static const connectLost = 'message.network_error';
+  static const unknowError = 'message.unknow_error';
   static const email = 'label.email';
   static const password = 'label.password';
   static const phone = 'label.phone';
@@ -27,6 +27,7 @@ class StringConst {
   static const verifyCode = 'label.verify_code';
   static const signInFailed = 'label.sign_in_failed';
   static const signUpFailed = 'label.sign_up_failed';
+  static const activeAccountFailed = 'label.active_account_failed';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';
@@ -42,6 +43,7 @@ class StringConst {
   static const enterCode = 'message.enter_code';
   static const enterRoomId = 'message.enter_room_id';
   static const enterRoomName = 'message.enter_room_name';
+  static const enterVerifyCode = 'message.enter_verify_code';
   static const registerSuccess = 'message.register_success';
   static const forgotPasswordDone = 'message.forgot_password_done';
 
@@ -55,4 +57,5 @@ class StringConst {
   static const verify = 'button.verify';
   static const accountInActive = 'message.account_inactive';
   static const accountExisted = 'message.account_existed';
+  static const errorVerifyCode = 'message.error_verify_code';
 }

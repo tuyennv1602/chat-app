@@ -18,7 +18,6 @@ class _BaseScaffoldState extends State<BaseScaffold> {
 
   @override
   void initState() {
-    _progressDialog = ProgressDialog(context);
     super.initState();
   }
 
@@ -29,6 +28,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
       backgroundColor: Colors.white,
       body: BlocListener<LoadingBloc, LoadingState>(
         listener: (context, state) {
+          _progressDialog ??= ProgressDialog(context);
           if (state is Loading) {
             _progressDialog.show();
           }
