@@ -40,11 +40,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       final resp =
           await authenticationUseCase.register(event.registerRequestModel);
       loadingBloc.add(FinishLoading());
-      if (resp) {
-        yield SignedUpState();
-      } else {
-        yield* _handleError(translate(StringConst.unknowError));
-      }
+
+      yield SignedUpState();
     } on DioError catch (e) {
       yield* _handleError(e.errorMessage);
     } on NetworkException catch (e) {
