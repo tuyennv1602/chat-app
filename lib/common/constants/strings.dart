@@ -26,6 +26,7 @@ class StringConst {
   static const welcome = 'label.welcome';
   static const verifyCode = 'label.verify_code';
   static const signInFailed = 'label.sign_in_failed';
+  static const activeAccountFailed = 'label.active_account_failed';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';
@@ -41,6 +42,7 @@ class StringConst {
   static const enterCode = 'message.enter_code';
   static const enterRoomId = 'message.enter_room_id';
   static const enterRoomName = 'message.enter_room_name';
+  static const enterVerifyCode = 'message.enter_verify_code';
   static const registerSuccess = 'message.register_success';
   static const forgotPasswordDone = 'message.forgot_password_done';
 
@@ -53,4 +55,5 @@ class StringConst {
 
   static const verify = 'button.verify';
   static const accountInActive = 'message.account_inactive';
+  static const errorVerifyCode = 'message.error_verify_code';
 }

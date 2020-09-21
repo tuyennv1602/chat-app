@@ -88,6 +88,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ActiveAccountScreen.route,
                   arguments: {
                     'email': emailCtrl.text,
+                    'name': null,
                   },
                 ),
               ),
