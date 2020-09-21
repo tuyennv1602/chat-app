@@ -32,8 +32,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
   Future<bool> register(RegisterRequestModel registerRequestModel) async {
     if (await networkInfo.isConnected) {
-      final resp = await remoteDataSource.register(registerRequestModel);
-      return resp;
+      return remoteDataSource.register(registerRequestModel);
     } else {
       throw NetworkException();
     }

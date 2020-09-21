@@ -13,7 +13,7 @@
     "confirm_password": "Nhập lại mật khẩu",
     "code": "Mã quân nhân",
     "sign_in_failed": "Đăng nhập thất bại",
-    "sign_un_failed": "Đăng ký thất bại",
+    "sign_up_failed": "Đăng ký thất bại",
     "room_id": "Mã phòng",
     "cancel": "Huỷ",
     "send_request": "Gửi yêu cầu",

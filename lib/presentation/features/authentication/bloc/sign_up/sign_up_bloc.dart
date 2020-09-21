@@ -21,7 +21,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   SignUpBloc({
     this.loadingBloc,
     this.authenticationUseCase,
-  }) : super(SignUpInitial());
+  }) : super(SignUpInitialState());
   @override
   Stream<SignUpState> mapEventToState(
     SignUpEvent event,
@@ -37,18 +37,14 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   Stream<SignUpState> _mapSubmitSignUp(SubmitSignUpEvent event) async* {
     try {
       loadingBloc.add(StartLoading());
-
       final resp =
           await authenticationUseCase.register(event.registerRequestModel);
       loadingBloc.add(FinishLoading());
-      yield SignedUpState();
-    } on DioError catch (e) {
-      if (e.response.data['code'] == ErrorUtils.accountExisted) {
-        loadingBloc.add(FinishLoading());
-        yield ErroredSignUpState(e.errorMessage);
-      } else {
-        yield* _handleError(e.errorMessage);
+      if (resp) {
+        yield SignedUpState();
       }
+    } on DioError catch (e) {
+      yield* _handleError(e.errorMessage);
     } on NetworkException catch (e) {
       yield* _handleError(e.message);
     } catch (e) {

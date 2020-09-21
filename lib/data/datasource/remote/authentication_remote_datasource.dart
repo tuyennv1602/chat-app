@@ -7,22 +7,18 @@ class AuthenticationRemoteDataSource {
   AuthenticationRemoteDataSource({this.client});
 
   Future<LoginResponseModel> login(String email, String password) async {
-    final resp = await client.post('login', body: {
-      'email': email,
-      'password': password,
-    });
+    final resp = await client.post(
+      'login',
+      body: {
+        'email': email,
+        'password': password,
+      },
+    );
     return LoginResponseModel.fromJson(resp.data['data']);
   }
 
   Future<bool> register(RegisterRequestModel reg) async {
-    final resp = await client.post('account/register', body: {
-      'code': reg.code,
-      'nickname': reg.nickname,
-      'fullname': reg.fullname,
-      'phone_number': reg.phoneNumber,
-      'email': reg.email,
-      'password': reg.password
-    });
+    final resp = await client.post('account/register', body: reg.toJson());
     return resp.data['success'];
   }
 }

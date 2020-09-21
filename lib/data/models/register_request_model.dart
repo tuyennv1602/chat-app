@@ -14,4 +14,15 @@ class RegisterRequestModel {
     this.email,
     this.password,
   });
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['code'] = code;
+    data['nickname'] = nickname;
+    data['fullname'] = fullname;
+    data['phone_number'] = phoneNumber;
+    data['email'] = email;
+    data['password'] = password;
+    return data;
+  }
 }
