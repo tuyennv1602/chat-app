@@ -3,6 +3,7 @@ import 'package:chat_app/common/platform/network_info.dart';
 import 'package:chat_app/data/datasource/local/local_datasource.dart';
 import 'package:chat_app/data/datasource/remote/authentication_remote_datasource.dart';
 import 'package:chat_app/data/models/login_response_model.dart';
+import 'package:chat_app/data/models/register_request_model.dart';
 import 'package:chat_app/domain/repositories/authentication_repository.dart';
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
@@ -23,6 +24,15 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       await localDataSource.setToken(resp.token);
       await localDataSource.setUser(resp.userModel);
       return resp;
+    } else {
+      throw NetworkException();
+    }
+  }
+
+  @override
+  Future<bool> register(RegisterRequestModel registerRequestModel) async {
+    if (await networkInfo.isConnected) {
+      return remoteDataSource.register(registerRequestModel);
     } else {
       throw NetworkException();
     }
