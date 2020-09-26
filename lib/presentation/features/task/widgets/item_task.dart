@@ -1,6 +1,7 @@
 import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
+import 'package:chat_app/common/utils/common_utils.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
 import 'package:chat_app/presentation/features/task/widgets/item_status.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 
 class ItemTask extends StatelessWidget {
-  final int status;
+  final TaskStatus status;
   int size = 20;
-  ItemTask({Key key, this.status = 0}) : super(key: key);
+  ItemTask({Key key, this.status = TaskStatus.none}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

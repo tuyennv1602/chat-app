@@ -1,6 +1,7 @@
 import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
+import 'package:chat_app/common/utils/common_utils.dart';
 import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/presentation/features/task/widgets/item_task.dart';
@@ -41,7 +42,9 @@ class _TaskListScreenState extends State<TaskListScreen> {
                   SizedBox(height: 15.w),
               itemCount: 10,
               itemBuilder: (context, index) {
-                return ItemTask();
+                return ItemTask(
+                  status: CommonUtil.checkTaskStatus(1),
+                );
               },
             ),
           )
