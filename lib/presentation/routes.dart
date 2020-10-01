@@ -1,5 +1,6 @@
 import 'package:chat_app/common/navigation/fade_in_route.dart';
 import 'package:chat_app/common/navigation/slide_left_route.dart';
+import 'package:chat_app/presentation/create_task.dart';
 import 'package:chat_app/presentation/features/home/screen/create_room_screen.dart';
 import 'package:chat_app/presentation/features/authentication/screen/active_account_screen.dart';
 import 'package:chat_app/presentation/features/authentication/screen/forgot_password_success_screen.dart';
@@ -61,6 +62,8 @@ class Routes {
     switch (settings.name) {
       case SignInScreen.route:
         return FadeInRoute(widget: SignInScreen());
+      case CreateTaskScreen.router:
+        return FadeInRoute(widget: CreateTaskScreen());
       case SignUpScreen.route:
         return SlideLeftRoute(widget: SignUpScreen());
       case ForgotPasswordScreen.route:
