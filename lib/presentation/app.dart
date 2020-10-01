@@ -43,6 +43,7 @@ class App extends StatelessWidget {
         theme: ThemeData(
           primaryColor: AppColors.primaryColor,
           fontFamily: 'Roboto',
+          canvasColor: Colors.transparent,
         ),
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,

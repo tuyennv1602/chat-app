@@ -9,6 +9,7 @@ import 'package:chat_app/presentation/features/home/widget/fab_menu/fab_menu_ove
 import 'package:chat_app/presentation/features/home/widget/item_conversation.dart';
 import 'package:chat_app/presentation/features/home/widget/join_room_dialog.dart';
 import 'package:chat_app/presentation/features/home/widget/notification_badge.dart';
+import 'package:chat_app/presentation/task_option.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_svg/svg.dart';
@@ -87,6 +88,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     trailing: SvgPicture.asset(IconConst.search),
                     onTapLeading: () {},
+                    onTapTrailing: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return TaskOptionSheet();
+                        },
+                        isScrollControlled: true,
+                      );
+                    },
                   ),
                   Expanded(
                     child: Container(
