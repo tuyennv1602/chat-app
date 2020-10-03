@@ -1,10 +1,10 @@
-class Member {
+class MemberEntity {
   final int id;
   final String name;
   final String nickName;
   final String code;
 
-  Member({
+  MemberEntity({
     this.id,
     this.name,
     this.nickName,

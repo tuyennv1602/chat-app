@@ -58,4 +58,14 @@ class StringConst {
   static const accountInActive = 'message.account_inactive';
   static const accountExisted = 'message.account_existed';
   static const errorVerifyCode = 'message.error_verify_code';
+  static const conversation = 'conversation.conversation';
+  static const location = 'conversation.location';
+  static const activeNow = 'conversation.activeNow';
+  static const inputMessage = 'conversation.inputMessage';
+  static const today = 'conversation.today';
+  static const image = 'label.image';
+  static const camera = 'label.camera';
+  static const video = 'label.video';
+  static const audio = 'label.audio';
+  static const gallery = 'label.gallery';
 }

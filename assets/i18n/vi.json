@@ -25,7 +25,12 @@
     "selected": "Đã chọn",
     "room_name": "Tên phòng",
     "all_member": "Tất cả thành viên",
-    "verify_code": "Mã xác thực"
+    "verify_code": "Mã xác thực",
+    "image": "Ảnh",
+    "camera": "Máy ảnh",
+    "video": "Video",
+    "audio": "Thông điệp",
+    "gallery": "Thư viện"
   },
   "message": {
     "network_error": "Lỗi kết nối, vui lòng kiểm tra đường truyền internet!",
@@ -63,5 +68,12 @@
   },
   "button": {
     "verify": "Xác thực"
+  },
+  "conversation": {
+    "conversation": "Hội thoại",
+    "location": "Vị trí",
+    "activeNow": "Đang hoạt động",
+    "inputMessage": "Nhập tin nhắn",
+    "today": "Hôm nay"
   }
 }

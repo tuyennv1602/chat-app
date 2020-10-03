@@ -28,9 +28,9 @@ final TextStyle textStyleInputError = TextStyle(
 );
 
 final TextStyle textStyleButton = TextStyle(
-  fontSize: ScreenUtil().setSp(16),
+  fontSize: ScreenUtil().setSp(15),
   color: Colors.white,
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.w400,
 );
 
 final TextStyle textStyleRegular = TextStyle(
@@ -43,4 +43,9 @@ final TextStyle textStyleMedium = TextStyle(
   fontSize: ScreenUtil().setSp(15),
   color: AppColors.black,
   fontWeight: FontWeight.w500,
+);
+
+final TextStyle textStyleMessage = TextStyle(
+  fontSize: ScreenUtil().setSp(15),
+  fontWeight: FontWeight.w400,
 );
