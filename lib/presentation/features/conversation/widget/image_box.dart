@@ -123,21 +123,22 @@ class ImageBox extends StatelessWidget {
               child: Stack(
                 children: [
                   _buildImage(90.w, 2),
-                  message.images.length > 3
-                      ? GestureDetector(
-                          onTap: () => _viewFullPhoto(2),
-                          child: Container(
-                            height: 90.w,
-                            color: Colors.black.withOpacity(0.5),
-                            child: Center(
-                              child: Text(
-                                '+${message.images.length - 3}',
-                                style: TextStyle(color: Colors.white, fontSize: 18.sp),
-                              ),
-                            ),
+                  Visibility(
+                    visible: message.images.length > 3,
+                    child: GestureDetector(
+                      onTap: () => _viewFullPhoto(2),
+                      child: Container(
+                        height: 90.w,
+                        color: Colors.black.withOpacity(0.5),
+                        child: Center(
+                          child: Text(
+                            '+${message.images.length - 3}',
+                            style: TextStyle(color: Colors.white, fontSize: 18.sp),
                           ),
-                        )
-                      : const SizedBox()
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
