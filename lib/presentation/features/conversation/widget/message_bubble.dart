@@ -58,8 +58,9 @@ class _MessageState extends State<MessageBubble> {
     );
   }
 
-  Widget _renderSender() => widget.showSenderName && !_isNextBySender && !_isMine
-      ? Padding(
+  Widget _renderSender() => Visibility(
+        visible: widget.showSenderName && !_isNextBySender && !_isMine,
+        child: Padding(
           padding: EdgeInsets.only(left: 35.w),
           child: Text(
             widget.message.sender.nickname,
@@ -69,17 +70,17 @@ class _MessageState extends State<MessageBubble> {
               fontSize: 11.sp,
             ),
           ),
-        )
-      : const SizedBox();
+        ),
+      );
 
   Widget _renderVerticalLine() => Container(
         color: AppColors.line,
         height: 0.5,
       );
 
-  Widget _renderSeperator() {
-    if (_isPreviousDiff) {
-      return Padding(
+  Widget _renderSeperator() => Visibility(
+      visible: _isPreviousDiff,
+      child: Padding(
         padding: EdgeInsets.symmetric(vertical: 20.w, horizontal: 10.w),
         child: Row(
           children: [
@@ -101,10 +102,7 @@ class _MessageState extends State<MessageBubble> {
             ),
           ],
         ),
-      );
-    }
-    return const SizedBox();
-  }
+      ));
 
   EdgeInsets _itemMargin() {
     if (_isNextDiff) {
@@ -113,46 +111,42 @@ class _MessageState extends State<MessageBubble> {
     return EdgeInsets.only(bottom: _isNextBySender ? 3.w : 15.w);
   }
 
-  Widget _getLeftTime() {
-    if (!_isMine) {
-      return const SizedBox();
-    }
-    return Expanded(
-      child: isShowTime
-          ? Padding(
-              padding: EdgeInsets.only(right: 5.w),
-              child: Text(
-                widget.message.getCreatedTime,
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  color: AppColors.warmGrey,
-                ),
-              ),
-            )
-          : const SizedBox(),
-    );
-  }
+  Widget _getLeftTime() => Visibility(
+        visible: _isMine,
+        child: Expanded(
+          child: isShowTime
+              ? Padding(
+                  padding: EdgeInsets.only(right: 5.w),
+                  child: Text(
+                    widget.message.getCreatedTime,
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: AppColors.warmGrey,
+                    ),
+                  ),
+                )
+              : const SizedBox(),
+        ),
+      );
 
-  Widget _getRightTime() {
-    if (_isMine) {
-      return const SizedBox();
-    }
-    return Expanded(
-      child: isShowTime
-          ? Padding(
-              padding: EdgeInsets.only(left: 5.w),
-              child: Text(
-                widget.message.getCreatedTime,
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  color: AppColors.warmGrey,
-                ),
-              ),
-            )
-          : const SizedBox(),
-    );
-  }
+  Widget _getRightTime() => Visibility(
+        visible: !_isMine,
+        child: Expanded(
+          child: isShowTime
+              ? Padding(
+                  padding: EdgeInsets.only(left: 5.w),
+                  child: Text(
+                    widget.message.getCreatedTime,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: AppColors.warmGrey,
+                    ),
+                  ),
+                )
+              : const SizedBox(),
+        ),
+      );
 
   Widget _renderContent() {
     switch (widget.message.contentType) {

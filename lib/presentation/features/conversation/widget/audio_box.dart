@@ -75,7 +75,10 @@ class _AudioBoxState extends State<AudioBox> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          widget.isMine ? _buildPlayButton() : const SizedBox(),
+          Visibility(
+            visible: widget.isMine,
+            child: _buildPlayButton(),
+          ),
           Container(
             width: 100.w,
             child: SvgPicture.asset(
@@ -84,7 +87,10 @@ class _AudioBoxState extends State<AudioBox> {
               color: AppColors.warmGrey,
             ),
           ),
-          !widget.isMine ? _buildPlayButton() : const SizedBox()
+          Visibility(
+            visible: !widget.isMine,
+            child: _buildPlayButton(),
+          ),
         ],
       ),
     );
