@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
@@ -7,11 +9,13 @@ import 'package:chat_app/domain/entities/message_entity.dart';
 import 'package:chat_app/domain/entities/user_entity.dart';
 import 'package:chat_app/presentation/features/conversation/widget/attach_item.dart';
 import 'package:chat_app/presentation/features/conversation/widget/message_bubble.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -125,6 +129,38 @@ class _ChatPageState extends State<ChatPage> {
   void _hideAttachButton() {
     _keyFabButton?.currentState?.close();
     _attachNotifier.value = false;
+  }
+
+  Future<void> _pickVideo() async {
+    final result = await FilePicker.platform.pickFiles(type: FileType.video);
+    if (result != null) {
+      final file = result.files.first;
+      debugPrint('video path: ${file.path}');
+    }
+  }
+
+  Future<void> _pickAudio() async {
+    final result = await FilePicker.platform.pickFiles(type: FileType.audio);
+    if (result != null) {
+      final file = result.files.first;
+      debugPrint('audio path: ${file.path}');
+    }
+  }
+
+  Future<void> _pickImages() async {
+    final result = await FilePicker.platform.pickFiles(type: FileType.image, allowMultiple: true);
+    if (result != null) {
+      final files = result.paths.map((path) => File(path)).toList();
+      debugPrint('images path: ${files.length}');
+    }
+  }
+
+  Future<void> _captureImage() async {
+    final pickedFile = await ImagePicker().getImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      final file = File(pickedFile.path);
+      debugPrint('image path: ${file.path}');
+    }
   }
 
   @override
@@ -241,6 +277,7 @@ class _ChatPageState extends State<ChatPage> {
                           title: translate(StringConst.gallery),
                           onTap: () {
                             _hideAttachButton();
+                            _pickImages();
                           },
                         ),
                       ),
@@ -250,6 +287,7 @@ class _ChatPageState extends State<ChatPage> {
                           title: translate(StringConst.camera),
                           onTap: () {
                             _hideAttachButton();
+                            _captureImage();
                           },
                         ),
                       ),
@@ -259,6 +297,7 @@ class _ChatPageState extends State<ChatPage> {
                           title: translate(StringConst.video),
                           onTap: () {
                             _hideAttachButton();
+                            _pickVideo();
                           },
                         ),
                       ),
@@ -268,6 +307,7 @@ class _ChatPageState extends State<ChatPage> {
                           title: translate(StringConst.audio),
                           onTap: () {
                             _hideAttachButton();
+                            _pickAudio();
                           },
                         ),
                       ),
