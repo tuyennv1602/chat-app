@@ -91,8 +91,8 @@ class AnimatedButtonWidgetState extends State<AnimatedButtonWidget>
             angle: angle.value * (pi / 4),
             child: SvgPicture.asset(
               IconConst.add,
-              width: 22.w,
-              height: 22.w,
+              width: (widget.buttonSize / 2).w,
+              height: (widget.buttonSize / 2).w,
             ),
           ),
         ),

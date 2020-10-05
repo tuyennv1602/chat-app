@@ -5,7 +5,7 @@ import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/item_member.dart';
 import 'package:chat_app/common/widgets/search_box.dart';
-import 'package:chat_app/domain/entities/member.dart';
+import 'package:chat_app/domain/entities/member_entity.dart';
 import 'package:chat_app/presentation/features/select_member/widget/item_selected_member.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -54,7 +54,7 @@ class _SelectMemberScreenState extends State<SelectMemberScreen> {
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (_, index) => ItemSelectedMember(
-                  member: Member(
+                  member: MemberEntity(
                     code: index.toString(),
                     name: 'Nguyen Khac Tu',
                     nickName: 'nguyen_tu',
@@ -78,7 +78,7 @@ class _SelectMemberScreenState extends State<SelectMemberScreen> {
               child: ListView.separated(
                 padding: EdgeInsets.symmetric(horizontal: 15.w),
                 itemBuilder: (_, index) => ItemMember(
-                  member: Member(
+                  member: MemberEntity(
                     code: index.toString(),
                     name: 'Nguyen Khac Tu',
                     nickName: 'nguyen_tu',

@@ -8,7 +8,7 @@ import 'package:chat_app/common/widgets/button_widget.dart';
 import 'package:chat_app/common/widgets/circle_button.dart';
 import 'package:chat_app/common/widgets/input_widget.dart';
 import 'package:chat_app/common/widgets/item_member.dart';
-import 'package:chat_app/domain/entities/member.dart';
+import 'package:chat_app/domain/entities/member_entity.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
@@ -154,7 +154,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
             child: ListView.separated(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
               itemBuilder: (_, index) => ItemMember(
-                member: Member(
+                member: MemberEntity(
                   code: index.toString(),
                   name: 'Lê Văn Luyện',
                   nickName: 'luyen_nguyen',

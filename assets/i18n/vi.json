@@ -30,7 +30,12 @@
     "time": "Thời gian",
     "content_task": "Nội dung nhiệm vụ",
     "task": "Nhiệm vụ",
-    "to": "đến"
+    "to": "đến",
+    "image": "Ảnh",
+    "camera": "Máy ảnh",
+    "video": "Video",
+    "audio": "Thông điệp",
+    "gallery": "Thư viện"
   },
   "message": {
     "network_error": "Lỗi kết nối, vui lòng kiểm tra đường truyền internet!",
@@ -68,5 +73,12 @@
   },
   "button": {
     "verify": "Xác thực"
+  },
+  "conversation": {
+    "conversation": "Hội thoại",
+    "location": "Vị trí",
+    "activeNow": "Đang hoạt động",
+    "inputMessage": "Nhập tin nhắn",
+    "today": "Hôm nay"
   }
 }
