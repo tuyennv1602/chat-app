@@ -28,6 +28,11 @@ class StringConst {
   static const signInFailed = 'label.sign_in_failed';
   static const signUpFailed = 'label.sign_up_failed';
   static const activeAccountFailed = 'label.active_account_failed';
+  static const createTask = 'label.create_task';
+  static const time = 'label.time';
+  static const to = 'label.to';
+  static const contentTask = 'label.content_task';
+  static const task = 'label.task';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';

@@ -13,6 +13,7 @@ import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:intl/intl.dart';
 
 class CreateTaskScreen extends StatefulWidget {
   static const String router = '/create_task';
@@ -21,6 +22,9 @@ class CreateTaskScreen extends StatefulWidget {
 }
 
 class _CreateTaskScreenState extends State<CreateTaskScreen> {
+  DateTime _createDate = DateTime.now();
+  DateTime _finishDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
@@ -29,7 +33,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
           AppBarWidget(
             onTapLeading: () => Routes.instance.pop(),
             center: Text(
-              'Tạo nhiệm vụ',
+              translate(StringConst.createTask),
               style: textStyleAppbar,
             ),
           ),
@@ -39,11 +43,12 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
               child: Column(
                 children: [
                   InputWidget(
-                    placeHolder: 'Nhiệm vụ',
+                    placeHolder: translate(StringConst.task),
                   ),
                   SizedBox(height: 15.w),
                   InputWidget(
-                    placeHolder: 'Nội dung nhiệm vụ',
+                    placeHolder: translate(StringConst.contentTask),
+                    textAlignVertical: TextAlignVertical.top,
                     maxLines: 3,
                   ),
                 ],
@@ -56,7 +61,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Thời gian',
+                  translate(StringConst.time),
                   style: textStyleInput.copyWith(
                     color: AppColors.warmGrey,
                     fontSize: 11.sp,
@@ -66,17 +71,51 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(child: TimeWidget(time: '09:00 01/08/2020')),
+                    Expanded(
+                      child: TimeWidget(
+                        time: _createDate,
+                        onTap: (date, time) {
+                          if (date != null && time != null) {
+                            setState(() {
+                              _createDate = DateTime(
+                                date.year,
+                                date.month,
+                                date.day,
+                                time.hour,
+                                time.minute,
+                              );
+                            });
+                          }
+                        },
+                      ),
+                    ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 13.w),
                       child: Text(
-                        'đến',
+                        translate(StringConst.to),
                         style: textStyleInput.copyWith(
                           fontSize: 13.sp,
                         ),
                       ),
                     ),
-                    Expanded(child: TimeWidget(time: '09:00 01/08/2020')),
+                    Expanded(
+                      child: TimeWidget(
+                        time: _finishDate,
+                        onTap: (date, time) {
+                          if (date != null && time != null) {
+                            setState(() {
+                              _finishDate = DateTime(
+                                date.year,
+                                date.month,
+                                date.day,
+                                time.hour,
+                                time.minute,
+                              );
+                            });
+                          }
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -129,7 +168,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
             ),
           ),
           ButtonWidget(
-            label: 'Tạo nhiệm vụ',
+            label: translate(StringConst.createTask),
             margin: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
             onTap: () {},
           )
@@ -140,24 +179,52 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
 }
 
 class TimeWidget extends StatelessWidget {
-  final String time;
-  TimeWidget({
-    Key key,
-    this.time,
-  }) : super(key: key);
+  final Function(DateTime, TimeOfDay) onTap;
+  final DateTime time;
+
+  TimeWidget({Key key, this.onTap, this.time}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: AppColors.line, width: 1.w),
-        borderRadius: BorderRadius.all(Radius.circular(5.w)),
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 7.w),
-      child: Text(
-        time,
-        style: textStyleInput.copyWith(
-          fontSize: 13.sp,
+    return InkWell(
+      onTap: () async {
+        final selectedDate = showDatePicker(
+          context: context,
+          firstDate: DateTime(2020),
+          lastDate: DateTime(2030),
+          initialDate: DateTime.now(),
+          helpText: '',
+        );
+
+        await selectedDate.then(
+          (date) {
+            if (date == null) {
+              return;
+            }
+            showTimePicker(
+              initialTime: TimeOfDay(
+                  hour: DateTime.now().hour, minute: DateTime.now().minute),
+              context: context,
+              helpText: '',
+            )..then(
+                (time) {
+                  onTap(date, time);
+                },
+              );
+          },
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: AppColors.line, width: 1.w),
+          borderRadius: BorderRadius.all(Radius.circular(5.w)),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 7.w),
+        child: Text(
+          '${DateFormat('HH:mm dd/MM/yyyy').format(time)}',
+          style: textStyleInput.copyWith(
+            fontSize: 13.sp,
+          ),
         ),
       ),
     );
