@@ -56,8 +56,8 @@ class _SelectMemberScreenState extends State<SelectMemberScreen> {
                 itemBuilder: (_, index) => ItemSelectedMember(
                   member: MemberEntity(
                     code: index.toString(),
-                    name: 'Nguyen Khac Tu',
-                    nickName: 'nguyen_tu',
+                    fullname: 'Nguyen Khac Tu',
+                    nickname: 'nguyen_tu',
                   ),
                 ),
                 separatorBuilder: (_, index) => SizedBox(width: 5.w),
@@ -80,8 +80,8 @@ class _SelectMemberScreenState extends State<SelectMemberScreen> {
                 itemBuilder: (_, index) => ItemMember(
                   member: MemberEntity(
                     code: index.toString(),
-                    name: 'Nguyen Khac Tu',
-                    nickName: 'nguyen_tu',
+                    fullname: 'Nguyen Khac Tu',
+                    nickname: 'nguyen_tu',
                   ),
                 ),
                 separatorBuilder: (_, index) => SizedBox(

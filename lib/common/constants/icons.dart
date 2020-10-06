@@ -23,4 +23,11 @@ class IconConst {
   static const String camera = '${path}camera.svg';
   static const String audio = '${path}micro_phone.svg';
   static const String video = '${path}video.svg';
+  static const String task = '${path}task.svg';
+  static const String mapPin = '${path}map_pin.svg';
+  static const String addMember = '${path}add_user.svg';
+  static const String cancel = '${path}cancel.svg';
+  static const String logout = '${path}logout.svg';
+  static const String focus = '${path}focus.svg';
+  static const String share = '${path}share.svg';
 }
