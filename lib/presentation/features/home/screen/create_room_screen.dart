@@ -86,8 +86,8 @@ class CreateRoomScreen extends StatelessWidget {
                 itemBuilder: (_, index) => ItemMember(
                   member: MemberEntity(
                     code: index.toString(),
-                    name: 'Nguyen Khac Tu',
-                    nickName: 'nguyen_tu',
+                    fullname: 'Nguyen Khac Tu',
+                    nickname: 'nguyen_tu',
                   ),
                   memberAction: MemberAction.delete,
                 ),
