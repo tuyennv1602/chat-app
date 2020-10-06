@@ -28,6 +28,7 @@ class StringConst {
   static const signInFailed = 'label.sign_in_failed';
   static const signUpFailed = 'label.sign_up_failed';
   static const activeAccountFailed = 'label.active_account_failed';
+  static const finishIn = 'label.finish_in';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';
@@ -53,6 +54,9 @@ class StringConst {
   static const justNow = 'time.just_now';
   static const minAgo = 'time.min_ago';
   static const hourAgo = 'time.hour_ago';
+  static const day = 'time.day';
+  static const hour = 'time.hour';
+  static const minute = 'time.minute';
 
   static const verify = 'button.verify';
   static const accountInActive = 'message.account_inactive';

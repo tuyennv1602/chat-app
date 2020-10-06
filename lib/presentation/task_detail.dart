@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
@@ -10,6 +12,7 @@ import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class TaskDetailScreen extends StatefulWidget {
   static const String router = '/task_detail';
@@ -59,16 +62,14 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Kết thúc trong',
+                          translate(StringConst.finishIn),
                           style: textStyleInput.copyWith(
                             color: AppColors.greyText,
                           ),
                         ),
-                        Text(
-                          '1 ngày 2 giờ 30 phút',
-                          style: textStyleInput.copyWith(
-                            color: AppColors.primaryColor,
-                          ),
+                        CountDownTimer(
+                          createDate: DateTime(2020, 10, 8, 12, 00),
+                          finishDate: DateTime(2020, 10, 9, 12, 00),
                         ),
                       ],
                     ),
@@ -112,6 +113,80 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CountDownTimer extends StatefulWidget {
+  final DateTime finishDate;
+  final DateTime createDate;
+
+  CountDownTimer({Key key, this.finishDate, this.createDate}) : super(key: key);
+  @override
+  _CountDownTimerState createState() => _CountDownTimerState();
+}
+
+class _CountDownTimerState extends State<CountDownTimer> {
+  int _minutes;
+  int _hours;
+  int _days;
+  Timer _timer;
+  DateTime createDate;
+  DateTime finishDate;
+
+  void _startTimer() {
+    if (_timer != null) {
+      _timer.cancel();
+    }
+    _timer = Timer.periodic(const Duration(seconds: 60), (timer) {
+      setState(() {
+        if (createDate != finishDate) {
+          finishDate = finishDate.subtract(const Duration(minutes: 1));
+        } else {
+          _timer.cancel();
+        }
+      });
+    });
+  }
+
+  String _getTime() {
+    _days = finishDate.difference(createDate).inDays;
+    _hours = (finishDate.difference(createDate).inHours) % 24;
+    _minutes = (finishDate.difference(createDate).inMinutes) % 60;
+    if (_days == 0) {
+      return '$_hours ${translate(StringConst.hour)} '
+          '$_minutes ${translate(StringConst.minute)}';
+    } else if (_hours == 0 && _minutes == 0) {
+      return '$_days ${translate(StringConst.day)}';
+    } else if (_hours == 0 && _days == 0) {
+      return '$_minutes ${translate(StringConst.hour)}';
+    }
+    return '$_days ${translate(StringConst.day)}'
+        ' $_hours ${translate(StringConst.hour)} '
+        '$_minutes ${translate(StringConst.hour)}';
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    createDate = widget.createDate;
+    finishDate = widget.finishDate;
+    _startTimer();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      _getTime(),
+      style: textStyleInput.copyWith(
+        color: AppColors.primaryColor,
       ),
     );
   }

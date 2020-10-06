@@ -25,7 +25,8 @@
     "selected": "Đã chọn",
     "room_name": "Tên phòng",
     "all_member": "Tất cả thành viên",
-    "verify_code": "Mã xác thực"
+    "verify_code": "Mã xác thực",
+    "finish_in": "Kết thúc trong"
   },
   "message": {
     "network_error": "Lỗi kết nối, vui lòng kiểm tra đường truyền internet!",
@@ -55,7 +56,10 @@
   "time": {
     "just_now": "vừa xong",
     "min_ago": "phút trước",
-    "hour_ago": "giờ trước"
+    "hour_ago": "giờ trước",
+    "day": "ngày",
+    "hour": "giờ",
+    "minute": "phút"
   },
   "home": {
     "join_conversation": "Tham gia tác chiến",
