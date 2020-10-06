@@ -1,4 +1,5 @@
 import 'package:chat_app/common/constants/icons.dart';
+import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/utils/screen_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
@@ -32,7 +33,7 @@ class AppBarWidget extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: const [
           BoxShadow(
-            color: Color(0xFFD1D1D1),
+            color: AppColors.shadow,
             blurRadius: 15,
             offset: Offset(0, 2),
           ),

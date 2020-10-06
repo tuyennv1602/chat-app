@@ -7,7 +7,7 @@ import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/item_member.dart';
-import 'package:chat_app/domain/entities/member.dart';
+import 'package:chat_app/domain/entities/member_entity.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -95,7 +95,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                     child: ListView.separated(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
                       itemBuilder: (_, index) => ItemMember(
-                        member: Member(
+                        member: MemberEntity(
                           code: index.toString(),
                           name: 'Lê Văn Luyện',
                           nickName: 'luyen_nguyen',

@@ -1,5 +1,9 @@
 import 'package:chat_app/common/navigation/fade_in_route.dart';
 import 'package:chat_app/common/navigation/slide_left_route.dart';
+import 'package:chat_app/common/navigation/slide_up_router.dart';
+import 'package:chat_app/presentation/features/conversation/screen/conversatiton_screen.dart';
+import 'package:chat_app/presentation/features/conversation/screen/gallery_photo_screen.dart';
+import 'package:chat_app/presentation/features/conversation/screen/video_player_screen.dart';
 import 'package:chat_app/presentation/features/home/screen/create_room_screen.dart';
 import 'package:chat_app/presentation/features/authentication/screen/active_account_screen.dart';
 import 'package:chat_app/presentation/features/authentication/screen/forgot_password_success_screen.dart';
@@ -83,6 +87,21 @@ class Routes {
             email: arguments['email'],
             name: arguments['name'],
           ),
+        );
+      case ConversationScreen.route:
+        return SlideLeftRoute(widget: ConversationScreen());
+      case GalleryPhotoScreen.route:
+        final Map arguments = settings.arguments;
+        return SlideUpRoute(
+          widget: GalleryPhotoScreen(
+            message: arguments['message'],
+            index: arguments['index'],
+          ),
+        );
+      case VideoPlayerScreen.route:
+        final Map arguments = settings.arguments;
+        return SlideUpRoute(
+          widget: VideoPlayerScreen(arguments['message']),
         );
       default:
         return _emptyRoute(settings);
