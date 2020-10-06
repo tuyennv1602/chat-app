@@ -28,6 +28,7 @@ class StringConst {
   static const signInFailed = 'label.sign_in_failed';
   static const signUpFailed = 'label.sign_up_failed';
   static const activeAccountFailed = 'label.active_account_failed';
+  static const attachment = 'label.attachment';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';

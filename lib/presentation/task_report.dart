@@ -1,4 +1,5 @@
 import 'package:chat_app/common/constants/icons.dart';
+import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/widgets/app_bar.dart';
@@ -7,8 +8,10 @@ import 'package:chat_app/common/widgets/button_widget.dart';
 import 'package:chat_app/common/widgets/circle_button.dart';
 import 'package:chat_app/common/widgets/input_widget.dart';
 import 'package:chat_app/presentation/routes.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class TaskReportScreen extends StatefulWidget {
   static const String route = '/task_report';
@@ -43,13 +46,28 @@ class _TaskReportScreenState extends State<TaskReportScreen> {
             child: Row(
               children: [
                 Text(
-                  'Tài liệu đính kèm',
+                  translate(StringConst.attachment),
                   style: textStyleMedium.copyWith(
                     color: AppColors.primaryColor,
                   ),
                 ),
                 InkWell(
-                  onTap: null,
+                  onTap: () async {
+                    FilePickerResult result =
+                        await FilePicker.platform.pickFiles(
+                      type: FileType.custom,
+                      allowedExtensions: ['jpg', 'pdf', 'doc', 'png'],
+                    );
+                    if (result != null) {
+                      PlatformFile file = result.files.first;
+
+                      debugPrint(file.name);
+                      debugPrint(file.bytes.toString());
+                      debugPrint(file.size.toString());
+                      debugPrint(file.extension);
+                      debugPrint(file.path);
+                    }
+                  },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: 12.w,
