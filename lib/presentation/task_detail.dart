@@ -68,8 +68,8 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                           ),
                         ),
                         CountDownTimer(
-                          createDate: DateTime(2020, 10, 8, 12, 00),
-                          finishDate: DateTime(2020, 10, 9, 12, 00),
+                          createDate: DateTime(2020, 10, 6, 12, 00),
+                          finishDate: DateTime(2020, 10, 7, 12, 00),
                         ),
                       ],
                     ),
@@ -100,7 +100,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                           name: 'Lê Văn Luyện',
                           nickName: 'luyen_nguyen',
                         ),
-                        memberAction: MemberAction.delete,
+                        memberAction: MemberAction.completed,
                       ),
                       separatorBuilder: (_, index) => SizedBox(
                         height: 10.h,
@@ -134,6 +134,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
   Timer _timer;
   DateTime createDate;
   DateTime finishDate;
+  DateTime now = DateTime.now();
 
   void _startTimer() {
     if (_timer != null) {
@@ -141,9 +142,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
     }
     _timer = Timer.periodic(const Duration(seconds: 60), (timer) {
       setState(() {
-        if (createDate != finishDate) {
-          finishDate = finishDate.subtract(const Duration(minutes: 1));
-        } else {
+        if (now == finishDate || finishDate.isBefore(now)) {
           _timer.cancel();
         }
       });
@@ -151,9 +150,15 @@ class _CountDownTimerState extends State<CountDownTimer> {
   }
 
   String _getTime() {
-    _days = finishDate.difference(createDate).inDays;
-    _hours = (finishDate.difference(createDate).inHours) % 24;
-    _minutes = (finishDate.difference(createDate).inMinutes) % 60;
+    final now = DateTime.now();
+    if (finishDate.isBefore(now)) {
+      return 'Đã kết thúc';
+    } else if (createDate.isAfter(now)) {
+      return 'Sắp diễn ra';
+    }
+    _days = finishDate.difference(now).inDays;
+    _hours = (finishDate.difference(now).inHours) % 24;
+    _minutes = (finishDate.difference(now).inMinutes) % 60;
     if (_days == 0) {
       return '$_hours ${translate(StringConst.hour)} '
           '$_minutes ${translate(StringConst.minute)}';
@@ -164,7 +169,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
     }
     return '$_days ${translate(StringConst.day)}'
         ' $_hours ${translate(StringConst.hour)} '
-        '$_minutes ${translate(StringConst.hour)}';
+        '$_minutes ${translate(StringConst.minute)}';
   }
 
   @override
