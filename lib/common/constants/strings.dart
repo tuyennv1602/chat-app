@@ -69,4 +69,11 @@ class StringConst {
   static const video = 'label.video';
   static const audio = 'label.audio';
   static const gallery = 'label.gallery';
+  static const option = 'label.option';
+  static const task = 'conversation.task';
+  static const memberLocation = 'conversation.memberLocation';
+  static const memberList = 'conversation.memberList';
+  static const deleteRoom = 'conversation.deleteRoom';
+  static const leaveRoom = 'conversation.leaveRoom';
+  static const loading = 'label.loading';
 }

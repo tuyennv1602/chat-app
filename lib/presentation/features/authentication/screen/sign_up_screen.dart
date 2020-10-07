@@ -82,7 +82,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ActiveAccountScreen.route,
               arguments: {
                 'email': emailCtrl.text,
-                'name': MemberEntity(name: fullNameCtrl.text).getShortName,
+                'name': MemberEntity(nickname: fullNameCtrl.text).getShortName,
               },
             );
           }

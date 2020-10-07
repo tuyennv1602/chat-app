@@ -3,6 +3,8 @@ import 'package:chat_app/common/navigation/slide_left_route.dart';
 import 'package:chat_app/common/navigation/slide_up_router.dart';
 import 'package:chat_app/presentation/features/conversation/screen/conversatiton_screen.dart';
 import 'package:chat_app/presentation/features/conversation/screen/gallery_photo_screen.dart';
+import 'package:chat_app/presentation/features/conversation/screen/map_screen.dart';
+import 'package:chat_app/presentation/features/conversation/screen/option_screen.dart';
 import 'package:chat_app/presentation/features/conversation/screen/video_player_screen.dart';
 import 'package:chat_app/presentation/features/home/screen/create_room_screen.dart';
 import 'package:chat_app/presentation/features/authentication/screen/active_account_screen.dart';
@@ -103,6 +105,10 @@ class Routes {
         return SlideUpRoute(
           widget: VideoPlayerScreen(arguments['message']),
         );
+      case OptionScreen.route:
+        return SlideLeftRoute(widget: OptionScreen());
+      case MapScreen.route:
+        return SlideLeftRoute(widget: MapScreen());
       default:
         return _emptyRoute(settings);
     }

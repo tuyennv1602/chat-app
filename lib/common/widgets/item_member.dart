@@ -85,7 +85,7 @@ class _ItemMemberState extends State<ItemMember> {
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 4.h),
                           child: Text(
-                            widget.member.name,
+                            widget.member.nickname,
                             style: textStyleMedium,
                           ),
                         ),
