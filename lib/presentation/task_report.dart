@@ -20,6 +20,8 @@ class TaskReportScreen extends StatefulWidget {
 }
 
 class _TaskReportScreenState extends State<TaskReportScreen> {
+  List<PlatformFile> _listFile = [];
+
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
@@ -53,19 +55,14 @@ class _TaskReportScreenState extends State<TaskReportScreen> {
                 ),
                 InkWell(
                   onTap: () async {
-                    FilePickerResult result =
-                        await FilePicker.platform.pickFiles(
+                    final result = await FilePicker.platform.pickFiles(
                       type: FileType.custom,
                       allowedExtensions: ['jpg', 'pdf', 'doc', 'png'],
                     );
                     if (result != null) {
-                      PlatformFile file = result.files.first;
-
-                      debugPrint(file.name);
-                      debugPrint(file.bytes.toString());
-                      debugPrint(file.size.toString());
-                      debugPrint(file.extension);
-                      debugPrint(file.path);
+                      setState(() {
+                        _listFile.addAll(result.files);
+                      });
                     }
                   },
                   child: Padding(
@@ -89,11 +86,11 @@ class _TaskReportScreenState extends State<TaskReportScreen> {
             child: ListView.separated(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
               itemBuilder: (_, index) =>
-                  Text('${index + 1}.IMG_00${index + 1}.jpg'),
+                  Text('${index + 1}. ${_listFile[index].name}'),
               separatorBuilder: (_, index) => SizedBox(
                 height: 10.h,
               ),
-              itemCount: 4,
+              itemCount: _listFile.length,
             ),
           ),
           ButtonWidget(
