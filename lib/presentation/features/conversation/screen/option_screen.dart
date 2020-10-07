@@ -5,6 +5,7 @@ import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/presentation/features/conversation/screen/map_screen.dart';
 import 'package:chat_app/presentation/features/conversation/widget/item_conversation_option.dart';
+import 'package:chat_app/presentation/features/task/screen/task_list_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/global.dart';
@@ -35,7 +36,9 @@ class OptionScreen extends StatelessWidget {
                   ),
                   ItemConversationOption(
                     icon: IconConst.task,
-                    title: translate(StringConst.task),
+                    title: translate(StringConst.taskCombat),
+                    onTap: () =>
+                        Routes.instance.navigate(TaskListScreen.router),
                   ),
                   ItemConversationOption(
                     icon: IconConst.group,

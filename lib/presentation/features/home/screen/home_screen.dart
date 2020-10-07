@@ -90,8 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     trailing: SvgPicture.asset(IconConst.search),
                     onTapLeading: () {},
-                    onTapTrailing: () =>
-                        Routes.instance.navigate(TaskListScreen.router),
                   ),
                   Expanded(
                     child: Container(

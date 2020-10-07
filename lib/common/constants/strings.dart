@@ -70,7 +70,7 @@ class StringConst {
   static const audio = 'label.audio';
   static const gallery = 'label.gallery';
   static const option = 'label.option';
-  static const task = 'conversation.task';
+  static const taskCombat = 'conversation.task_combat';
   static const memberLocation = 'conversation.memberLocation';
   static const memberList = 'conversation.memberList';
   static const deleteRoom = 'conversation.deleteRoom';
