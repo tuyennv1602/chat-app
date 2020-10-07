@@ -10,78 +10,83 @@ class ItemConversationWidget extends StatelessWidget {
   final int conversationId;
   final String conversationName;
   final String lastMessage;
+  final Function(int conversationId) onTap;
 
   const ItemConversationWidget({
     Key key,
     this.conversationId,
     this.conversationName,
     this.lastMessage,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(right: 15.w),
-          child: conversationId % 2 == 0
-              ? const GroupAvatartWidget()
-              : CircleAvatarWidget(
-                  source: null,
-                  isActive: true,
+    return InkWell(
+      onTap: () => onTap?.call(conversationId),
+      child: Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(right: 15.w),
+            child: conversationId % 2 == 0
+                ? const GroupAvatartWidget()
+                : CircleAvatarWidget(
+                    source: null,
+                    isActive: true,
+                  ),
+          ),
+          Expanded(
+            child: Container(
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: AppColors.line, width: 0.5),
                 ),
-        ),
-        Expanded(
-          child: Container(
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: AppColors.line, width: 0.5),
+              ),
+              padding: EdgeInsets.only(bottom: 10.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 4.h),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            conversationName,
+                            style: textStyleLabel,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Text(
+                          DateTime.now()
+                              .add(
+                                const Duration(minutes: 1),
+                              )
+                              .timeAgo(),
+                          style: TextStyle(
+                            color: AppColors.grey,
+                            fontSize: 12.sp,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Text(
+                    lastMessage,
+                    style: textStyleRegular.copyWith(
+                      fontSize: 13.sp,
+                      color: AppColors.greyText,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  )
+                ],
               ),
             ),
-            padding: EdgeInsets.only(bottom: 10.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 4.h),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          conversationName,
-                          style: textStyleLabel,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      Text(
-                        DateTime.now()
-                            .add(
-                              const Duration(minutes: 1),
-                            )
-                            .timeAgo(),
-                        style: TextStyle(
-                          color: AppColors.grey,
-                          fontSize: 12.sp,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Text(
-                  lastMessage,
-                  style: textStyleRegular.copyWith(
-                    fontSize: 13.sp,
-                    color: AppColors.greyText,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                )
-              ],
-            ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }

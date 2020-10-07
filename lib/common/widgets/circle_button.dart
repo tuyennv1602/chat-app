@@ -14,7 +14,7 @@ class CircleButtonWidget extends StatelessWidget {
     Key key,
     this.onTap,
     this.isEnable = false,
-    this.size = 60,
+    this.size = 55,
     this.urlIcon,
     this.padding,
   }) : super(key: key);

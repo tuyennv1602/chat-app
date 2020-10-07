@@ -20,10 +20,10 @@ class GroupAvatartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _ownerSize = 26.h;
-    final _memberSize = 20.h;
+    final _ownerSize = 26.w;
+    final _memberSize = 20.w;
     return Container(
-      height: 40.h,
+      height: 40.w,
       child: AspectRatio(
         aspectRatio: 1,
         child: Stack(
@@ -38,7 +38,7 @@ class GroupAvatartWidget extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(_ownerSize / 2),
-                  child: _renderImage('https://i.ytimg.com/vi/1T_rG6J7Sw8/maxresdefault.jpg'),
+                  child: _renderImage(null),
                 ),
               ),
             ),
@@ -53,8 +53,7 @@ class GroupAvatartWidget extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(_memberSize / 2),
-                  child: _renderImage(
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ37D5GLzprj2ZIAi556PcG6z2zwlBs8LY-yQ&usqp=CAU'),
+                  child: _renderImage(null),
                 ),
               ),
             ),

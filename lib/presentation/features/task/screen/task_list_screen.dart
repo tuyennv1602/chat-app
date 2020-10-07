@@ -26,7 +26,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
           AppBarWidget(
             onTapLeading: () => Routes.instance.pop(),
             center: Text(
-              translate(StringConst.mission),
+              translate(StringConst.task),
               style: textStyleAppbar,
             ),
             trailing: SvgPicture.asset(

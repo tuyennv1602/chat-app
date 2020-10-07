@@ -17,7 +17,7 @@ class CircleAvatarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _size = size ?? 40.h;
+    final _size = size ?? 40.w;
     return Container(
       width: _size,
       height: _size,
@@ -43,8 +43,8 @@ class CircleAvatarWidget extends StatelessWidget {
               right: 1,
               bottom: 0,
               child: Container(
-                width: 10.h,
-                height: 10.h,
+                width: 10.w,
+                height: 10.w,
                 decoration: BoxDecoration(
                   color: AppColors.lightGreen,
                   shape: BoxShape.circle,

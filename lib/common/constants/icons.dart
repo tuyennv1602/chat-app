@@ -18,4 +18,13 @@ class IconConst {
   static const String done = '${path}done.svg';
   static const String cancel = '${path}cancel.svg';
   static const String addTask = '${path}add_task.svg';
+  static const String menu = '${path}menu.svg';
+  static const String send = '${path}send.svg';
+  static const String play = '${path}play.svg';
+  static const String voiceMessage = '${path}voice_message.svg';
+  static const String volume = '${path}volume.svg';
+  static const String mountain = '${path}mountain.svg';
+  static const String camera = '${path}camera.svg';
+  static const String audio = '${path}micro_phone.svg';
+  static const String video = '${path}video.svg';
 }

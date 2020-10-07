@@ -118,6 +118,6 @@ linter:
     - unnecessary_lambdas
     - flutter_style_todos
     - join_return_with_assignment
-    - lines_longer_than_80_chars
+    # - lines_longer_than_80_chars
     - prefer_foreach
     - use_to_and_as_if_applicable
