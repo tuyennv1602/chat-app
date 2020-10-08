@@ -28,6 +28,7 @@ class StringConst {
   static const signInFailed = 'label.sign_in_failed';
   static const signUpFailed = 'label.sign_up_failed';
   static const activeAccountFailed = 'label.active_account_failed';
+  static const close = 'label.close';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';
@@ -58,4 +59,9 @@ class StringConst {
   static const accountInActive = 'message.account_inactive';
   static const accountExisted = 'message.account_existed';
   static const errorVerifyCode = 'message.error_verify_code';
+
+  static const editTask = 'task_option.edit_task';
+  static const reportTask = 'task_option.report_task';
+  static const completedTask = 'task_option.completed_task';
+  static const closeTask = 'task_option.close_task';
 }

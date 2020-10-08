@@ -1,9 +1,11 @@
+import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/utils/screen_utils.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class TaskOptionSheet extends StatelessWidget {
   @override
@@ -20,11 +22,11 @@ class TaskOptionSheet extends StatelessWidget {
       child: Column(
         children: [
           ItemBottomSheet(
-            label: 'Chỉnh sửa nhiệm vụ',
+            label: translate(StringConst.editTask),
             onTap: () {},
           ),
           ItemBottomSheet(
-            label: 'Báo cáo kết quả',
+            label: translate(StringConst.reportTask),
             onTap: () {
               // hide bottom sheet
               // Routes.instance.pop();
@@ -32,15 +34,15 @@ class TaskOptionSheet extends StatelessWidget {
             },
           ),
           ItemBottomSheet(
-            label: 'Nhiệm vụ hoàn thành',
+            label: translate(StringConst.completedTask),
             onTap: () {},
           ),
           ItemBottomSheet(
-            label: 'Hủy bỏ nhiệm vụ',
+            label: translate(StringConst.closeTask),
             onTap: () {},
           ),
           ItemBottomSheet(
-            label: 'Đóng',
+            label: translate(StringConst.close),
             onTap: () => Routes.instance.pop(),
             color: Colors.red,
           ),
