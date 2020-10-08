@@ -162,6 +162,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   placeHolder: translate(StringConst.email),
                                   validator: Validator.validEmail,
                                   controller: emailCtrl,
+                                  inputType: TextInputType.emailAddress,
                                   onChanged: (t) {
                                     _checkEnableButton();
                                   },
@@ -171,6 +172,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   placeHolder: translate(StringConst.phone),
                                   validator: Validator.validPhone,
                                   controller: phoneCtrl,
+                                  inputType: TextInputType.number,
                                   onChanged: (t) {
                                     _checkEnableButton();
                                   },
@@ -207,7 +209,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   if (_validateAndSave) {
                                     signUpBloc.add(
                                       SubmitSignUpEvent(
-                                        registerRequestModel: RegisterRequestModel(
+                                        registerRequestModel:
+                                            RegisterRequestModel(
                                           code: codeCtrl.text,
                                           email: emailCtrl.text,
                                           fullname: fullNameCtrl.text,
