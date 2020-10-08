@@ -73,7 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
       child: BlocListener<SignInBloc, SignInState>(
         listener: (_, state) {
           if (state is SignedInState) {
-            Routes.instance.navigate(HomeScreen.route);
+            Routes.instance.navigateAndRemove(HomeScreen.route);
           }
           if (state is AccountInActiveState) {
             AlertUtil.show(
