@@ -1,8 +1,8 @@
 import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
-import 'package:chat_app/common/utils/common_utils.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
+import 'package:chat_app/domain/entities/task_entity.dart';
 import 'package:chat_app/presentation/features/task/widgets/item_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -21,7 +21,7 @@ class ItemTask extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: const [
           BoxShadow(
-            color: Color(0xFFD1D1D1),
+            color: AppColors.shadow,
             blurRadius: 15,
             offset: Offset(0, 2),
           ),
@@ -47,7 +47,9 @@ class ItemTask extends StatelessWidget {
                 height: 28.h,
                 color: status == 0
                     ? AppColors.yellow
-                    : status == 1 ? AppColors.primaryColor : AppColors.red,
+                    : status == 1
+                        ? AppColors.primaryColor
+                        : AppColors.red,
               ),
               ItemStatusWidget(
                 status: status,

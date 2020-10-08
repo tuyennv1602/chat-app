@@ -4,7 +4,7 @@ enum TaskStatus {
   cancel,
 }
 
-class CommonUtil {
+class TaskEntity {
   static TaskStatus checkTaskStatus(int status) {
     switch (status) {
       case 0:
