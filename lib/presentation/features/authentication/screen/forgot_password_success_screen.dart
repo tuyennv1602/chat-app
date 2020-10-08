@@ -15,34 +15,37 @@ class ForgotPasswordSuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.h),
-        child: Column(
-          children: [
-            SizedBox(height: ScreenUtil.statusBarHeight + 80.w),
-            SvgPicture.asset(
-              IconConst.success,
-              width: 150.w,
-              height: 150.w,
-            ),
-            SizedBox(height: 50.h),
-            Text(
-              translate(StringConst.forgotPasswordDone),
-              style: textStyleLabel.copyWith(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w400,
+      body: WillPopScope(
+        onWillPop: () => Routes.instance.navigateAndRemove(SignInScreen.route),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.h),
+          child: Column(
+            children: [
+              SizedBox(height: ScreenUtil.statusBarHeight + 80.w),
+              SvgPicture.asset(
+                IconConst.success,
+                width: 150.w,
+                height: 150.w,
               ),
-              textAlign: TextAlign.center,
-            ),
-            const Spacer(),
-            ButtonWidget(
-              label: translate(StringConst.signIn),
-              onTap: () {
-                Routes.instance.navigateAndRemove(SignInScreen.route);
-              },
-            ),
-            SizedBox(height: 40.h),
-          ],
+              SizedBox(height: 50.h),
+              Text(
+                translate(StringConst.forgotPasswordDone),
+                style: textStyleLabel.copyWith(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w400,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const Spacer(),
+              ButtonWidget(
+                label: translate(StringConst.signIn),
+                onTap: () {
+                  Routes.instance.navigateAndRemove(SignInScreen.route);
+                },
+              ),
+              SizedBox(height: 40.h),
+            ],
+          ),
         ),
       ),
     );

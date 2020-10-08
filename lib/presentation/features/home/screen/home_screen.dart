@@ -4,12 +4,14 @@ import 'package:chat_app/common/widgets/animated_button.dart';
 import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
+import 'package:chat_app/presentation/features/conversation/screen/conversatiton_screen.dart';
 import 'package:chat_app/presentation/features/home/screen/create_room_screen.dart';
 import 'package:chat_app/presentation/features/home/widget/fab_menu/fab_menu_overlay.dart';
 import 'package:chat_app/presentation/features/home/widget/item_conversation.dart';
 import 'package:chat_app/presentation/features/home/widget/join_room_dialog.dart';
 import 'package:chat_app/presentation/features/home/widget/notification_badge.dart';
 import 'package:chat_app/presentation/task_option.dart';
+import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_svg/svg.dart';
@@ -114,6 +116,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             conversationId: index,
                             conversationName: 'Group tac chien 1',
                             lastMessage: 'Hey Trung, how are you today?',
+                            onTap: (int conversationId) => Routes.instance
+                                .navigate(ConversationScreen.route),
                           );
                         },
                       ),
@@ -128,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
             right: 15.h,
             child: AnimatedButtonWidget(
               key: _keyFabButton,
-              buttonSize: 45.h,
+              buttonSize: 45.w,
               onTap: (isOpening) {
                 if (isOpening) {
                   _fabMenu?.hide();

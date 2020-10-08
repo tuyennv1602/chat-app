@@ -3,7 +3,7 @@ import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
-import 'package:chat_app/domain/entities/member.dart';
+import 'package:chat_app/domain/entities/member_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,7 +12,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 enum MemberAction { delete, select }
 
 class ItemMember extends StatefulWidget {
-  final Member member;
+  final MemberEntity member;
   final MemberAction memberAction;
   final bool isSelected;
   final Function onDelete;
@@ -85,7 +85,7 @@ class _ItemMemberState extends State<ItemMember> {
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 4.h),
                           child: Text(
-                            widget.member.name,
+                            widget.member.nickname,
                             style: textStyleMedium,
                           ),
                         ),

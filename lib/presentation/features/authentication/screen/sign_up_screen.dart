@@ -11,7 +11,7 @@ import 'package:chat_app/common/widgets/circle_button.dart';
 import 'package:chat_app/common/widgets/custom_alert.dart';
 import 'package:chat_app/common/widgets/input_widget.dart';
 import 'package:chat_app/data/models/register_request_model.dart';
-import 'package:chat_app/domain/entities/member.dart';
+import 'package:chat_app/domain/entities/member_entity.dart';
 import 'package:chat_app/presentation/features/authentication/bloc/sign_up/sign_up_bloc.dart';
 import 'package:chat_app/presentation/features/authentication/screen/active_account_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
@@ -82,7 +82,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ActiveAccountScreen.route,
               arguments: {
                 'email': emailCtrl.text,
-                'name': Member(name: fullNameCtrl.text).getShortName,
+                'name': MemberEntity(nickname: fullNameCtrl.text).getShortName,
               },
             );
           }
@@ -207,8 +207,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   if (_validateAndSave) {
                                     signUpBloc.add(
                                       SubmitSignUpEvent(
-                                        registerRequestModel:
-                                            RegisterRequestModel(
+                                        registerRequestModel: RegisterRequestModel(
                                           code: codeCtrl.text,
                                           email: emailCtrl.text,
                                           fullname: fullNameCtrl.text,

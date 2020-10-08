@@ -1,13 +1,13 @@
 import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
-import 'package:chat_app/domain/entities/member.dart';
+import 'package:chat_app/domain/entities/member_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ItemSelectedMember extends StatelessWidget {
-  final Member member;
+  final MemberEntity member;
   final Function onDelete;
 
   ItemSelectedMember({

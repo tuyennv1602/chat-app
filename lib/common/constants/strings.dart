@@ -64,4 +64,21 @@ class StringConst {
   static const reportTask = 'task_option.report_task';
   static const completedTask = 'task_option.completed_task';
   static const closeTask = 'task_option.close_task';
+  static const conversation = 'conversation.conversation';
+  static const location = 'conversation.location';
+  static const activeNow = 'conversation.activeNow';
+  static const inputMessage = 'conversation.inputMessage';
+  static const today = 'conversation.today';
+  static const image = 'label.image';
+  static const camera = 'label.camera';
+  static const video = 'label.video';
+  static const audio = 'label.audio';
+  static const gallery = 'label.gallery';
+  static const option = 'label.option';
+  static const task = 'conversation.task';
+  static const memberLocation = 'conversation.memberLocation';
+  static const memberList = 'conversation.memberList';
+  static const deleteRoom = 'conversation.deleteRoom';
+  static const leaveRoom = 'conversation.leaveRoom';
+  static const loading = 'label.loading';
 }

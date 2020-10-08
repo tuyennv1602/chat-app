@@ -8,6 +8,7 @@ class ButtonWidget extends StatelessWidget {
   final bool isEnable;
   final EdgeInsets margin;
   final Function onTap;
+  final double height;
 
   ButtonWidget({
     Key key,
@@ -15,13 +16,14 @@ class ButtonWidget extends StatelessWidget {
     this.isEnable = true,
     this.margin = EdgeInsets.zero,
     @required this.onTap,
+    this.height,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 40.h,
+      height: height ?? 40.h,
       margin: margin,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(40.h / 2),
@@ -31,8 +33,8 @@ class ButtonWidget extends StatelessWidget {
           colors: isEnable
               ? AppColors.gradientButton
               : [
-                  AppColors.grey,
-                  AppColors.grey,
+                  AppColors.buttonDisable,
+                  AppColors.buttonDisable,
                 ],
         ),
       ),
@@ -41,7 +43,7 @@ class ButtonWidget extends StatelessWidget {
         child: Center(
           child: Text(
             label,
-            style: textStyleButton,
+            style: textStyleButton.copyWith(color: isEnable ? Colors.white : Colors.grey[600]),
           ),
         ),
       ),
