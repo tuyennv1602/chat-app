@@ -97,8 +97,8 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       itemBuilder: (_, index) => ItemMember(
                         member: MemberEntity(
                           code: index.toString(),
-                          name: 'Lê Văn Luyện',
-                          nickName: 'luyen_nguyen',
+                          fullname: 'Lê Văn Luyện',
+                          nickname: 'luyen_nguyen',
                         ),
                         memberAction: MemberAction.completed,
                       ),

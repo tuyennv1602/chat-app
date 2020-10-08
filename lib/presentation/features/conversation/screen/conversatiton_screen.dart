@@ -7,6 +7,8 @@ import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
 import 'package:chat_app/presentation/features/conversation/page/chat_page.dart';
+import 'package:chat_app/presentation/features/conversation/screen/option_screen.dart';
+import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
@@ -58,6 +60,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
               ],
             ),
             trailing: SvgPicture.asset(IconConst.menu),
+            onTapTrailing: () => Routes.instance.navigate(OptionScreen.route),
           ),
           Expanded(
             child: ChatPage(),

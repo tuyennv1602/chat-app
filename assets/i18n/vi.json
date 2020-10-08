@@ -31,7 +31,9 @@
     "camera": "Máy ảnh",
     "video": "Video",
     "audio": "Thông điệp",
-    "gallery": "Thư viện"
+    "gallery": "Thư viện",
+    "option": "Tuỳ chọn",
+    "loading": "Đang tải..."
   },
   "message": {
     "network_error": "Lỗi kết nối, vui lòng kiểm tra đường truyền internet!",
@@ -78,6 +80,11 @@
     "location": "Vị trí",
     "activeNow": "Đang hoạt động",
     "inputMessage": "Nhập tin nhắn",
-    "today": "Hôm nay"
+    "today": "Hôm nay",
+    "task": "Nhiệm vụ tác chiến",
+    "memberLocation": "Vị trí thành viên",
+    "memberList": "Danh sách thành viên",
+    "deleteRoom": "Huỷ bỏ tác chiến",
+    "leaveRoom": "Rời phòng tác chiến"
   }
 }
