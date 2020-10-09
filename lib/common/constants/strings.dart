@@ -29,6 +29,7 @@ class StringConst {
   static const signUpFailed = 'label.sign_up_failed';
   static const activeAccountFailed = 'label.active_account_failed';
   static const finishIn = 'label.finish_in';
+  static const task = 'label.task';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';
@@ -73,7 +74,7 @@ class StringConst {
   static const audio = 'label.audio';
   static const gallery = 'label.gallery';
   static const option = 'label.option';
-  static const task = 'conversation.task';
+  static const taskCombat = 'conversation.task_combat';
   static const memberLocation = 'conversation.memberLocation';
   static const memberList = 'conversation.memberList';
   static const deleteRoom = 'conversation.deleteRoom';
