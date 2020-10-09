@@ -10,6 +10,7 @@ import 'package:chat_app/presentation/features/home/widget/fab_menu/fab_menu_ove
 import 'package:chat_app/presentation/features/home/widget/item_conversation.dart';
 import 'package:chat_app/presentation/features/home/widget/join_room_dialog.dart';
 import 'package:chat_app/presentation/features/home/widget/notification_badge.dart';
+import 'package:chat_app/presentation/features/task/screen/task_list_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
@@ -106,8 +107,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             conversationId: index,
                             conversationName: 'Group tac chien 1',
                             lastMessage: 'Hey Trung, how are you today?',
-                            onTap: (int conversationId) =>
-                                Routes.instance.navigate(ConversationScreen.route),
+                            onTap: (int conversationId) => Routes.instance
+                                .navigate(ConversationScreen.route),
                           );
                         },
                       ),
