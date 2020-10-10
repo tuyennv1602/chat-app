@@ -172,7 +172,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   placeHolder: translate(StringConst.phone),
                                   validator: Validator.validPhone,
                                   controller: phoneCtrl,
-                                  inputType: TextInputType.number,
+                                  inputType: TextInputType.phone,
                                   onChanged: (t) {
                                     _checkEnableButton();
                                   },
