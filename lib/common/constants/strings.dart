@@ -47,6 +47,7 @@ class StringConst {
   static const enterVerifyCode = 'message.enter_verify_code';
   static const registerSuccess = 'message.register_success';
   static const forgotPasswordDone = 'message.forgot_password_done';
+  static const loginFail = 'message.login_fail';
 
   static const passwordNotMatch = 'message.password_not_match';
   static const joinConversation = 'home.join_conversation';
