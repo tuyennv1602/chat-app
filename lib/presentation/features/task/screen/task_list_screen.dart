@@ -43,12 +43,8 @@ class _TaskListScreenState extends State<TaskListScreen> {
                   SizedBox(height: 15.w),
               itemCount: 10,
               itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () =>
-                      Routes.instance.navigate(TaskDetailScreen.router),
-                  child: ItemTask(
-                    status: TaskEntity.checkTaskStatus(1),
-                  ),
+                return ItemTask(
+                  status: TaskEntity.checkTaskStatus(TaskEntity(status: 1).status),
                 );
               },
             ),

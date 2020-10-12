@@ -75,7 +75,7 @@ class Routes {
         return SlideLeftRoute(widget: ForgotPasswordScreen());
       case HomeScreen.route:
         return FadeInRoute(widget: HomeScreen());
-      case TaskDetailScreen.router:
+      case TaskDetailScreen.route:
         return SlideLeftRoute(widget: TaskDetailScreen());
       case CreateRoomScreen.route:
         return SlideLeftRoute(widget: CreateRoomScreen());

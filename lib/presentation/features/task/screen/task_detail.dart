@@ -14,7 +14,7 @@ import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 class TaskDetailScreen extends StatefulWidget {
-  static const String router = '/task_detail';
+  static const String route = '/task_detail';
   @override
   _TaskDetailScreenState createState() => _TaskDetailScreenState();
 }
