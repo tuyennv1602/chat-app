@@ -128,6 +128,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         InputWidget(
                           placeHolder: translate(StringConst.email),
                           validator: Validator.validEmail,
+                          inputType: TextInputType.emailAddress,
                           onChanged: (text) {
                             _checkEnableButton();
                           },
