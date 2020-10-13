@@ -5,6 +5,11 @@ enum TaskStatus {
 }
 
 class TaskEntity {
+  int status;
+  TaskEntity({
+    this.status,
+  });
+
   static TaskStatus checkTaskStatus(int status) {
     switch (status) {
       case 0:

@@ -9,7 +9,7 @@ import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
-enum MemberAction { delete, select }
+enum MemberAction { delete, select, completed }
 
 class ItemMember extends StatefulWidget {
   final MemberEntity member;
@@ -17,6 +17,7 @@ class ItemMember extends StatefulWidget {
   final bool isSelected;
   final Function onDelete;
   final Function onTap;
+  final Function onCompleted;
 
   const ItemMember({
     Key key,
@@ -25,6 +26,7 @@ class ItemMember extends StatefulWidget {
     this.isSelected = false,
     this.onDelete,
     this.onTap,
+    this.onCompleted,
   }) : super(key: key);
 
   @override
@@ -42,6 +44,20 @@ class _ItemMemberState extends State<ItemMember> {
             IconConst.close,
             width: 16.w,
             height: 16.w,
+          ),
+        ),
+      );
+    }
+    if (widget.memberAction == MemberAction.completed) {
+      return InkWell(
+        onTap: widget.onCompleted,
+        child: Padding(
+          padding: EdgeInsets.all(10.w),
+          child: SvgPicture.asset(
+            IconConst.newspaper,
+            width: 16.w,
+            height: 16.w,
+            color: Colors.blue,
           ),
         ),
       );

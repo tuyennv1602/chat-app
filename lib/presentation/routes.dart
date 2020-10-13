@@ -11,6 +11,7 @@ import 'package:chat_app/presentation/features/authentication/screen/active_acco
 import 'package:chat_app/presentation/features/authentication/screen/forgot_password_success_screen.dart';
 import 'package:chat_app/presentation/features/home/screen/home_screen.dart';
 import 'package:chat_app/presentation/features/select_member/screen/select_member_screen.dart';
+import 'package:chat_app/presentation/features/task/screen/task_detail.dart';
 import 'package:chat_app/presentation/features/task/screen/task_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'features/authentication/screen/forgot_password.dart';
@@ -74,6 +75,8 @@ class Routes {
         return SlideLeftRoute(widget: ForgotPasswordScreen());
       case HomeScreen.route:
         return FadeInRoute(widget: HomeScreen());
+      case TaskDetailScreen.route:
+        return SlideLeftRoute(widget: TaskDetailScreen());
       case CreateRoomScreen.route:
         return SlideLeftRoute(widget: CreateRoomScreen());
       case SelectMemberScreen.route:

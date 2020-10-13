@@ -12,6 +12,7 @@ import 'package:chat_app/presentation/features/home/widget/join_room_dialog.dart
 import 'package:chat_app/presentation/features/home/widget/notification_badge.dart';
 import 'package:chat_app/presentation/features/task/screen/task_list_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
+import 'package:chat_app/presentation/features/task/screen/task_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_svg/svg.dart';

@@ -4,6 +4,7 @@ import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/domain/entities/task_entity.dart';
+import 'package:chat_app/presentation/features/task/screen/task_detail.dart';
 import 'package:chat_app/presentation/features/task/widgets/item_task.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
               itemCount: 10,
               itemBuilder: (context, index) {
                 return ItemTask(
-                  status: TaskEntity.checkTaskStatus(1),
+                  status: TaskEntity.checkTaskStatus(TaskEntity(status: 1).status),
                 );
               },
             ),
