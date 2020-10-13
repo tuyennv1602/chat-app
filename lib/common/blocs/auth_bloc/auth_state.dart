@@ -4,6 +4,8 @@ abstract class AuthState {}
 
 class InitialAuthState extends AuthState {}
 
+class CheckingAuthenticatedState extends AuthState {}
+
 class AuthenticatedState extends AuthState {
   final UserEntity user;
 

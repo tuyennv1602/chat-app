@@ -4,6 +4,7 @@ import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/network/app_header.dart';
 import 'package:chat_app/common/network/client.dart';
 import 'package:chat_app/data/datasource/local/local_datasource.dart';
+import 'package:chat_app/data/datasource/remote/user_remote_datasource.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:chat_app/common/extensions/string_ext.dart';
@@ -11,10 +12,12 @@ import 'package:chat_app/common/extensions/string_ext.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final Client client;
   final LocalDataSource localDataSource;
+  final UserRemoteDataSource userRemoteDataSource;
 
   AuthBloc({
     this.client,
     this.localDataSource,
+    this.userRemoteDataSource,
   }) : super(InitialAuthState());
 
   @override
@@ -32,16 +35,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Stream<AuthState> _mapCheckAuthToState(CheckAuthEvent event) async* {
     try {
+      yield CheckingAuthenticatedState();
       final token = await localDataSource.getToken();
       if (token.isNotEmptyAndNull) {
         client.setHeader = AppHeader(accessToken: token);
-        final user = await localDataSource.getUser();
+        final user = await userRemoteDataSource.getUser();
         yield AuthenticatedState(user);
       } else {
         yield UnAuthenticatedState();
       }
     } catch (e) {
       yield ErroredAuthState(translate(StringConst.unknowError));
+      localDataSource.clearAll();
     }
   }
 
@@ -51,6 +56,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       yield AuthenticatedState(event.user);
     } catch (e) {
       yield ErroredAuthState(translate(StringConst.unknowError));
+      localDataSource.clearAll();
     }
   }
 }

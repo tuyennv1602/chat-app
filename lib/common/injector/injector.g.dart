@@ -9,8 +9,10 @@ part of 'injector.dart';
 class _$Injector extends Injector {
   void _configureBlocs() {
     final Container container = Container();
-    container.registerSingleton((c) =>
-        AuthBloc(client: c<Client>(), localDataSource: c<LocalDataSource>()));
+    container.registerSingleton((c) => AuthBloc(
+        client: c<Client>(),
+        localDataSource: c<LocalDataSource>(),
+        userRemoteDataSource: c<UserRemoteDataSource>()));
     container.registerSingleton((c) => LoadingBloc());
     container.registerSingleton((c) =>
         RoomBloc(roomUseCase: c<RoomUseCase>(), loadingBloc: c<LoadingBloc>()));
@@ -75,9 +77,7 @@ class _$Injector extends Injector {
 
   void _configureLocalDataSources() {
     final Container container = Container();
-    container.registerSingleton((c) => AppSharedPreference());
-    container.registerSingleton(
-        (c) => LocalDataSource(sharedPreferences: c<AppSharedPreference>()));
+    container.registerSingleton((c) => LocalDataSource());
   }
 
   void _configureCommon() {

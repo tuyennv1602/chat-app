@@ -22,7 +22,6 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
     if (await networkInfo.isConnected) {
       final resp = await remoteDataSource.login(email, password);
       await localDataSource.setToken(resp.token);
-      await localDataSource.setUser(resp.userModel);
       return resp;
     } else {
       throw NetworkException();

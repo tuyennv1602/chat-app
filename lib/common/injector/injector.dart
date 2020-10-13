@@ -2,7 +2,6 @@ import 'package:chat_app/common/blocs/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/common/blocs/loading_bloc/loading_bloc.dart';
 import 'package:chat_app/common/network/client.dart';
 import 'package:chat_app/common/platform/network_info.dart';
-import 'package:chat_app/data/datasource/local/app_shared_preference.dart';
 import 'package:chat_app/data/datasource/local/local_datasource.dart';
 import 'package:chat_app/data/datasource/remote/authentication_remote_datasource.dart';
 import 'package:chat_app/data/datasource/remote/room_remote_datasource.dart';
@@ -90,7 +89,6 @@ abstract class Injector {
   void _configureRemoteDataSources();
 
   // ============LOCAL DATA SOURCE==============
-  @Register.singleton(AppSharedPreference)
   @Register.singleton(LocalDataSource)
   void _configureLocalDataSources();
 
