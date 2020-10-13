@@ -28,6 +28,7 @@ class StringConst {
   static const signInFailed = 'label.sign_in_failed';
   static const signUpFailed = 'label.sign_up_failed';
   static const activeAccountFailed = 'label.active_account_failed';
+  static const share = 'label.share';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';
@@ -75,4 +76,12 @@ class StringConst {
   static const deleteRoom = 'conversation.deleteRoom';
   static const leaveRoom = 'conversation.leaveRoom';
   static const loading = 'label.loading';
+  static const emptyMessage = 'conversation.emptyMessage';
+  static const joinCode = 'conversation.joinCode';
+  static const getCodeSuccess = 'conversation.getCodeSuccess';
+  static const shareCode = 'conversation.shareCode';
+  static const emptyConversation = 'home.emptyConversation';
+  static const joinCodeLabel = 'label.joinCode';
+  static const memberCount = 'conversation.memberCount';
+  static const resultSearch = 'label.resultSearch';
 }

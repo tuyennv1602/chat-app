@@ -12,7 +12,7 @@ class LoginResponseModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final data = <String, dynamic>{};
     data['token'] = token;
     if (userModel != null) {
       data['user'] = userModel.toJson();

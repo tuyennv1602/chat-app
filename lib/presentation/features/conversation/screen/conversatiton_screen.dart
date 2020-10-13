@@ -6,6 +6,8 @@ import 'package:chat_app/common/utils/screen_utils.dart';
 import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
+import 'package:chat_app/common/widgets/group_avatar.dart';
+import 'package:chat_app/domain/entities/room_entity.dart';
 import 'package:chat_app/presentation/features/conversation/page/chat_page.dart';
 import 'package:chat_app/presentation/features/conversation/screen/option_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
@@ -13,9 +15,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_translate/global.dart';
+import 'package:sprintf/sprintf.dart';
 
 class ConversationScreen extends StatefulWidget {
   static const String route = '/conversation';
+  final RoomEntity room;
+
+  ConversationScreen({Key key, this.room}) : super(key: key);
 
   @override
   _ConversationScreenState createState() => _ConversationScreenState();
@@ -31,9 +37,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
             onTapLeading: () => Navigator.of(context).pop(),
             center: Row(
               children: [
-                CircleAvatarWidget(
-                  source: null,
-                  isActive: true,
+                GroupAvatartWidget(
+                  members: widget.room.members,
                 ),
                 Expanded(
                   child: Padding(
@@ -43,11 +48,11 @@ class _ConversationScreenState extends State<ConversationScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Vũ Oanh',
+                          widget.room.name,
                           style: textStyleAppbar,
                         ),
                         Text(
-                          translate(StringConst.activeNow),
+                          sprintf(translate(StringConst.memberCount), [widget.room.totalMember]),
                           style: TextStyle(
                             fontSize: 12.sp,
                             color: AppColors.warmGrey,

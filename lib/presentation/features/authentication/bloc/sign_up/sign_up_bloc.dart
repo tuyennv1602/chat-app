@@ -4,8 +4,7 @@ import 'package:chat_app/common/blocs/loading_bloc/loading_bloc.dart';
 import 'package:chat_app/common/blocs/loading_bloc/loading_event.dart';
 import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/exception/network_exception.dart';
-import 'package:chat_app/common/utils/error_utils.dart';
-import 'package:chat_app/data/models/register_request_model.dart';
+import 'package:chat_app/data/models/request/register_request_model.dart';
 import 'package:chat_app/domain/usecases/authentication_usecase.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -37,8 +36,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   Stream<SignUpState> _mapSubmitSignUp(SubmitSignUpEvent event) async* {
     try {
       loadingBloc.add(StartLoading());
-      final resp =
-          await authenticationUseCase.register(event.registerRequestModel);
+      final resp = await authenticationUseCase.register(event.registerRequestModel);
       loadingBloc.add(FinishLoading());
 
       yield SignedUpState();

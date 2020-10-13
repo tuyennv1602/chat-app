@@ -23,14 +23,14 @@ class ItemSelectedMember extends StatelessWidget {
         Container(
           width: 55.w,
           padding: EdgeInsets.only(top: 5.h),
-          child: Wrap(
-            alignment: WrapAlignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CircleAvatarWidget(source: null),
+              CircleAvatarWidget(source: member.avatar),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 4.h),
                 child: Text(
-                  member.getShortName,
+                  '${member.getShortName}\n',
                   style: textStyleMedium.copyWith(fontSize: 12.sp),
                   textAlign: TextAlign.center,
                   maxLines: 2,
@@ -46,7 +46,11 @@ class ItemSelectedMember extends StatelessWidget {
             onTap: onDelete,
             child: Padding(
               padding: EdgeInsets.all(5.w),
-              child: SvgPicture.asset(IconConst.close),
+              child: SvgPicture.asset(
+                IconConst.close,
+                width: 20,
+                height: 20,
+              ),
             ),
           ),
         )

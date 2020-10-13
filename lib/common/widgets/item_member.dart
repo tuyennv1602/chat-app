@@ -7,7 +7,6 @@ import 'package:chat_app/domain/entities/member_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 
 enum MemberAction { delete, select }
 
@@ -16,7 +15,7 @@ class ItemMember extends StatefulWidget {
   final MemberAction memberAction;
   final bool isSelected;
   final Function onDelete;
-  final Function onTap;
+  final Function(MemberEntity member) onTap;
 
   const ItemMember({
     Key key,
@@ -61,7 +60,7 @@ class _ItemMemberState extends State<ItemMember> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: widget.onTap,
+      onTap: () => widget.onTap?.call(widget.member),
       child: Row(
         children: [
           CircleAvatarWidget(source: null),
@@ -85,13 +84,13 @@ class _ItemMemberState extends State<ItemMember> {
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 4.h),
                           child: Text(
-                            widget.member.nickname,
+                            widget.member.fullname,
                             style: textStyleMedium,
                           ),
                         ),
                         Text(
                           // ignore: lines_longer_than_80_chars
-                          '${translate(StringConst.code)}: ${widget.member.code}',
+                          '${widget.member.nickname} (MQN: ${widget.member.code})',
                           style: TextStyle(
                             fontSize: 13.sp,
                             color: AppColors.greyText,

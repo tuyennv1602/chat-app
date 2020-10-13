@@ -1,3 +1,5 @@
+import 'package:chat_app/common/blocs/loading_bloc/loading_bloc.dart';
+import 'package:chat_app/common/blocs/loading_bloc/loading_event.dart';
 import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/images.dart';
 import 'package:chat_app/common/constants/strings.dart';
@@ -78,10 +80,9 @@ class _SignInScreenState extends State<SignInScreen> {
           if (state is AccountInActiveState) {
             AlertUtil.show(
               context,
-              child: CustomAlertWidget(
+              child: CustomAlertWidget.warning(
                 title: translate(StringConst.notification),
                 message: state.message,
-                alertType: AlertType.warning,
                 confirmTitle: translate(StringConst.verify),
                 cancelTitle: translate(StringConst.cancel),
                 onConfirmed: () => Routes.instance.navigate(
@@ -97,7 +98,7 @@ class _SignInScreenState extends State<SignInScreen> {
           if (state is ErroredSignInState) {
             AlertUtil.show(
               context,
-              child: CustomAlertWidget(
+              child: CustomAlertWidget.error(
                 title: translate(StringConst.signInFailed),
                 message: state.error,
               ),

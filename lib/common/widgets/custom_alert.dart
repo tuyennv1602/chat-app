@@ -7,8 +7,9 @@ import 'package:flutter_svg/svg.dart';
 
 enum AlertType { warning, success, error }
 
+// ignore: must_be_immutable
 class CustomAlertWidget extends StatelessWidget {
-  final AlertType alertType;
+  AlertType alertType;
   final String title;
   final String message;
   final Function onClose;
@@ -17,9 +18,8 @@ class CustomAlertWidget extends StatelessWidget {
   final Function onConfirmed;
   final Function onCancel;
 
-  CustomAlertWidget({
+  CustomAlertWidget.error({
     Key key,
-    this.alertType = AlertType.error,
     @required this.title,
     @required this.message,
     this.onClose,
@@ -27,7 +27,35 @@ class CustomAlertWidget extends StatelessWidget {
     this.cancelTitle,
     this.onCancel,
     this.onConfirmed,
-  }) : super(key: key);
+  }) : super(key: key) {
+    alertType = AlertType.error;
+  }
+
+  CustomAlertWidget.success({
+    Key key,
+    @required this.title,
+    @required this.message,
+    this.onClose,
+    this.confirmTitle,
+    this.cancelTitle,
+    this.onCancel,
+    this.onConfirmed,
+  }) : super(key: key) {
+    alertType = AlertType.success;
+  }
+
+  CustomAlertWidget.warning({
+    Key key,
+    @required this.title,
+    @required this.message,
+    this.onClose,
+    this.confirmTitle,
+    this.cancelTitle,
+    this.onCancel,
+    this.onConfirmed,
+  }) : super(key: key) {
+    alertType = AlertType.warning;
+  }
 
   Color _getBackgroundColor() {
     switch (alertType) {
