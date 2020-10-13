@@ -29,6 +29,8 @@ class StringConst {
   static const signUpFailed = 'label.sign_up_failed';
   static const activeAccountFailed = 'label.active_account_failed';
   static const share = 'label.share';
+  static const finishIn = 'label.finish_in';
+  static const task = 'label.task';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';
@@ -47,6 +49,7 @@ class StringConst {
   static const enterVerifyCode = 'message.enter_verify_code';
   static const registerSuccess = 'message.register_success';
   static const forgotPasswordDone = 'message.forgot_password_done';
+  static const loginFail = 'message.login_fail';
 
   static const passwordNotMatch = 'message.password_not_match';
   static const joinConversation = 'home.join_conversation';
@@ -54,6 +57,9 @@ class StringConst {
   static const justNow = 'time.just_now';
   static const minAgo = 'time.min_ago';
   static const hourAgo = 'time.hour_ago';
+  static const day = 'time.day';
+  static const hour = 'time.hour';
+  static const minute = 'time.minute';
 
   static const verify = 'button.verify';
   static const accountInActive = 'message.account_inactive';
@@ -70,7 +76,7 @@ class StringConst {
   static const audio = 'label.audio';
   static const gallery = 'label.gallery';
   static const option = 'label.option';
-  static const task = 'conversation.task';
+  static const taskCombat = 'conversation.task_combat';
   static const memberLocation = 'conversation.memberLocation';
   static const memberList = 'conversation.memberList';
   static const deleteRoom = 'conversation.deleteRoom';

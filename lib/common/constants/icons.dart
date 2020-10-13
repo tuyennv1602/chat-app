@@ -14,6 +14,10 @@ class IconConst {
   static const String close = '${path}close.svg';
   static const String success = '${path}success.svg';
   static const String registerDone = '${path}register_done.svg';
+  static const String pending = '${path}pending.svg';
+  static const String done = '${path}done.svg';
+  static const String cancel = '${path}cancel.svg';
+  static const String addTask = '${path}add_task.svg';
   static const String menu = '${path}menu.svg';
   static const String send = '${path}send.svg';
   static const String play = '${path}play.svg';
@@ -23,10 +27,10 @@ class IconConst {
   static const String camera = '${path}camera.svg';
   static const String audio = '${path}micro_phone.svg';
   static const String video = '${path}video.svg';
+  static const String newspaper = '${path}newspaper.svg';
   static const String task = '${path}task.svg';
   static const String mapPin = '${path}map_pin.svg';
   static const String addMember = '${path}add_user.svg';
-  static const String cancel = '${path}cancel.svg';
   static const String logout = '${path}logout.svg';
   static const String focus = '${path}focus.svg';
   static const String share = '${path}share.svg';

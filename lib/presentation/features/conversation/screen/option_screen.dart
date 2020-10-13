@@ -11,6 +11,7 @@ import 'package:chat_app/presentation/features/conversation/bloc/option_bloc/opt
 import 'package:chat_app/presentation/features/conversation/bloc/option_bloc/option_state.dart';
 import 'package:chat_app/presentation/features/conversation/screen/map_screen.dart';
 import 'package:chat_app/presentation/features/conversation/widget/item_conversation_option.dart';
+import 'package:chat_app/presentation/features/task/screen/task_list_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,6 +85,7 @@ class _OptionScreenState extends State<OptionScreen> {
                       ItemConversationOption(
                         icon: IconConst.task,
                         title: translate(StringConst.task),
+                        onTap: () => Routes.instance.navigate(TaskListScreen.router),
                       ),
                       ItemConversationOption(
                         icon: IconConst.group,
