@@ -9,9 +9,10 @@ import 'package:flutter_translate/flutter_translate.dart';
 
 class JoinRoomDialog extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController roomId = TextEditingController();
+  final TextEditingController roomIdCtrl = TextEditingController();
+  final Function(String joinCode) onRequest;
 
-  JoinRoomDialog({Key key}) : super(key: key);
+  JoinRoomDialog({Key key, this.onRequest}) : super(key: key);
 
   bool get _validateAndSave {
     final form = _formKey.currentState;
@@ -48,10 +49,9 @@ class JoinRoomDialog extends StatelessWidget {
                   child: Form(
                     key: _formKey,
                     child: InputWidget(
-                      placeHolder: translate(StringConst.roomId),
+                      placeHolder: translate(StringConst.joinCodeLabel),
                       validator: Validator.validRoomId,
-                      controller: roomId,
-                      onChanged: (t) {},
+                      controller: roomIdCtrl,
                     ),
                   ),
                 ),
@@ -90,6 +90,7 @@ class JoinRoomDialog extends StatelessWidget {
                           onTap: () {
                             if (_validateAndSave) {
                               Navigator.of(context).pop();
+                              onRequest?.call(roomIdCtrl.text);
                             }
                           },
                           child: Container(

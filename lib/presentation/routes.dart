@@ -59,8 +59,9 @@ class Routes {
     );
   }
 
-  void pop({dynamic result}) {
+  Future<void> pop({dynamic result}) async {
     if (navigatorKey.currentState.canPop()) {
+      await Future.delayed(const Duration(milliseconds: 5));
       navigatorKey.currentState.pop(result);
     }
   }
@@ -80,7 +81,11 @@ class Routes {
       case CreateRoomScreen.route:
         return SlideLeftRoute(widget: CreateRoomScreen());
       case SelectMemberScreen.route:
-        return SlideLeftRoute(widget: SelectMemberScreen());
+        final Map arguments = settings.arguments;
+        return SlideLeftRoute(
+            widget: SelectMemberScreen(
+          selectMemberBloc: arguments['bloc'],
+        ));
       case ForgotPasswordSuccessScreen.router:
         return FadeInRoute(widget: ForgotPasswordSuccessScreen());
       case TaskListScreen.router:
@@ -88,21 +93,20 @@ class Routes {
       case ActiveAccountScreen.route:
         final Map arguments = settings.arguments;
         return FadeInRoute(
-          widget: ActiveAccountScreen(
-            email: arguments['email'],
-            name: arguments['name'],
-          ),
-        );
+            widget: ActiveAccountScreen(
+          email: arguments['email'],
+          name: arguments['name'],
+        ));
       case ConversationScreen.route:
-        return SlideLeftRoute(widget: ConversationScreen());
+        final Map arguments = settings.arguments;
+        return SlideLeftRoute(widget: ConversationScreen(room: arguments['room']));
       case GalleryPhotoScreen.route:
         final Map arguments = settings.arguments;
         return SlideUpRoute(
-          widget: GalleryPhotoScreen(
-            message: arguments['message'],
-            index: arguments['index'],
-          ),
-        );
+            widget: GalleryPhotoScreen(
+          message: arguments['message'],
+          index: arguments['index'],
+        ));
       case VideoPlayerScreen.route:
         final Map arguments = settings.arguments;
         return SlideUpRoute(

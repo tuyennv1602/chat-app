@@ -10,7 +10,7 @@ import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/circle_button.dart';
 import 'package:chat_app/common/widgets/custom_alert.dart';
 import 'package:chat_app/common/widgets/input_widget.dart';
-import 'package:chat_app/data/models/register_request_model.dart';
+import 'package:chat_app/data/models/request/register_request_model.dart';
 import 'package:chat_app/domain/entities/member_entity.dart';
 import 'package:chat_app/presentation/features/authentication/bloc/sign_up/sign_up_bloc.dart';
 import 'package:chat_app/presentation/features/authentication/screen/active_account_screen.dart';
@@ -89,7 +89,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           if (state is ErroredSignUpState) {
             AlertUtil.show(
               context,
-              child: CustomAlertWidget(
+              child: CustomAlertWidget.error(
                 title: translate(StringConst.signUpFailed),
                 message: state.error,
               ),

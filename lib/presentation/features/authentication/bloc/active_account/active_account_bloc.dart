@@ -4,7 +4,6 @@ import 'package:chat_app/common/blocs/loading_bloc/loading_bloc.dart';
 import 'package:chat_app/common/blocs/loading_bloc/loading_event.dart';
 import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/exception/network_exception.dart';
-import 'package:chat_app/common/utils/error_utils.dart';
 import 'package:chat_app/domain/usecases/authentication_usecase.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -34,8 +33,7 @@ class ActiveAccountBloc extends Bloc<ActiveAccountEvent, ActiveAccountState> {
     }
   }
 
-  Stream<ActiveAccountState> _mapSubmitSignIn(
-      SubmitActiveAccountEvent event) async* {
+  Stream<ActiveAccountState> _mapSubmitSignIn(SubmitActiveAccountEvent event) async* {
     try {
       loadingBloc.add(StartLoading());
       final res = await authenticationUseCase.activeAccount(

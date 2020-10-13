@@ -34,4 +34,8 @@ class IconConst {
   static const String logout = '${path}logout.svg';
   static const String focus = '${path}focus.svg';
   static const String share = '${path}share.svg';
+  static const String shareCode = '${path}share_code.svg';
+  static const String empty = '${path}empty.svg';
+  static const String clear = '${path}clear.svg';
+  static const String error2 = '${path}error2.svg';
 }

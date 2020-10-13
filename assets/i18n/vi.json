@@ -34,7 +34,10 @@
     "audio": "Thông điệp",
     "gallery": "Thư viện",
     "option": "Tuỳ chọn",
-    "loading": "Đang tải..."
+    "loading": "Đang tải...",
+    "share": "Chia sẻ",
+    "joinCode": "Mã tham gia",
+    "resultSearch": "Kết quả tìm kiếm"
   },
   "message": {
     "network_error": "Lỗi kết nối, vui lòng kiểm tra đường truyền internet!",
@@ -72,7 +75,8 @@
   },
   "home": {
     "join_conversation": "Tham gia tác chiến",
-    "create_conversation": "Tạo phòng tác chiến"
+    "create_conversation": "Tạo phòng tác chiến",
+    "emptyConversation": "Chưa có phòng tác chiến"
   },
   "button": {
     "verify": "Xác thực"
@@ -87,6 +91,11 @@
     "memberLocation": "Vị trí thành viên",
     "memberList": "Danh sách thành viên",
     "deleteRoom": "Huỷ bỏ tác chiến",
-    "leaveRoom": "Rời phòng tác chiến"
+    "leaveRoom": "Rời phòng tác chiến",
+    "emptyMessage": "Chưa có tin nhắn",
+    "joinCode": "Lấy mã tham gia tác chiến",
+    "getCodeSuccess": "Mã tham gia tác chiến là %s.",
+    "shareCode": "Nhập mã tác chiến %s để tham gia tác chiến ngay!",
+    "memberCount": "%d thành viên"
   }
 }

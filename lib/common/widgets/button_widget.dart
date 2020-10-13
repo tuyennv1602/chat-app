@@ -39,7 +39,7 @@ class ButtonWidget extends StatelessWidget {
         ),
       ),
       child: InkWell(
-        onTap: onTap,
+        onTap: isEnable ? onTap : null,
         child: Center(
           child: Text(
             label,

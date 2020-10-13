@@ -48,7 +48,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       loadingBloc.add(FinishLoading());
       yield SignedInState();
     } on DioError catch (e) {
-      if (e.response.data['code'] == ErrorUtils.accountInActive) {
+      if (e.error == DioErrorType.RESPONSE &&
+          e.response.data['code'] == ErrorUtils.accountInActive) {
         loadingBloc.add(FinishLoading());
         yield AccountInActiveState(e.errorMessage);
       } else {

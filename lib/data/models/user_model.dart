@@ -8,6 +8,7 @@ class UserModel extends UserEntity {
     String fullname,
     String phoneNumber,
     String email,
+    String avatar,
   }) : super(
           id: id,
           code: code,
@@ -15,6 +16,7 @@ class UserModel extends UserEntity {
           fullname: fullname,
           phoneNumber: phoneNumber,
           email: email,
+          avatar: avatar,
         );
 
   UserModel.fromJson(Map<String, dynamic> json) {
@@ -24,16 +26,18 @@ class UserModel extends UserEntity {
     fullname = json['fullname'];
     phoneNumber = json['phone_number'];
     email = json['email'];
+    avatar = json['avatar'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final data = <String, dynamic>{};
     data['id'] = id;
     data['code'] = code;
     data['nickname'] = nickname;
     data['fullname'] = fullname;
     data['phone_number'] = phoneNumber;
     data['email'] = email;
+    data['avatar'] = avatar;
     return data;
   }
 }

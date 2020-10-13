@@ -5,6 +5,7 @@ class UserEntity {
   String fullname;
   String phoneNumber;
   String email;
+  String avatar;
 
   UserEntity({
     this.id,
@@ -13,5 +14,6 @@ class UserEntity {
     this.fullname,
     this.phoneNumber,
     this.email,
+    this.avatar,
   });
 }

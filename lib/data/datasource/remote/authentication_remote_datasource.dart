@@ -1,6 +1,6 @@
 import 'package:chat_app/common/network/client.dart';
-import 'package:chat_app/data/models/login_response_model.dart';
-import 'package:chat_app/data/models/register_request_model.dart';
+import 'package:chat_app/data/models/response/login_response_model.dart';
+import 'package:chat_app/data/models/request/register_request_model.dart';
 
 class AuthenticationRemoteDataSource {
   final Client client;

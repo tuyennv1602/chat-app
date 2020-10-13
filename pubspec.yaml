@@ -36,6 +36,8 @@ dependencies:
   google_maps_flutter: ^1.0.2
   flutter_cache_manager: ^1.4.2
   fluster: ^1.1.2
+  share: ^0.6.5+2
+  sprintf: ^4.0.2
 
 dev_dependencies:
   flutter_test:

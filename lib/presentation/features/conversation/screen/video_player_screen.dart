@@ -109,7 +109,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                   height: 200,
                                   child: Center(
                                     child: Image.asset(
-                                      ImageConst.circleLoading,
+                                      ImageConst.loading,
                                       width: 30.w,
                                       height: 30.w,
                                     ),
