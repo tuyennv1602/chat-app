@@ -7,12 +7,17 @@ import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/widgets/animated_button.dart';
 import 'package:chat_app/domain/entities/message_entity.dart';
 import 'package:chat_app/domain/entities/user_entity.dart';
+import 'package:chat_app/presentation/features/conversation/bloc/message_bloc/message_bloc.dart';
+import 'package:chat_app/presentation/features/conversation/bloc/message_bloc/message_state.dart';
+import 'package:chat_app/presentation/features/conversation/bloc/socket_bloc/socket_bloc.dart';
+import 'package:chat_app/presentation/features/conversation/bloc/socket_bloc/socket_event.dart';
 import 'package:chat_app/presentation/features/conversation/widget/attach_item.dart';
 import 'package:chat_app/presentation/features/conversation/widget/message_bubble.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,6 +25,14 @@ import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ChatPage extends StatefulWidget {
+  final MessageBloc messageBloc;
+  final SocketBloc socketBloc;
+
+  const ChatPage({
+    Key key,
+    this.messageBloc,
+    this.socketBloc,
+  }) : super(key: key);
   @override
   _ChatPageState createState() => _ChatPageState();
 }
@@ -52,7 +65,6 @@ class _ChatPageState extends State<ChatPage> {
       type: 2,
       images: [
         'https://www.tooktrip.com/en/upload/save_image/05270953_5ecdd62681be3.jpg',
-        'https://cdn.pixabay.com/photo/2013/02/21/19/06/beach-84533__340.jpg',
         'https://cdn.pixabay.com/photo/2016/10/18/21/22/california-1751455__340.jpg',
         'https://www.visitlagunabeach.com/imager/s3-us-west-1_amazonaws_com/laguna-craft/craft/Victoria-beach-scs_2632d877b3d4fc81e8192bac4d0bf9b7.jpg'
       ],
@@ -64,18 +76,7 @@ class _ChatPageState extends State<ChatPage> {
       type: 2,
       images: [
         'https://www.tooktrip.com/en/upload/save_image/05270953_5ecdd62681be3.jpg',
-        'https://cdn.pixabay.com/photo/2013/02/21/19/06/beach-84533__340.jpg',
         'https://cdn.pixabay.com/photo/2016/10/18/21/22/california-1751455__340.jpg'
-      ],
-      createdAt: 1601447374,
-    ),
-    MessageEntity(
-      id: '7',
-      sender: UserEntity(id: 3, nickname: 'User 3', fullname: 'Nguyen Van B'),
-      type: 2,
-      images: [
-        'https://www.tooktrip.com/en/upload/save_image/05270953_5ecdd62681be3.jpg',
-        'https://cdn.pixabay.com/photo/2013/02/21/19/06/beach-84533__340.jpg'
       ],
       createdAt: 1601447374,
     ),
@@ -169,27 +170,30 @@ class _ChatPageState extends State<ChatPage> {
       child: Column(
         children: [
           Expanded(
-            child: SmartRefresher(
-              enablePullUp: true,
-              enablePullDown: false,
-              controller: _refershController,
-              child: ListView.builder(
-                reverse: true,
-                padding: EdgeInsets.only(
-                  left: 15.w,
-                  right: 15.w,
+            child: BlocBuilder<MessageBloc, MessageState>(
+              builder: (context, state) => SmartRefresher(
+                enablePullUp: true,
+                enablePullDown: false,
+                controller: _refershController,
+                child: ListView.builder(
+                  reverse: true,
+                  padding: EdgeInsets.only(
+                    left: 15.w,
+                    right: 15.w,
+                  ),
+                  itemCount: state.messages.length,
+                  itemBuilder: (context, index) {
+                    final _previous = index == 0 ? null : state.messages[index - 1];
+                    final _next =
+                        index == state.messages.length - 1 ? null : state.messages[index + 1];
+                    return MessageBubble(
+                      message: state.messages[index],
+                      previousMessage: _next,
+                      nextMessage: _previous,
+                      showSenderName: true,
+                    );
+                  },
                 ),
-                itemCount: mockChats.length,
-                itemBuilder: (context, index) {
-                  final _previous = index == 0 ? null : mockChats[index - 1];
-                  final _next = index == mockChats.length - 1 ? null : mockChats[index + 1];
-                  return MessageBubble(
-                    message: mockChats[index],
-                    previousMessage: _next,
-                    nextMessage: _previous,
-                    showSenderName: true,
-                  );
-                },
               ),
             ),
           ),
@@ -254,7 +258,10 @@ class _ChatPageState extends State<ChatPage> {
                       IconConst.send,
                       color: enable ? AppColors.primaryColor : AppColors.grey,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      widget.socketBloc.add(SendMessageEvent(type: 1, content: messageCtrl.text));
+                      messageCtrl.text = '';
+                    },
                   ),
                 ),
               ],

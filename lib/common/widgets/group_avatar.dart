@@ -117,7 +117,7 @@ class GroupAvatartWidget extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 9.sp,
                           color: AppColors.greyText,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),

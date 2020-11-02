@@ -24,18 +24,14 @@ class _BaseScaffoldState extends State<BaseScaffold> {
   Widget build(BuildContext context) {
     return BlocBuilder<LoadingBloc, LoadingState>(
       builder: (context, state) => WillPopScope(
-        onWillPop: () => Future.value(state is Loaded),
+        onWillPop: () async => state is Loaded,
         child: Scaffold(
           resizeToAvoidBottomPadding: false,
           backgroundColor: Colors.white,
           body: Stack(
             children: [
               Positioned.fill(
-                child: GestureDetector(
-                  onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-                  behavior: HitTestBehavior.deferToChild,
-                  child: widget.child,
-                ),
+                child: widget.child,
               ),
               Positioned.fill(
                 child: Visibility(
@@ -58,7 +54,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

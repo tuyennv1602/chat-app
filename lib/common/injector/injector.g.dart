@@ -11,6 +11,7 @@ class _$Injector extends Injector {
     final Container container = Container();
     container.registerSingleton((c) => AuthBloc(
         client: c<Client>(),
+        socketClient: c<SocketClient>(),
         localDataSource: c<LocalDataSource>(),
         userRemoteDataSource: c<UserRemoteDataSource>()));
     container.registerSingleton((c) => LoadingBloc());
@@ -35,6 +36,7 @@ class _$Injector extends Injector {
         roomBloc: c<RoomBloc>(),
         loadingBloc: c<LoadingBloc>(),
         roomUseCase: c<RoomUseCase>()));
+    container.registerFactory((c) => MessageBloc());
   }
 
   void _configureUseCases() {
@@ -83,6 +85,7 @@ class _$Injector extends Injector {
   void _configureCommon() {
     final Container container = Container();
     container.registerSingleton((c) => Client());
+    container.registerSingleton((c) => SocketClient());
     container.registerFactory((c) => NetworkInfoImpl());
   }
 }

@@ -11,13 +11,19 @@ final TextStyle textStyleAppbar = TextStyle(
 final TextStyle textStyleLabel = TextStyle(
   fontSize: ScreenUtil().setSp(15),
   color: AppColors.black,
+  fontWeight: FontWeight.w500,
+);
+
+final TextStyle textStyleBold = TextStyle(
+  fontSize: ScreenUtil().setSp(24),
+  color: AppColors.black,
   fontWeight: FontWeight.w600,
 );
 
 final TextStyle textStyleInput = TextStyle(
   fontSize: ScreenUtil().setSp(15),
   color: AppColors.black,
-  fontWeight: FontWeight.w400,
+  fontWeight: FontWeight.w500,
   height: 1.5,
 );
 
@@ -30,13 +36,12 @@ final TextStyle textStyleInputError = TextStyle(
 final TextStyle textStyleButton = TextStyle(
   fontSize: ScreenUtil().setSp(15),
   color: Colors.white,
-  fontWeight: FontWeight.w400,
+  fontWeight: FontWeight.w500,
 );
 
 final TextStyle textStyleRegular = TextStyle(
   fontSize: ScreenUtil().setSp(14),
   color: AppColors.black,
-  fontWeight: FontWeight.w400,
 );
 
 final TextStyle textStyleMedium = TextStyle(
@@ -47,5 +52,5 @@ final TextStyle textStyleMedium = TextStyle(
 
 final TextStyle textStyleMessage = TextStyle(
   fontSize: ScreenUtil().setSp(15),
-  fontWeight: FontWeight.w400,
+  fontWeight: FontWeight.w500,
 );

@@ -90,4 +90,8 @@ class StringConst {
   static const joinCodeLabel = 'label.joinCode';
   static const memberCount = 'conversation.memberCount';
   static const resultSearch = 'label.resultSearch';
+  static const connected = 'label.connected';
+  static const connecting = 'label.connecting';
+  static const connectError = 'label.connectError';
+  static const disconnect = 'label.disconnect';
 }

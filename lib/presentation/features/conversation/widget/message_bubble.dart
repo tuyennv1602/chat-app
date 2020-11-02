@@ -1,5 +1,5 @@
 import 'package:chat_app/common/blocs/auth_bloc/auth_bloc.dart';
-import 'package:chat_app/common/blocs/auth_bloc/auth_state.dart';
+import 'package:chat_app/common/injector/injector.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
 import 'package:chat_app/domain/entities/message_entity.dart';
@@ -9,7 +9,6 @@ import 'package:chat_app/presentation/features/conversation/widget/image_box.dar
 import 'package:chat_app/presentation/features/conversation/widget/text_box.dart';
 import 'package:chat_app/presentation/features/conversation/widget/video_box.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 
 class MessageBubble extends StatefulWidget {
@@ -33,6 +32,12 @@ class MessageBubble extends StatefulWidget {
 class _MessageState extends State<MessageBubble> {
   bool isShowTime = false;
   UserEntity _currentUser;
+  @override
+  void initState() {
+    super.initState();
+    _currentUser = Injector.resolve<AuthBloc>().state.user;
+  }
+
   bool get _isNextBySender => widget.message.sender.id == widget?.nextMessage?.sender?.id;
   bool get _isMine => _currentUser?.id == widget.message.sender.id;
   bool get _isPreviousDiff =>
@@ -53,7 +58,7 @@ class _MessageState extends State<MessageBubble> {
       padding: EdgeInsets.only(right: 10.w),
       child: CircleAvatarWidget(
         source: null,
-        size: 25.w,
+        size: 25,
       ),
     );
   }
@@ -179,38 +184,31 @@ class _MessageState extends State<MessageBubble> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthBloc, AuthState>(
-      builder: (context, state) {
-        if (state is AuthenticatedState) {
-          _currentUser = state.user;
-        }
-        return GestureDetector(
-          onTap: () {
-            setState(() {
-              isShowTime = !isShowTime;
-            });
-          },
-          child: Container(
-            margin: _itemMargin(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isShowTime = !isShowTime;
+        });
+      },
+      child: Container(
+        margin: _itemMargin(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _renderSeperator(),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                _renderSeperator(),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    _renderAvatar(),
-                    _getLeftTime(),
-                    _renderContent(),
-                    _getRightTime(),
-                  ],
-                ),
-                _renderSender(),
+                _renderAvatar(),
+                _getLeftTime(),
+                _renderContent(),
+                _getRightTime(),
               ],
             ),
-          ),
-        );
-      },
+            _renderSender(),
+          ],
+        ),
+      ),
     );
   }
 }

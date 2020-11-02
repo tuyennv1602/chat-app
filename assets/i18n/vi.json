@@ -37,7 +37,11 @@
     "loading": "Đang tải...",
     "share": "Chia sẻ",
     "joinCode": "Mã tham gia",
-    "resultSearch": "Kết quả tìm kiếm"
+    "resultSearch": "Kết quả tìm kiếm",
+    "connected": "Đã kết nối",
+    "connecting": "Đang kết nối",
+    "connectError": "Lỗi",
+    "disconnect": "Mất kết nối"
   },
   "message": {
     "network_error": "Lỗi kết nối, vui lòng kiểm tra đường truyền internet!",

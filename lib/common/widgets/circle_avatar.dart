@@ -17,7 +17,7 @@ class CircleAvatarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _size = size ?? 40.w;
+    final _size = (size ?? 40).w;
     return Container(
       width: _size,
       height: _size,

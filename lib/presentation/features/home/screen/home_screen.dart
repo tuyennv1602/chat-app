@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         10.h,
                                       ),
                                       itemCount: state.rooms.length,
-                                      separatorBuilder: (_, index) => Container(height: 10.h),
+                                      separatorBuilder: (_, index) => Container(height: 5.h),
                                       physics: const BouncingScrollPhysics(),
                                       itemBuilder: (_, index) {
                                         return ItemConversationWidget(

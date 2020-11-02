@@ -1,6 +1,7 @@
 import 'package:chat_app/common/blocs/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/common/blocs/loading_bloc/loading_bloc.dart';
 import 'package:chat_app/common/network/client.dart';
+import 'package:chat_app/common/network/socket_client.dart';
 import 'package:chat_app/common/platform/network_info.dart';
 import 'package:chat_app/data/datasource/local/local_datasource.dart';
 import 'package:chat_app/data/datasource/remote/authentication_remote_datasource.dart';
@@ -18,6 +19,7 @@ import 'package:chat_app/domain/usecases/user_usecase.dart';
 import 'package:chat_app/presentation/features/authentication/bloc/active_account/active_account_bloc.dart';
 import 'package:chat_app/presentation/features/authentication/bloc/sign_in/sign_in_bloc.dart';
 import 'package:chat_app/presentation/features/authentication/bloc/sign_up/sign_up_bloc.dart';
+import 'package:chat_app/presentation/features/conversation/bloc/message_bloc/message_bloc.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/option_bloc/option_bloc.dart';
 import 'package:chat_app/presentation/features/home/bloc/create_room_bloc/create_room_bloc.dart';
 import 'package:chat_app/presentation/features/home/bloc/room_bloc/room_bloc.dart';
@@ -59,6 +61,7 @@ abstract class Injector {
   @Register.factory(SearchMemberBloc)
   @Register.factory(SelectMemberBloc)
   @Register.factory(CreateRoomBloc)
+  @Register.factory(MessageBloc)
   void _configureBlocs();
 
   // ============USE CASES==============
@@ -94,6 +97,7 @@ abstract class Injector {
 
   // ============COMMON==============
   @Register.singleton(Client)
+  @Register.singleton(SocketClient)
   @Register.factory(NetworkInfoImpl)
   void _configureCommon();
 }
