@@ -79,9 +79,7 @@ class _ItemMemberState extends State<ItemMember> {
       child: Row(
         children: [
           CircleAvatarWidget(source: null),
-          SizedBox(
-            width: 15.w,
-          ),
+          SizedBox(width: 15.w),
           Expanded(
             child: Container(
               decoration: const BoxDecoration(

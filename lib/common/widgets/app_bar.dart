@@ -28,7 +28,7 @@ class AppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil.statusBarHeight + 70.w,
+      height: ScreenUtil.statusBarHeight + 60.w,
       padding: EdgeInsets.only(top: ScreenUtil.statusBarHeight),
       decoration: BoxDecoration(
         boxShadow: const [

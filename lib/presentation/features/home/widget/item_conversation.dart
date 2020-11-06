@@ -2,6 +2,7 @@ import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/widgets/group_avatar.dart';
+import 'package:chat_app/domain/entities/message_entity.dart';
 import 'package:chat_app/domain/entities/room_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
@@ -17,6 +18,24 @@ class ItemConversationWidget extends StatelessWidget {
     this.room,
     this.onTap,
   }) : super(key: key);
+
+  String get getLastMessage {
+    if (room.lastMessage == null) {
+      return '[${translate(StringConst.emptyMessage)}]';
+    }
+    switch (room.lastMessage.contentType) {
+      case MessageType.text:
+        return room.lastMessage.content;
+      case MessageType.audio:
+        return '[${translate(StringConst.audio)}]';
+      case MessageType.video:
+        return '[${translate(StringConst.video)}]';
+      case MessageType.image:
+        return '[${translate(StringConst.image)}]';
+      default:
+        return '[${translate(StringConst.emptyMessage)}]';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,27 +72,20 @@ class ItemConversationWidget extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        Visibility(
-                          visible: room.lastMessage != null,
-                          child: Text(
-                            DateTime.now()
-                                .add(
-                                  const Duration(minutes: 1),
-                                )
-                                .timeAgo(),
-                            style: TextStyle(
-                              color: AppColors.grey,
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                        )
+                        room.lastMessage != null
+                            ? Text(
+                                room.lastMessage.getCreatedAt.timeAgo(),
+                                style: TextStyle(
+                                  color: AppColors.grey,
+                                  fontSize: 12.sp,
+                                ),
+                              )
+                            : const SizedBox(),
                       ],
                     ),
                   ),
                   Text(
-                    room.lastMessage == null
-                        ? '[${translate(StringConst.emptyMessage)}]'
-                        : 'Last message',
+                    getLastMessage,
                     style: textStyleRegular.copyWith(
                       fontSize: 13.sp,
                       color: AppColors.greyText,

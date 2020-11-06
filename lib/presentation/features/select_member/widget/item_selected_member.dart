@@ -21,16 +21,19 @@ class ItemSelectedMember extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: 55.w,
+          width: 60.w,
           padding: EdgeInsets.only(top: 5.h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CircleAvatarWidget(source: member.avatar),
+              CircleAvatarWidget(
+                source: member.avatar,
+                size: 45,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 4.h),
                 child: Text(
-                  '${member.getShortName}\n',
+                  '${member.nickname}\n',
                   style: textStyleMedium.copyWith(fontSize: 12.sp),
                   textAlign: TextAlign.center,
                   maxLines: 2,
@@ -41,15 +44,18 @@ class ItemSelectedMember extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: -3,
+          right: 0,
           child: InkWell(
             onTap: onDelete,
-            child: Padding(
-              padding: EdgeInsets.all(5.w),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white, width: 2),
+                shape: BoxShape.circle,
+              ),
               child: SvgPicture.asset(
                 IconConst.close,
-                width: 20,
-                height: 20,
+                width: 20.w,
+                height: 20.w,
               ),
             ),
           ),

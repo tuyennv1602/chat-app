@@ -77,7 +77,7 @@ class JoinRoomDialog extends StatelessWidget {
                             ),
                             child: Text(
                               translate(StringConst.cancel),
-                              style: textStyleRegular.copyWith(
+                              style: textStyleMedium.copyWith(
                                 color: AppColors.greyText,
                               ),
                             ),
@@ -103,7 +103,7 @@ class JoinRoomDialog extends StatelessWidget {
                             ),
                             child: Text(
                               translate(StringConst.sendRequest),
-                              style: textStyleRegular.copyWith(
+                              style: textStyleMedium.copyWith(
                                 color: Colors.white,
                               ),
                             ),

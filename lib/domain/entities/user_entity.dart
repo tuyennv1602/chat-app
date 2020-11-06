@@ -1,4 +1,8 @@
-class UserEntity {
+import 'package:chat_app/common/network/configs.dart';
+import 'package:equatable/equatable.dart';
+
+// ignore: must_be_immutable
+class UserEntity extends Equatable {
   int id;
   String code;
   String nickname;
@@ -16,4 +20,9 @@ class UserEntity {
     this.email,
     this.avatar,
   });
+
+  @override
+  List<Object> get props => [id, code];
+
+  String get fullAvatar => '${Configurations.avatarUrl}/${avatar ?? 'noavatar.png'}';
 }

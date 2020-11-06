@@ -19,7 +19,7 @@ class ItemTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> Routes.instance.navigate(TaskDetailScreen.route),
+      onTap: () => Routes.instance.navigate(TaskDetailScreen.route),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
         decoration: BoxDecoration(
@@ -88,14 +88,13 @@ class ItemTask extends StatelessWidget {
                     height: 26.w,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      separatorBuilder: (BuildContext context, int index) =>
-                          SizedBox(width: 5.w),
+                      separatorBuilder: (BuildContext context, int index) => SizedBox(width: 5.w),
                       itemCount: 3,
                       itemBuilder: (context, index) {
                         return Container(
                           alignment: Alignment.center,
                           child: CircleAvatarWidget(
-                            size: index == 0 ? 26.w : 20.w,
+                            size: index == 0 ? 26 : 20,
                             source: null,
                           ),
                         );

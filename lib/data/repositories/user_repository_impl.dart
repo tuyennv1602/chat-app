@@ -28,4 +28,13 @@ class UserRepositoryImpl implements UserRepository {
       throw NetworkException();
     }
   }
+
+  @override
+  Future<String> uploadAvatar(String filePath, String fileName) async {
+    if (await networkInfo.isConnected) {
+      return userRemoteDataSource.updateAvatar(filePath, fileName);
+    } else {
+      throw NetworkException();
+    }
+  }
 }

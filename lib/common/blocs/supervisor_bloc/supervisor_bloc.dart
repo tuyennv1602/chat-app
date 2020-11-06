@@ -17,10 +17,4 @@ class SupervisorBloc extends BlocObserver {
         'Event: ${transition.event.runtimeType}\n'
         'Next state: ${transition.nextState.runtimeType}');
   }
-
-  @override
-  void onError(Bloc bloc, Object error, StackTrace stacktrace) {
-    super.onError(bloc, error, stacktrace);
-    LOG.warn('${bloc.runtimeType} Errored', error, stacktrace);
-  }
 }

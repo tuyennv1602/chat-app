@@ -49,6 +49,7 @@ class CircleButtonWidget extends StatelessWidget {
             urlIcon,
             width: _iconSize,
             height: _iconSize,
+            color: Colors.white,
           ),
         ),
       ),

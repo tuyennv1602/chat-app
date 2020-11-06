@@ -81,8 +81,8 @@ class AnimatedButtonWidgetState extends State<AnimatedButtonWidget>
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5,
+              color: AppColors.shadow,
+              blurRadius: 15,
               offset: Offset(0, 2),
             ),
           ],

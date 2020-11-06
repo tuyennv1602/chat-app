@@ -106,129 +106,135 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     fit: BoxFit.fill,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.w),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: ScreenUtil.statusBarHeight + 16,
-                          ),
-                          child: InkWell(
-                            onTap: () => Routes.instance.pop(),
-                            child: SvgPicture.asset(
-                              IconConst.back,
-                              color: Colors.white,
-                            ),
-                          ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InkWell(
+                      onTap: () => Routes.instance.pop(),
+                      child: Container(
+                        margin:
+                            EdgeInsets.only(top: MediaQuery.of(context).padding.top, left: 10.w),
+                        padding: EdgeInsets.all(15.w),
+                        child: SvgPicture.asset(
+                          IconConst.back,
+                          color: Colors.white,
+                          width: 22.w,
+                          height: 22.w,
                         ),
-                        SizedBox(height: 110.h),
-                        Expanded(
-                          child: KeyboardAvoider(
-                            autoScroll: true,
-                            child: Column(
-                              children: [
-                                InputWidget(
-                                  placeHolder: translate(StringConst.code),
-                                  validator: Validator.validCode,
-                                  controller: codeCtrl,
-                                  onChanged: (t) {
-                                    _checkEnableButton();
-                                  },
-                                ),
-                                SizedBox(height: 15.h),
-                                InputWidget(
-                                  placeHolder: translate(StringConst.fullName),
-                                  validator: Validator.validFullName,
-                                  controller: fullNameCtrl,
-                                  onChanged: (t) {
-                                    _checkEnableButton();
-                                  },
-                                ),
-                                SizedBox(height: 15.h),
-                                InputWidget(
-                                  placeHolder: translate(StringConst.nickName),
-                                  validator: Validator.validNickName,
-                                  controller: nickNameCtrl,
-                                  onChanged: (t) {
-                                    _checkEnableButton();
-                                  },
-                                ),
-                                SizedBox(height: 15.h),
-                                InputWidget(
-                                  placeHolder: translate(StringConst.email),
-                                  validator: Validator.validEmail,
-                                  controller: emailCtrl,
-                                  inputType: TextInputType.emailAddress,
-                                  onChanged: (t) {
-                                    _checkEnableButton();
-                                  },
-                                ),
-                                SizedBox(height: 15.h),
-                                InputWidget(
-                                  placeHolder: translate(StringConst.phone),
-                                  validator: Validator.validPhone,
-                                  controller: phoneCtrl,
-                                  inputType: TextInputType.phone,
-                                  onChanged: (t) {
-                                    _checkEnableButton();
-                                  },
-                                ),
-                                SizedBox(height: 15.h),
-                                InputWidget(
-                                  placeHolder: translate(StringConst.password),
-                                  validator: Validator.validPassword,
-                                  controller: passwordCtrl,
-                                  obscureText: true,
-                                  onChanged: (t) {
-                                    _checkEnableButton();
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 40.h, top: 15.h),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.w),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                translate(StringConst.signUp),
-                                style: textStyleLabel.copyWith(
-                                  fontSize: 24.sp,
+                              SizedBox(height: 110.h),
+                              Expanded(
+                                child: KeyboardAvoider(
+                                  autoScroll: true,
+                                  child: Column(
+                                    children: [
+                                      InputWidget(
+                                        placeHolder: translate(StringConst.code),
+                                        validator: Validator.validCode,
+                                        controller: codeCtrl,
+                                        onChanged: (t) {
+                                          _checkEnableButton();
+                                        },
+                                      ),
+                                      SizedBox(height: 15.h),
+                                      InputWidget(
+                                        placeHolder: translate(StringConst.fullName),
+                                        validator: Validator.validFullName,
+                                        controller: fullNameCtrl,
+                                        onChanged: (t) {
+                                          _checkEnableButton();
+                                        },
+                                      ),
+                                      SizedBox(height: 15.h),
+                                      InputWidget(
+                                        placeHolder: translate(StringConst.nickName),
+                                        validator: Validator.validNickName,
+                                        controller: nickNameCtrl,
+                                        onChanged: (t) {
+                                          _checkEnableButton();
+                                        },
+                                      ),
+                                      SizedBox(height: 15.h),
+                                      InputWidget(
+                                        placeHolder: translate(StringConst.email),
+                                        validator: Validator.validEmail,
+                                        controller: emailCtrl,
+                                        inputType: TextInputType.emailAddress,
+                                        onChanged: (t) {
+                                          _checkEnableButton();
+                                        },
+                                      ),
+                                      SizedBox(height: 15.h),
+                                      InputWidget(
+                                        placeHolder: translate(StringConst.phone),
+                                        validator: Validator.validPhone,
+                                        controller: phoneCtrl,
+                                        inputType: TextInputType.phone,
+                                        onChanged: (t) {
+                                          _checkEnableButton();
+                                        },
+                                      ),
+                                      SizedBox(height: 15.h),
+                                      InputWidget(
+                                        placeHolder: translate(StringConst.password),
+                                        validator: Validator.validPassword,
+                                        controller: passwordCtrl,
+                                        obscureText: true,
+                                        onChanged: (t) {
+                                          _checkEnableButton();
+                                        },
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                              CircleButtonWidget(
-                                isEnable: _enableButton,
-                                urlIcon: IconConst.next,
-                                onTap: () {
-                                  if (_validateAndSave) {
-                                    signUpBloc.add(
-                                      SubmitSignUpEvent(
-                                        registerRequestModel:
-                                            RegisterRequestModel(
-                                          code: codeCtrl.text,
-                                          email: emailCtrl.text,
-                                          fullname: fullNameCtrl.text,
-                                          nickname: nickNameCtrl.text,
-                                          password: passwordCtrl.text,
-                                          phoneNumber: phoneCtrl.text,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                },
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 40.h, top: 15.h),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      translate(StringConst.signUp),
+                                      style: textStyleBold,
+                                    ),
+                                    CircleButtonWidget(
+                                      isEnable: _enableButton,
+                                      urlIcon: IconConst.next,
+                                      onTap: () {
+                                        if (_validateAndSave) {
+                                          signUpBloc.add(
+                                            SubmitSignUpEvent(
+                                              registerRequestModel: RegisterRequestModel(
+                                                code: codeCtrl.text,
+                                                email: emailCtrl.text,
+                                                fullname: fullNameCtrl.text,
+                                                nickname: nickNameCtrl.text,
+                                                password: passwordCtrl.text,
+                                                phoneNumber: phoneCtrl.text,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),

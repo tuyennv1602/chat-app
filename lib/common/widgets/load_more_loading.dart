@@ -18,7 +18,7 @@ class LoadMoreLoading extends StatelessWidget {
       failedText: '',
       idleText: '',
       loadingText: '',
-      loadingIcon: Image.asset(ImageConst.loading),
+      loadingIcon: Image.asset(ImageConst.circleLoading),
       failedIcon: const Icon(Icons.error, color: Colors.red),
       idleIcon: const Icon(
         Icons.arrow_upward,
@@ -28,6 +28,7 @@ class LoadMoreLoading extends StatelessWidget {
         return Container(
           width: 25.w,
           height: 25.w,
+          margin: EdgeInsets.symmetric(vertical: 10.w),
           child: Center(
             child: child,
           ),

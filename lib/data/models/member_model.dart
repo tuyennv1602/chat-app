@@ -1,5 +1,6 @@
 import 'package:chat_app/domain/entities/member_entity.dart';
 
+// ignore: must_be_immutable
 class MemberModel extends MemberEntity {
   MemberModel({
     int id,

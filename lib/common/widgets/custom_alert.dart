@@ -192,7 +192,7 @@ class CustomAlertWidget extends StatelessWidget {
                             ),
                             child: Text(
                               cancelTitle,
-                              style: textStyleRegular.copyWith(
+                              style: textStyleMedium.copyWith(
                                 color: AppColors.greyText,
                               ),
                             ),
@@ -216,7 +216,7 @@ class CustomAlertWidget extends StatelessWidget {
                             ),
                             child: Text(
                               confirmTitle,
-                              style: textStyleRegular.copyWith(
+                              style: textStyleMedium.copyWith(
                                 color: Colors.white,
                               ),
                             ),
