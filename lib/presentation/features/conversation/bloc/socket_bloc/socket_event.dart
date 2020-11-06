@@ -1,3 +1,5 @@
+import 'package:chat_app/data/models/message_model.dart';
+
 abstract class SocketStatusEvent {}
 
 class NewStatusEvent extends SocketStatusEvent {
@@ -13,8 +15,9 @@ class ErrorStatusEvent extends SocketStatusEvent {
 }
 
 class SendMessageEvent extends SocketStatusEvent {
-  final int type;
-  final String content;
+  final MessageModel message;
 
-  SendMessageEvent({this.type, this.content});
+  SendMessageEvent({
+    this.message,
+  });
 }

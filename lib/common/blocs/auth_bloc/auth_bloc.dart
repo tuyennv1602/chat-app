@@ -32,6 +32,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       case SignedInEvent:
         yield* _mapAuthenticatedToState(event);
         break;
+      case SignedOutEvent:
+        yield* _mapSignOutToState(event);
+        break;
+      case UpdatedAvatarEvent:
+        yield* _mapUpdateToState(event);
+        break;
       default:
     }
   }
@@ -49,8 +55,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield UnAuthenticatedState();
       }
     } catch (e) {
+      await localDataSource.clearAll();
       yield ErroredAuthState(translate(StringConst.unknowError));
-      localDataSource.clearAll();
     }
   }
 
@@ -60,8 +66,27 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       socketClient.setToken = event.token;
       yield AuthenticatedState(event.user, event.token);
     } catch (e) {
+      await localDataSource.clearAll();
       yield ErroredAuthState(translate(StringConst.unknowError));
-      localDataSource.clearAll();
+    }
+  }
+
+  Stream<AuthState> _mapSignOutToState(SignedOutEvent event) async* {
+    try {
+      await localDataSource.clearAll();
+      yield UnAuthenticatedState(user: state.user);
+    } catch (e) {
+      await localDataSource.clearAll();
+      yield ErroredAuthState(translate(StringConst.unknowError));
+    }
+  }
+
+  Stream<AuthState> _mapUpdateToState(UpdatedAvatarEvent event) async* {
+    try {
+      yield AuthenticatedState(state.user..avatar = event.avatar, state.token);
+    } catch (e) {
+      await localDataSource.clearAll();
+      yield ErroredAuthState(translate(StringConst.unknowError));
     }
   }
 }

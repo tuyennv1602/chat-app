@@ -20,7 +20,7 @@ class AuthenticatedState extends AuthState {
 }
 
 class UnAuthenticatedState extends AuthState {
-  UnAuthenticatedState() : super(token: null, user: null);
+  UnAuthenticatedState({UserEntity user}) : super(token: null, user: user);
 }
 
 class ErroredAuthState extends AuthState {

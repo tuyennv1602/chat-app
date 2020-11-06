@@ -10,6 +10,7 @@ import 'package:chat_app/presentation/features/home/screen/create_room_screen.da
 import 'package:chat_app/presentation/features/authentication/screen/active_account_screen.dart';
 import 'package:chat_app/presentation/features/authentication/screen/forgot_password_success_screen.dart';
 import 'package:chat_app/presentation/features/home/screen/home_screen.dart';
+import 'package:chat_app/presentation/features/profile/screen/my_profile_screen.dart';
 import 'package:chat_app/presentation/features/select_member/screen/select_member_screen.dart';
 import 'package:chat_app/presentation/features/splash/screen/splash_screen.dart';
 import 'package:chat_app/presentation/features/task/screen/task_detail.dart';
@@ -119,6 +120,8 @@ class Routes {
         return SlideLeftRoute(widget: OptionScreen());
       case MapScreen.route:
         return SlideLeftRoute(widget: MapScreen());
+      case MyProfileScreen.route:
+        return SlideLeftRoute(widget: MyProfileScreen());
       default:
         return _emptyRoute(settings);
     }

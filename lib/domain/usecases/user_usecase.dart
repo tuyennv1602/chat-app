@@ -10,4 +10,7 @@ class UserUseCase {
   Future<SearchUserResponseModel> searchUser(String key) => userRepository.searchUser(key);
 
   Future<UserModel> getUser() => userRepository.getUser();
+
+  Future<String> updateAvatar(String filePath, String fileName) =>
+      userRepository.uploadAvatar(filePath, fileName);
 }

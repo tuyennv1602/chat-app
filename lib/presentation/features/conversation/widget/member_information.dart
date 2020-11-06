@@ -37,23 +37,26 @@ class MemberInformation extends StatelessWidget {
       ),
       child: Wrap(
         children: <Widget>[
-          Row(
-            children: [
-              CircleAvatarWidget(source: null),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: Text(
-                    memberEntity.fullname,
-                    style: textStyleMedium,
+          SafeArea(
+            top: false,
+            child: Row(
+              children: [
+                CircleAvatarWidget(source: null),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                    child: Text(
+                      memberEntity.fullname,
+                      style: textStyleMedium,
+                    ),
                   ),
                 ),
-              ),
-              IconButton(
-                icon: SvgPicture.asset(IconConst.share, width: 25.w, height: 25.w),
-                onPressed: onShare,
-              )
-            ],
+                IconButton(
+                  icon: SvgPicture.asset(IconConst.share, width: 25.w, height: 25.w),
+                  onPressed: onShare,
+                )
+              ],
+            ),
           ),
         ],
       ),

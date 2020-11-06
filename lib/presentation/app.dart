@@ -63,10 +63,7 @@ class App extends StatelessWidget {
             ScreenUtil.init(context);
             return MultiBlocListener(
               listeners: _getBlocListener(context),
-              child: Listener(
-                onPointerDown: (_) => FocusScope.of(context).requestFocus(FocusNode()),
-                child: widget,
-              ),
+              child: widget,
             );
           },
         ),

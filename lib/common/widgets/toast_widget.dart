@@ -33,7 +33,7 @@ class ToastWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 65.w),
+      margin: EdgeInsets.only(top: 60.w),
       padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
       decoration: BoxDecoration(color: _backgroundColor, borderRadius: BorderRadius.circular(4)),
       child: Text(

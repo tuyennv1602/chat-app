@@ -15,3 +15,9 @@ class SignedInEvent extends AuthEvent {
 }
 
 class SignedOutEvent extends AuthEvent {}
+
+class UpdatedAvatarEvent extends AuthEvent {
+  final String avatar;
+
+  UpdatedAvatarEvent(this.avatar);
+}

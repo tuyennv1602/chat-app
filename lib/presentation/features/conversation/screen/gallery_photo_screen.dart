@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chat_app/common/blocs/auth_bloc/auth_bloc.dart';
+import 'package:chat_app/common/injector/injector.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/domain/entities/message_entity.dart';
 import 'package:flutter/material.dart';
@@ -25,16 +27,19 @@ class GalleryPhotoScreen extends StatefulWidget {
 class _GalleryPhotoScreenState extends State<GalleryPhotoScreen> {
   PageController pageController;
   int currentIndex;
+  String _token;
 
   @override
   void initState() {
+    _token = Injector.resolve<AuthBloc>().state.token;
     currentIndex = widget.index;
     pageController = PageController(initialPage: widget.index);
     super.initState();
   }
 
   PhotoViewGalleryPageOptions _buildPhoto(BuildContext context, int index) {
-    final item = widget.message.images[index];
+    // final item = widget.message.images[index];
+    final item = '${widget.message.getMediaUrl}?token=$_token';
     return PhotoViewGalleryPageOptions(
       imageProvider: CachedNetworkImageProvider(item),
       initialScale: PhotoViewComputedScale.contained,
@@ -60,7 +65,7 @@ class _GalleryPhotoScreenState extends State<GalleryPhotoScreen> {
               children: [
                 Container(
                   color: Colors.black,
-                  height: 55.w,
+                  height: 60.w,
                   child: Row(
                     children: [
                       IconButton(
@@ -76,27 +81,31 @@ class _GalleryPhotoScreenState extends State<GalleryPhotoScreen> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 widget.message.sender.nickname,
                                 style: textStyleAppbar.copyWith(color: Colors.white),
                               ),
-                              Text(
-                                '${widget.message.getFullCreatedTime}',
-                                style: const TextStyle(color: Colors.white),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 3),
+                                child: Text(
+                                  '${widget.message.getFullCreatedTime}',
+                                  style: TextStyle(color: Colors.white, fontSize: 13.sp),
+                                ),
                               ),
                             ],
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15.w),
-                        child: Text(
-                          '${currentIndex + 1}/${widget.message.images.length}',
-                          style: textStyleRegular.copyWith(color: Colors.white),
-                        ),
-                      )
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      //   child: Text(
+                      //     '${currentIndex + 1}/${widget.message.images.length}',
+                      //     style: textStyleRegular.copyWith(color: Colors.white),
+                      //   ),
+                      // )
                     ],
                   ),
                 ),
@@ -106,7 +115,8 @@ class _GalleryPhotoScreenState extends State<GalleryPhotoScreen> {
                     child: PhotoViewGallery.builder(
                       builder: _buildPhoto,
                       scrollPhysics: const BouncingScrollPhysics(),
-                      itemCount: widget.message.images.length,
+                      // itemCount: widget.message.images.length,
+                      itemCount: 1,
                       backgroundDecoration: const BoxDecoration(color: Colors.black),
                       pageController: pageController,
                       onPageChanged: (index) {

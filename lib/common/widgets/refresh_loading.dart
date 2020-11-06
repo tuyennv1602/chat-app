@@ -28,11 +28,12 @@ class RefreshLoading extends StatelessWidget {
         color: Colors.grey,
       ),
       releaseIcon: const Icon(Icons.refresh, color: Colors.grey),
-      refreshingIcon: Image.asset(ImageConst.loading),
+      refreshingIcon: Image.asset(ImageConst.circleLoading),
       outerBuilder: (child) {
         return Container(
-          width: 30.w,
-          height: 30.w,
+          width: 25.w,
+          height: 25.w,
+          margin: EdgeInsets.symmetric(vertical: 10.w),
           child: Center(
             child: child,
           ),

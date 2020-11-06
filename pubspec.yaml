@@ -41,6 +41,7 @@ dependencies:
   socket_io_client: ^0.9.11
   equatable: ^1.2.5
   flutter_styled_toast: ^1.4.0+1
+  path_provider: ^1.6.24
 
 dev_dependencies:
   flutter_test:

@@ -5,15 +5,19 @@ import 'package:chat_app/common/network/socket_client.dart';
 import 'package:chat_app/common/platform/network_info.dart';
 import 'package:chat_app/data/datasource/local/local_datasource.dart';
 import 'package:chat_app/data/datasource/remote/authentication_remote_datasource.dart';
+import 'package:chat_app/data/datasource/remote/message_remote_datasource.dart';
 import 'package:chat_app/data/datasource/remote/room_remote_datasource.dart';
 import 'package:chat_app/data/datasource/remote/user_remote_datasource.dart';
 import 'package:chat_app/data/repositories/authentication_repository_impl.dart';
+import 'package:chat_app/data/repositories/message_repository_impl.dart';
 import 'package:chat_app/data/repositories/room_repository_impl.dart';
 import 'package:chat_app/data/repositories/user_repository_impl.dart';
 import 'package:chat_app/domain/repositories/authentication_repository.dart';
+import 'package:chat_app/domain/repositories/message_repository.dart';
 import 'package:chat_app/domain/repositories/room_repository.dart';
 import 'package:chat_app/domain/repositories/user_repository.dart';
 import 'package:chat_app/domain/usecases/authentication_usecase.dart';
+import 'package:chat_app/domain/usecases/message_usecase.dart';
 import 'package:chat_app/domain/usecases/room_usecase.dart';
 import 'package:chat_app/domain/usecases/user_usecase.dart';
 import 'package:chat_app/presentation/features/authentication/bloc/active_account/active_account_bloc.dart';
@@ -23,6 +27,7 @@ import 'package:chat_app/presentation/features/conversation/bloc/message_bloc/me
 import 'package:chat_app/presentation/features/conversation/bloc/option_bloc/option_bloc.dart';
 import 'package:chat_app/presentation/features/home/bloc/create_room_bloc/create_room_bloc.dart';
 import 'package:chat_app/presentation/features/home/bloc/room_bloc/room_bloc.dart';
+import 'package:chat_app/presentation/features/profile/bloc/avatar_bloc/update_avatar_bloc.dart';
 import 'package:chat_app/presentation/features/select_member/bloc/search_member_bloc/search_member_bloc.dart';
 import 'package:chat_app/presentation/features/select_member/bloc/select_member_bloc/select_member_bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -51,6 +56,7 @@ abstract class Injector {
   }
 
   // ============BLOCS==============
+  @Register.factory(UpdateAvatarBloc)
   @Register.singleton(AuthBloc)
   @Register.singleton(LoadingBloc)
   @Register.singleton(RoomBloc)
@@ -65,12 +71,17 @@ abstract class Injector {
   void _configureBlocs();
 
   // ============USE CASES==============
+  @Register.singleton(MessageUseCase)
   @Register.singleton(AuthenticationUseCase)
   @Register.singleton(RoomUseCase)
   @Register.singleton(UserUseCase)
   void _configureUseCases();
 
   // ============REPOSITORIES==============
+  @Register.singleton(
+    MessageRepository,
+    from: MessageRepositoryImpl,
+  )
   @Register.singleton(
     AuthenticationRepository,
     from: AuthenticationRepositoryImpl,
@@ -86,6 +97,7 @@ abstract class Injector {
   void _configureRepositories();
 
   // ============REMOTE DATA SOURCE==============
+  @Register.singleton(MessageRemoteDataSource)
   @Register.singleton(AuthenticationRemoteDataSource)
   @Register.singleton(RoomRemoteDataSource)
   @Register.singleton(UserRemoteDataSource)

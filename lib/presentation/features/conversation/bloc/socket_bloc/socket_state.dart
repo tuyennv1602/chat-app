@@ -1,3 +1,5 @@
+import 'package:chat_app/data/models/message_model.dart';
+
 abstract class SocketState {
   final String message;
 

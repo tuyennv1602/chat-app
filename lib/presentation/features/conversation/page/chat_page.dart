@@ -1,18 +1,27 @@
 import 'dart:io';
 
+import 'package:chat_app/common/blocs/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/strings.dart';
+import 'package:chat_app/common/injector/injector.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
-import 'package:chat_app/common/themes/app_text_theme.dart';
+import 'package:chat_app/common/utils/alert_utils.dart';
 import 'package:chat_app/common/widgets/animated_button.dart';
+import 'package:chat_app/common/widgets/custom_alert.dart';
+import 'package:chat_app/common/widgets/load_more_loading.dart';
+import 'package:chat_app/common/widgets/loading_widget.dart';
+import 'package:chat_app/data/models/message_model.dart';
+import 'package:chat_app/data/models/user_model.dart';
 import 'package:chat_app/domain/entities/message_entity.dart';
-import 'package:chat_app/domain/entities/user_entity.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/message_bloc/message_bloc.dart';
+import 'package:chat_app/presentation/features/conversation/bloc/message_bloc/message_event.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/message_bloc/message_state.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/socket_bloc/socket_bloc.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/socket_bloc/socket_event.dart';
-import 'package:chat_app/presentation/features/conversation/widget/attach_item.dart';
+import 'package:chat_app/common/widgets/attach_item.dart';
 import 'package:chat_app/presentation/features/conversation/widget/message_bubble.dart';
+import 'package:chat_app/presentation/features/conversation/widget/send_file_bubble.dart';
+import 'package:chat_app/presentation/features/conversation/widget/sender_detail.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,11 +36,13 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class ChatPage extends StatefulWidget {
   final MessageBloc messageBloc;
   final SocketBloc socketBloc;
+  final int roomId;
 
   const ChatPage({
     Key key,
     this.messageBloc,
     this.socketBloc,
+    this.roomId,
   }) : super(key: key);
   @override
   _ChatPageState createState() => _ChatPageState();
@@ -43,81 +54,16 @@ class _ChatPageState extends State<ChatPage> {
   final ValueNotifier<bool> _inputMessageNotifier = ValueNotifier(false);
   final ValueNotifier<bool> _attachNotifier = ValueNotifier(false);
   static final GlobalKey<AnimatedButtonWidgetState> _keyFabButton = GlobalKey();
+  int userId;
 
-  final List<MessageEntity> mockChats = [
-    MessageEntity(
-      id: '11',
-      sender: UserEntity(id: 3, nickname: 'User 3', fullname: 'Nguyen Van B'),
-      type: 4,
-      audioUrl: 'https://luan.xyz/files/audio/ambient_c_motion.mp3',
-      createdAt: 1601447374,
-    ),
-    MessageEntity(
-      id: '10',
-      sender: UserEntity(id: 3, nickname: 'User 3', fullname: 'Nguyen Van B'),
-      type: 3,
-      videoUrl: 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-      createdAt: 1601447374,
-    ),
-    MessageEntity(
-      id: '9',
-      sender: UserEntity(id: 3, nickname: 'User 3', fullname: 'Nguyen Van B'),
-      type: 2,
-      images: [
-        'https://www.tooktrip.com/en/upload/save_image/05270953_5ecdd62681be3.jpg',
-        'https://cdn.pixabay.com/photo/2016/10/18/21/22/california-1751455__340.jpg',
-        'https://www.visitlagunabeach.com/imager/s3-us-west-1_amazonaws_com/laguna-craft/craft/Victoria-beach-scs_2632d877b3d4fc81e8192bac4d0bf9b7.jpg'
-      ],
-      createdAt: 1601447374,
-    ),
-    MessageEntity(
-      id: '8',
-      sender: UserEntity(id: 3, nickname: 'User 3', fullname: 'Nguyen Van B'),
-      type: 2,
-      images: [
-        'https://www.tooktrip.com/en/upload/save_image/05270953_5ecdd62681be3.jpg',
-        'https://cdn.pixabay.com/photo/2016/10/18/21/22/california-1751455__340.jpg'
-      ],
-      createdAt: 1601447374,
-    ),
-    MessageEntity(
-      id: '6',
-      sender: UserEntity(id: 3, nickname: 'User 3', fullname: 'Nguyen Van B'),
-      content: 'Hey Trung, how are you today?',
-      createdAt: 1601447374,
-    ),
-    MessageEntity(
-      id: '5',
-      sender: UserEntity(id: 1, nickname: 'tunk', fullname: 'Nguyen Khac Tu'),
-      content: 'Thanks',
-      createdAt: 1601341500,
-    ),
-    MessageEntity(
-      id: '4',
-      sender: UserEntity(id: 1, nickname: 'tunk', fullname: 'Nguyen Khac Tu'),
-      content: 'Can you wait for me before heading to the office?',
-      createdAt: 1601341200,
-    ),
-    MessageEntity(
-      id: '3',
-      sender: UserEntity(id: 5, nickname: 'User 1', fullname: 'Nguyen Van A'),
-      content: 'I can’t wait to discuss it with someone, but I don’t want to spoiler it…',
-      createdAt: 1601276520,
-    ),
-    MessageEntity(
-      id: '2',
-      sender: UserEntity(id: 5, nickname: 'User 1', fullname: 'Nguyen Van A'),
-      type: 2,
-      images: ['https://www.tooktrip.com/en/upload/save_image/05270953_5ecdd62681be3.jpg'],
-      createdAt: 1601276520,
-    ),
-    MessageEntity(
-      id: '1',
-      sender: UserEntity(id: 5, nickname: 'User 1', fullname: 'Nguyen Van A'),
-      content: 'Did you see the Game of Thomes last night?',
-      createdAt: 1601276400,
-    ),
-  ];
+  @override
+  void initState() {
+    userId = Injector.resolve<AuthBloc>().state.user.id;
+    messageCtrl.addListener(() {
+      _inputMessageNotifier.value = messageCtrl.text.isNotEmpty;
+    });
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -132,11 +78,26 @@ class _ChatPageState extends State<ChatPage> {
     _attachNotifier.value = false;
   }
 
+  MessageModel get createMessage => MessageModel(
+        sender: UserModel(
+          id: userId,
+        ),
+        createdAt: DateTime.now().toIso8601String(),
+      );
+
   Future<void> _pickVideo() async {
-    final result = await FilePicker.platform.pickFiles(type: FileType.video);
+    final result =
+        await FilePicker.platform.pickFiles(type: FileType.video, allowCompression: true);
     if (result != null) {
       final file = result.files.first;
-      debugPrint('video path: ${file.path}');
+      widget.messageBloc.add(
+        NewMessageEvent(
+          createMessage
+            ..fileExtension = result.files[0].extension
+            ..content = file.path
+            ..type = 3,
+        ),
+      );
     }
   }
 
@@ -144,24 +105,56 @@ class _ChatPageState extends State<ChatPage> {
     final result = await FilePicker.platform.pickFiles(type: FileType.audio);
     if (result != null) {
       final file = result.files.first;
-      debugPrint('audio path: ${file.path}');
+      widget.messageBloc.add(
+        NewMessageEvent(
+          createMessage
+            ..fileExtension = result.files[0].extension
+            ..content = file.path
+            ..type = 4,
+        ),
+      );
     }
   }
 
   Future<void> _pickImages() async {
-    final result = await FilePicker.platform.pickFiles(type: FileType.image, allowMultiple: true);
+    final result = await FilePicker.platform
+        .pickFiles(type: FileType.image, allowMultiple: false, allowCompression: true);
     if (result != null) {
-      final files = result.paths.map((path) => File(path)).toList();
-      debugPrint('images path: ${files.length}');
+      final file = File(result.paths[0]);
+      widget.messageBloc.add(
+        NewMessageEvent(
+          createMessage
+            ..fileExtension = result.files[0].extension
+            ..content = file.path
+            ..type = 2,
+        ),
+      );
     }
   }
 
   Future<void> _captureImage() async {
-    final pickedFile = await ImagePicker().getImage(source: ImageSource.camera);
+    final pickedFile = await ImagePicker().getImage(source: ImageSource.camera, imageQuality: 50);
     if (pickedFile != null) {
       final file = File(pickedFile.path);
-      debugPrint('image path: ${file.path}');
+      widget.messageBloc.add(
+        NewMessageEvent(
+          createMessage
+            ..fileExtension = 'jpg'
+            ..content = file.path
+            ..type = 2,
+        ),
+      );
     }
+  }
+
+  TextStyle get _defaultTextStyle => TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 16.sp,
+        color: AppColors.black,
+      );
+
+  void _loadMoreMessage() {
+    widget.messageBloc.add(LoadMoreMessagesEvent(widget.roomId));
   }
 
   @override
@@ -170,35 +163,73 @@ class _ChatPageState extends State<ChatPage> {
       child: Column(
         children: [
           Expanded(
-            child: BlocBuilder<MessageBloc, MessageState>(
-              builder: (context, state) => SmartRefresher(
-                enablePullUp: true,
-                enablePullDown: false,
-                controller: _refershController,
-                child: ListView.builder(
-                  reverse: true,
-                  padding: EdgeInsets.only(
-                    left: 15.w,
-                    right: 15.w,
-                  ),
-                  itemCount: state.messages.length,
-                  itemBuilder: (context, index) {
-                    final _previous = index == 0 ? null : state.messages[index - 1];
-                    final _next =
-                        index == state.messages.length - 1 ? null : state.messages[index + 1];
-                    return MessageBubble(
-                      message: state.messages[index],
-                      previousMessage: _next,
-                      nextMessage: _previous,
-                      showSenderName: true,
+            child: Listener(
+              onPointerDown: (_) => FocusScope.of(context).requestFocus(FocusNode()),
+              child: BlocConsumer<MessageBloc, MessageState>(
+                listener: (_, state) {
+                  if (state is LoadedMessagesState || state is ErroredMessageState) {
+                    _refershController?.loadComplete();
+                  }
+                  if (state is ErroredMessageState) {
+                    AlertUtil.show(
+                      context,
+                      child: CustomAlertWidget.error(
+                        title: translate(StringConst.notification),
+                        message: state.error,
+                      ),
                     );
-                  },
-                ),
+                  }
+                },
+                builder: (context, state) {
+                  if (state is LoadingMessagesState) {
+                    return LoadingWidget();
+                  }
+                  return SmartRefresher(
+                    enablePullUp: state.canLoadMore,
+                    enablePullDown: false,
+                    controller: _refershController,
+                    footer: const LoadMoreLoading(),
+                    onLoading: _loadMoreMessage,
+                    child: ListView.builder(
+                      reverse: true,
+                      physics: const BouncingScrollPhysics(),
+                      padding: EdgeInsets.only(left: 10.w, right: 10.w),
+                      itemCount: state.messages.length,
+                      itemBuilder: (context, index) {
+                        final _message = state.messages[index];
+                        final _previous = index == 0 ? null : state.messages[index - 1];
+                        final _next =
+                            index == state.messages.length - 1 ? null : state.messages[index + 1];
+                        if (_message.id == null && _message.contentType != MessageType.text) {
+                          return SendFileBubble(
+                            message: _message,
+                            previous: _next,
+                            next: _previous,
+                            socketBloc: widget.socketBloc,
+                          );
+                        }
+                        return MessageBubble(
+                          message: _message,
+                          previousMessage: _next,
+                          nextMessage: _previous,
+                          showSenderName: true,
+                          onTapSender: (sender) => AlertUtil.show(
+                            context,
+                            child: SenderDetailWidget(
+                              user: sender,
+                            ),
+                            begin: const Offset(-1, 0),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
             ),
           ),
           Container(
-            height: 55.w,
+            padding: EdgeInsets.symmetric(vertical: 5.w),
             decoration: const BoxDecoration(
               color: Colors.white,
               boxShadow: [
@@ -210,9 +241,10 @@ class _ChatPageState extends State<ChatPage> {
               ],
             ),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.w),
+                  padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.w),
                   child: AnimatedButtonWidget(
                     key: _keyFabButton,
                     buttonSize: 25.w,
@@ -224,28 +256,28 @@ class _ChatPageState extends State<ChatPage> {
                 ),
                 Expanded(
                   child: Container(
-                    height: 38.w,
+                    padding: EdgeInsets.symmetric(vertical: 8.w, horizontal: 15.w),
                     decoration: BoxDecoration(
                       border: Border.all(color: AppColors.line),
                       borderRadius: BorderRadius.circular(38.w / 2),
                     ),
                     child: CupertinoTextField(
-                      style: textStyleInput,
+                      style: _defaultTextStyle,
                       textAlignVertical: TextAlignVertical.center,
-                      placeholderStyle: textStyleInput.copyWith(color: AppColors.warmGrey),
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      placeholderStyle: _defaultTextStyle.copyWith(color: AppColors.warmGrey),
+                      padding: EdgeInsets.zero,
                       cursorColor: AppColors.primaryColor,
                       cursorWidth: 1.5,
                       placeholder: translate(StringConst.inputMessage),
                       autocorrect: false,
                       enableSuggestions: false,
+                      maxLines: 4,
+                      minLines: 1,
+                      textInputAction: TextInputAction.newline,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.transparent),
                       ),
                       controller: messageCtrl,
-                      onChanged: (value) {
-                        _inputMessageNotifier.value = value.isNotEmpty;
-                      },
                     ),
                   ),
                 ),
@@ -253,14 +285,22 @@ class _ChatPageState extends State<ChatPage> {
                   valueListenable: _inputMessageNotifier,
                   builder: (context, enable, child) => IconButton(
                     iconSize: 25.w,
-                    padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.w),
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
                     icon: SvgPicture.asset(
                       IconConst.send,
                       color: enable ? AppColors.primaryColor : AppColors.grey,
                     ),
                     onPressed: () {
-                      widget.socketBloc.add(SendMessageEvent(type: 1, content: messageCtrl.text));
-                      messageCtrl.text = '';
+                      if (enable) {
+                        widget.socketBloc.add(
+                          SendMessageEvent(
+                            message: createMessage
+                              ..type = 1
+                              ..content = messageCtrl.text.trim(),
+                          ),
+                        );
+                        messageCtrl.text = '';
+                      }
                     },
                   ),
                 ),

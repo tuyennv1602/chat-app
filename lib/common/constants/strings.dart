@@ -94,4 +94,6 @@ class StringConst {
   static const connecting = 'label.connecting';
   static const connectError = 'label.connectError';
   static const disconnect = 'label.disconnect';
+  static const logout = 'label.logout';
+  static const changePassword = 'label.changePassword';
 }

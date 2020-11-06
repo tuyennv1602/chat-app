@@ -1,5 +1,3 @@
-import 'package:chat_app/common/blocs/loading_bloc/loading_bloc.dart';
-import 'package:chat_app/common/blocs/loading_bloc/loading_event.dart';
 import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/images.dart';
 import 'package:chat_app/common/constants/strings.dart';

@@ -1,3 +1,4 @@
+import 'package:chat_app/common/blocs/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/common/constants/socket_event.dart';
 import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/injector/injector.dart';
@@ -17,10 +18,15 @@ class SocketBloc extends Bloc<SocketStatusEvent, SocketState> {
   SocketClient _socketClient;
   Socket _socket;
   MessageBloc messageBloc;
+  AuthBloc authBloc;
+  List<MessageModel> sendings = [];
+  int userId;
 
   SocketBloc({
     this.roomId,
     this.messageBloc,
+    this.authBloc,
+    this.userId,
   }) : super(InitialSocketState()) {
     _initSocket();
   }
@@ -53,8 +59,12 @@ class SocketBloc extends Bloc<SocketStatusEvent, SocketState> {
         debugPrint('>>>>Status: ${data.toString()}');
       })
       ..on(SocketTopic.newMessage, (data) {
-        final message = MessageModel.fromJson(data);
-        messageBloc.add(NewMessageEvent(message));
+        final _message = MessageModel.fromJson(data);
+        if (_message.sender.id != userId) {
+          messageBloc.add(NewMessageEvent(_message));
+        } else {
+          _handleSendStatus(_message);
+        }
         debugPrint('>>>>>>>${data.toString()}');
       });
   }
@@ -76,13 +86,35 @@ class SocketBloc extends Bloc<SocketStatusEvent, SocketState> {
       yield ErroredSocketState(event.message);
     }
     if (event is SendMessageEvent) {
+      switch (event.message.type) {
+        case 1:
+          sendings.add(event.message);
+          messageBloc.add(NewMessageEvent(event.message));
+          break;
+        case 2:
+        case 3:
+        case 4:
+          sendings.add(event.message);
+          break;
+        default:
+      }
       _socket.emit(
         SocketTopic.sendMessage,
         {
-          'message_type': event.type,
-          'content': event.content,
+          'message_type': event.message.type,
+          'content': event.message.content,
         },
       );
+    }
+  }
+
+  void _handleSendStatus(MessageModel message) {
+    for (final item in sendings) {
+      if (item.content == message.content) {
+        messageBloc.add(UpdateMessageEvent(oldMessage: item, newMessage: message));
+        sendings.remove(item);
+        break;
+      }
     }
   }
 }

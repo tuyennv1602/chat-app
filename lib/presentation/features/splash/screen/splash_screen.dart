@@ -4,14 +4,12 @@ import 'package:chat_app/common/blocs/auth_bloc/auth_state.dart';
 import 'package:chat_app/common/constants/images.dart';
 import 'package:chat_app/common/injector/injector.dart';
 import 'package:chat_app/common/utils/screen_utils.dart';
-import 'package:chat_app/common/widgets/loading_widget.dart';
 import 'package:chat_app/presentation/features/authentication/screen/sign_in_screen.dart';
 import 'package:chat_app/presentation/features/home/screen/home_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:socket_io_client/socket_io_client.dart';
-import 'package:web_socket_channel/io.dart';
 
 class SplashScreen extends StatelessWidget {
   static const String route = '/splash';

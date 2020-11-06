@@ -5,4 +5,6 @@ abstract class UserRepository {
   Future<SearchUserResponseModel> searchUser(String key);
 
   Future<UserModel> getUser();
+
+  Future<String> uploadAvatar(String filePath, String fileName);
 }

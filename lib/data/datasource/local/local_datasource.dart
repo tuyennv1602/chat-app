@@ -18,7 +18,7 @@ class LocalDataSource {
     return prefs.remove(accessTokenKey);
   }
 
-  void clearAll() {
-    clearToken();
+  Future<bool> clearAll() async {
+    return clearToken();
   }
 }

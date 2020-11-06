@@ -1,35 +1,47 @@
 import 'package:chat_app/data/models/user_model.dart';
 import 'package:chat_app/domain/entities/message_entity.dart';
+import 'package:equatable/equatable.dart';
 
-class MessageModel extends MessageEntity {
+class MessageModel extends MessageEntity with EquatableMixin {
+  String fileExtension;
+
   MessageModel({
-    String id,
+    int id,
     UserModel sender,
     String content,
-    int createdAt,
+    String createdAt,
     int type,
-    List<String> images,
-    String audioUrl,
-    String videoUrl,
-    int status,
+    this.fileExtension,
   }) : super(
           id: id,
           sender: sender,
           content: content,
           createdAt: createdAt,
           type: type,
-          images: images,
-          audioUrl: audioUrl,
-          videoUrl: videoUrl,
-          status: status,
         );
 
   MessageModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    if (json['sender'] != null) {
-      sender = UserModel.fromJson(json['sender']);
+    if (json['created_by'] != null) {
+      sender = UserModel.fromJson(json['created_by']);
     }
-    type = json['message_type'];
-    createdAt = 1603213401;
+    type = json['content_type'];
+    content = json['content'];
+    createdAt = json['created_at'];
   }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['content'] = content;
+    data['content_type'] = type;
+    data['created_at'] = createdAt;
+    if (sender != null) {
+      data['created_by'] = sender.toJson();
+    }
+    return data;
+  }
+
+  @override
+  List<Object> get props => [id, content];
 }

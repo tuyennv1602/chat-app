@@ -75,8 +75,10 @@ class _OptionScreenState extends State<OptionScreen> {
               ),
               Expanded(
                 child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
                     children: [
+                      const SizedBox(height: 10),
                       ItemConversationOption(
                         icon: IconConst.mapPin,
                         title: translate(StringConst.memberLocation),

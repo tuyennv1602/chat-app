@@ -38,4 +38,14 @@ class IconConst {
   static const String empty = '${path}empty.svg';
   static const String clear = '${path}clear.svg';
   static const String error2 = '${path}error2.svg';
+  static const String code = '${path}code.svg';
+  static const String mail = '${path}mail.svg';
+  static const String name = '${path}name.svg';
+  static const String pin = '${path}pin.svg';
+  static const String telephone = '${path}telephone.svg';
+  static const String padlock = '${path}padlock.svg';
+  static const String arrowRight = '${path}arrow_right.svg';
+  static const String sending = '${path}sending.svg';
+  static const String mp3 = '${path}mp3.svg';
+  static const String pause = '${path}pause.svg';
 }

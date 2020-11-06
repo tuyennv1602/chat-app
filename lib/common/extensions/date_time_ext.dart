@@ -10,8 +10,9 @@ extension DateTimeExt on DateTime {
 
   String timeAgo() {
     final now = DateTime.now();
-    if (difference(now).inDays < 1) {
-      if (difference(now).inMinutes <= 1) {
+    if (now.day == day) {
+      final _minutes = difference(now).inMinutes.abs();
+      if (_minutes <= 1) {
         return translate(StringConst.justNow);
       } else {
         return DateFormat('HH:mm').format(this);
@@ -22,10 +23,10 @@ extension DateTimeExt on DateTime {
 
   String fullTimeAgo() {
     final now = DateTime.now();
-    final _diffMin = difference(now).inMinutes;
-    final _diffHour = difference(now).inHours;
-    if (_diffHour <= 12) {
-      if (_diffMin <= 1) {
+    final _diffMin = difference(now).inMinutes.abs();
+    final _diffHour = difference(now).inHours.abs();
+    if (now.day == day && _diffHour <= 12) {
+      if (_diffMin == 1 || _diffMin == 0) {
         return translate(StringConst.justNow);
       } else if (_diffMin < 60) {
         return '$_diffMin ${translate(StringConst.minAgo)}';

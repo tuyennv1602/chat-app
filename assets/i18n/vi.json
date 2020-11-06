@@ -28,7 +28,7 @@
     "verify_code": "Mã xác thực",
     "finish_in": "Kết thúc trong",
     "task": "Nhiệm vụ",
-    "image": "Ảnh",
+    "image": "Hình ảnh",
     "camera": "Máy ảnh",
     "video": "Video",
     "audio": "Thông điệp",
@@ -41,7 +41,9 @@
     "connected": "Đã kết nối",
     "connecting": "Đang kết nối",
     "connectError": "Lỗi",
-    "disconnect": "Mất kết nối"
+    "disconnect": "Mất kết nối",
+    "logout": "Đăng xuất",
+    "changePassword": "Đổi mật khẩu"
   },
   "message": {
     "network_error": "Lỗi kết nối, vui lòng kiểm tra đường truyền internet!",

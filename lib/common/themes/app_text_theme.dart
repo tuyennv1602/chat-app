@@ -24,7 +24,6 @@ final TextStyle textStyleInput = TextStyle(
   fontSize: ScreenUtil().setSp(15),
   color: AppColors.black,
   fontWeight: FontWeight.w500,
-  height: 1.5,
 );
 
 final TextStyle textStyleInputError = TextStyle(

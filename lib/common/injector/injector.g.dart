@@ -9,6 +9,8 @@ part of 'injector.dart';
 class _$Injector extends Injector {
   void _configureBlocs() {
     final Container container = Container();
+    container.registerFactory((c) => UpdateAvatarBloc(
+        userUseCase: c<UserUseCase>(), authBloc: c<AuthBloc>()));
     container.registerSingleton((c) => AuthBloc(
         client: c<Client>(),
         socketClient: c<SocketClient>(),
@@ -36,11 +38,14 @@ class _$Injector extends Injector {
         roomBloc: c<RoomBloc>(),
         loadingBloc: c<LoadingBloc>(),
         roomUseCase: c<RoomUseCase>()));
-    container.registerFactory((c) => MessageBloc());
+    container.registerFactory(
+        (c) => MessageBloc(messageUseCase: c<MessageUseCase>()));
   }
 
   void _configureUseCases() {
     final Container container = Container();
+    container.registerSingleton(
+        (c) => MessageUseCase(messageRepository: c<MessageRepository>()));
     container.registerSingleton((c) => AuthenticationUseCase(
         authenticationRepository: c<AuthenticationRepository>()));
     container.registerSingleton(
@@ -51,6 +56,10 @@ class _$Injector extends Injector {
 
   void _configureRepositories() {
     final Container container = Container();
+    container.registerSingleton<MessageRepository, MessageRepositoryImpl>((c) =>
+        MessageRepositoryImpl(
+            messageRemoteDataSource: c<MessageRemoteDataSource>(),
+            networkInfo: c<NetworkInfoImpl>()));
     container.registerSingleton<AuthenticationRepository,
             AuthenticationRepositoryImpl>(
         (c) => AuthenticationRepositoryImpl(
@@ -69,6 +78,8 @@ class _$Injector extends Injector {
 
   void _configureRemoteDataSources() {
     final Container container = Container();
+    container
+        .registerSingleton((c) => MessageRemoteDataSource(client: c<Client>()));
     container.registerSingleton(
         (c) => AuthenticationRemoteDataSource(client: c<Client>()));
     container
