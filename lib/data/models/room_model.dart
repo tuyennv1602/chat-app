@@ -1,4 +1,5 @@
 import 'package:chat_app/data/models/member_model.dart';
+import 'package:chat_app/data/models/message_model.dart';
 import 'package:chat_app/domain/entities/room_entity.dart';
 
 class RoomModel extends RoomEntity {
@@ -8,7 +9,7 @@ class RoomModel extends RoomEntity {
     int adminId,
     int totalMember,
     List<MemberModel> members,
-    dynamic lastMessage,
+    MessageModel lastMessage,
     bool isRead,
   }) : super(
           id: id,
@@ -31,7 +32,7 @@ class RoomModel extends RoomEntity {
         members.add(MemberModel.fromJson(v));
       });
     }
-    lastMessage = json['last_message'];
+    lastMessage = json['last_message'] != null ? MessageModel.fromJson(json['last_message']) : null;
     isRead = json['is_read'];
   }
 
@@ -44,7 +45,9 @@ class RoomModel extends RoomEntity {
     if (members != null) {
       data['members'] = members.map((v) => v.toJson()).toList();
     }
-    data['last_message'] = lastMessage;
+    if (lastMessage != null) {
+      data['last_message'] = lastMessage.toJson();
+    }
     data['is_read'] = isRead;
     return data;
   }

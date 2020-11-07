@@ -5,6 +5,7 @@ class AlertUtil {
     BuildContext context, {
     @required Widget child,
     bool dismissAble = false,
+    Offset begin = const Offset(1, 0),
   }) =>
       Future.delayed(const Duration(milliseconds: 5)).then(
         (value) => showGeneralDialog(
@@ -17,8 +18,7 @@ class AlertUtil {
             child: child,
           ),
           transitionBuilder: (context, anim1, anim2, child) => SlideTransition(
-            // ignore: lines_longer_than_80_chars
-            position: Tween(begin: const Offset(1, 0), end: const Offset(0, 0)).animate(anim1),
+            position: Tween(begin: begin, end: const Offset(0, 0)).animate(anim1),
             child: child,
           ),
         ),

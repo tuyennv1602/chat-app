@@ -1,3 +1,5 @@
+import 'package:chat_app/common/blocs/auth_bloc/auth_bloc.dart';
+import 'package:chat_app/common/blocs/auth_bloc/auth_state.dart';
 import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/injector/injector.dart';
@@ -7,6 +9,7 @@ import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
 import 'package:chat_app/common/widgets/custom_alert.dart';
+import 'package:chat_app/common/widgets/load_more_loading.dart';
 import 'package:chat_app/common/widgets/loading_widget.dart';
 import 'package:chat_app/common/widgets/refresh_loading.dart';
 import 'package:chat_app/common/widgets/status_widget.dart';
@@ -20,6 +23,7 @@ import 'package:chat_app/presentation/features/home/widget/fab_menu/fab_menu_ove
 import 'package:chat_app/presentation/features/home/widget/item_conversation.dart';
 import 'package:chat_app/presentation/features/home/widget/join_room_dialog.dart';
 import 'package:chat_app/presentation/features/home/widget/notification_badge.dart';
+import 'package:chat_app/presentation/features/profile/screen/my_profile_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
@@ -86,11 +90,11 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.of(context).pushNamed(CreateRoomScreen.route);
   }
 
-  Future<void> _refreshRooms() async {
+  void _refreshRooms() {
     _roomBloc.add(RefreshRoomEvent());
   }
 
-  Future<void> _loadMoreRooms() async {
+  void _loadMoreRooms() {
     _roomBloc.add(LoadMoreRoomEvent());
   }
 
@@ -129,9 +133,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         leadingPadding: EdgeInsets.all(12.w),
                         center: Center(
-                          child: CircleAvatarWidget(
-                            source: null,
-                            isActive: true,
+                          child: BlocBuilder<AuthBloc, AuthState>(
+                            builder: (_, state) => CircleAvatarWidget(
+                              source: state.user.fullAvatar,
+                              isActive: true,
+                              onTap: () => Navigator.of(context).pushNamed(MyProfileScreen.route),
+                            ),
                           ),
                         ),
                         trailing: SvgPicture.asset(IconConst.search),
@@ -150,19 +157,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               onRefresh: _refreshRooms,
                               onLoading: _loadMoreRooms,
                               header: const RefreshLoading(),
+                              footer: const LoadMoreLoading(),
                               child: state.rooms.isEmpty && state is LoadedRoomState
                                   ? StatusWidget.empty(
                                       message: translate(StringConst.emptyConversation),
                                     )
                                   : ListView.separated(
-                                      padding: EdgeInsets.fromLTRB(
-                                        15.w,
-                                        15.h,
-                                        15.w,
-                                        10.h,
-                                      ),
+                                      padding: EdgeInsets.fromLTRB(15.w, 15.h, 15.w, 10.h),
                                       itemCount: state.rooms.length,
-                                      separatorBuilder: (_, index) => Container(height: 10.h),
+                                      separatorBuilder: (_, index) => Container(height: 5.h),
                                       physics: const BouncingScrollPhysics(),
                                       itemBuilder: (_, index) {
                                         return ItemConversationWidget(

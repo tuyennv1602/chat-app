@@ -5,61 +5,56 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 
-class BaseScaffold extends StatefulWidget {
+class BaseScaffold extends StatelessWidget {
   final Widget child;
+  final bool dismissKeyboard;
 
-  BaseScaffold({Key key, @required this.child}) : super(key: key);
-
-  @override
-  _BaseScaffoldState createState() => _BaseScaffoldState();
-}
-
-class _BaseScaffoldState extends State<BaseScaffold> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  BaseScaffold({
+    Key key,
+    @required this.child,
+    this.dismissKeyboard = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoadingBloc, LoadingState>(
       builder: (context, state) => WillPopScope(
-        onWillPop: () => Future.value(state is Loaded),
+        onWillPop: () async => state is Loaded,
         child: Scaffold(
           resizeToAvoidBottomPadding: false,
           backgroundColor: Colors.white,
-          body: Stack(
-            children: [
-              Positioned.fill(
-                child: GestureDetector(
-                  onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-                  behavior: HitTestBehavior.deferToChild,
-                  child: widget.child,
+          body: Listener(
+            onPointerDown: (_) =>
+                dismissKeyboard ? FocusScope.of(context).requestFocus(FocusNode()) : null,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: child,
                 ),
-              ),
-              Positioned.fill(
-                child: Visibility(
-                  visible: state is Loading,
-                  child: Container(
-                    color: Colors.black.withOpacity(0.4),
-                    child: Center(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(25.w),
-                        child: Container(
-                          width: 50.w,
-                          height: 50.w,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(25.w),
+                Positioned.fill(
+                  child: Visibility(
+                    visible: state is Loading,
+                    child: Container(
+                      color: Colors.black.withOpacity(0.4),
+                      child: Center(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(25.w),
+                          child: Container(
+                            width: 50.w,
+                            height: 50.w,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(25.w),
+                            ),
+                            child: Center(child: Image.asset(ImageConst.loading)),
                           ),
-                          child: Center(child: Image.asset(ImageConst.loading)),
                         ),
                       ),
                     ),
                   ),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
         ),
       ),

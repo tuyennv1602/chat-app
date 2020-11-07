@@ -165,9 +165,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           children: [
                             Text(
                               translate(StringConst.signIn),
-                              style: textStyleLabel.copyWith(
-                                fontSize: 24.sp,
-                              ),
+                              style: textStyleBold,
                             ),
                             CircleButtonWidget(
                               isEnable: _enableButton,

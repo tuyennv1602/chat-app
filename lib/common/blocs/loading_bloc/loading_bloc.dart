@@ -4,7 +4,7 @@ import 'loading_event.dart';
 import 'loading_state.dart';
 
 class LoadingBloc extends Bloc<LoadingEvent, LoadingState> {
-  LoadingBloc() : super(EmptyState());
+  LoadingBloc() : super(Loaded());
 
   @override
   Stream<LoadingState> mapEventToState(LoadingEvent event) async* {
@@ -19,10 +19,9 @@ class LoadingBloc extends Bloc<LoadingEvent, LoadingState> {
   }
 
   Stream<LoadingState> _showLoadingState(StartLoading event) async* {
-    if (state is Loading) {
-      return;
+    if (state is Loaded) {
+      yield Loading();
     }
-    yield Loading();
   }
 
   Stream<LoadingState> _finishLoadingState(FinishLoading event) async* {

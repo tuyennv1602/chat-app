@@ -47,6 +47,7 @@ class AttachItem extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12.sp,
                 color: AppColors.greyText,
+                fontWeight: FontWeight.w500,
               ),
             ),
           )

@@ -51,25 +51,26 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 fit: BoxFit.fill,
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).padding.top + 16,
-                    ),
-                    child: InkWell(
-                      onTap: () => Routes.instance.pop(),
-                      child: SvgPicture.asset(
-                        IconConst.back,
-                        color: Colors.white,
-                      ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                InkWell(
+                  onTap: () => Routes.instance.pop(),
+                  child: Container(
+                    margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top, left: 10.w),
+                    padding: EdgeInsets.all(15.w),
+                    child: SvgPicture.asset(
+                      IconConst.back,
+                      color: Colors.white,
+                      width: 22.w,
+                      height: 22.w,
                     ),
                   ),
-                  const Spacer(),
-                  Form(
+                ),
+                const Spacer(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.w),
+                  child: Form(
                     key: _formKey,
                     child: InputWidget(
                       placeHolder: translate(StringConst.email),
@@ -80,35 +81,30 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       controller: email,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: 80.h,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          translate(StringConst.forgotPass),
-                          style: textStyleLabel.copyWith(
-                            fontSize: 24.sp,
-                          ),
-                        ),
-                        CircleButtonWidget(
-                          isEnable: _enableButton,
-                          urlIcon: IconConst.next,
-                          onTap: () {
-                            if (_validateAndSave) {
-                              Routes.instance
-                                  .navigate(ForgotPasswordSuccessScreen.router);
-                            }
-                          },
-                        ),
-                      ],
-                    ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 80.h, left: 25.w, right: 25.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        translate(StringConst.forgotPass),
+                        style: textStyleBold,
+                      ),
+                      CircleButtonWidget(
+                        isEnable: _enableButton,
+                        urlIcon: IconConst.next,
+                        onTap: () {
+                          if (_validateAndSave) {
+                            Routes.instance.navigate(ForgotPasswordSuccessScreen.router);
+                          }
+                        },
+                      ),
+                    ],
                   ),
-                  const Spacer(),
-                ],
-              ),
+                ),
+                const Spacer(),
+              ],
             ),
           ],
         ),

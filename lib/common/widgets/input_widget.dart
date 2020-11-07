@@ -66,7 +66,6 @@ class InputWidget extends StatelessWidget {
       controller: controller,
       autocorrect: false,
       autofocus: false,
-      autovalidate: false,
       enableSuggestions: false,
       maxLines: maxLines,
       maxLength: maxLength,
@@ -90,29 +89,30 @@ class InputWidget extends StatelessWidget {
         labelStyle: textStyleInput.copyWith(
           color: AppColors.warmGrey,
         ),
+        focusColor: AppColors.primaryColor,
         contentPadding: contentPadding,
         errorStyle: textStyleInputError,
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            width: 0.5,
+            width: 1,
             color: AppColors.warmGrey,
           ),
         ),
         errorBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            width: 0.5,
+            width: 1,
             color: AppColors.red,
           ),
         ),
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            width: 0.5,
+            width: 1,
             color: AppColors.primaryColor,
           ),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            width: 0.5,
+            width: 1,
             color: AppColors.red,
           ),
         ),

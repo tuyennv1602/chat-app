@@ -112,6 +112,7 @@ class _MapScreenState extends State<MapScreen> {
   void _openMemberDetail(context) {
     showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.transparent,
       barrierColor: Colors.transparent,
       builder: (BuildContext context) => MemberInformation(
         memberEntity: MemberEntity(

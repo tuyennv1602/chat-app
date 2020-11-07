@@ -1,4 +1,5 @@
 import 'package:chat_app/data/models/member_model.dart';
+import 'package:chat_app/data/models/message_model.dart';
 
 class RoomEntity {
   int id;
@@ -6,7 +7,7 @@ class RoomEntity {
   int adminId;
   int totalMember;
   List<MemberModel> members;
-  dynamic lastMessage;
+  MessageModel lastMessage;
   bool isRead;
 
   RoomEntity({

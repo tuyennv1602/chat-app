@@ -47,7 +47,7 @@ class ItemConversationOption extends StatelessWidget {
               ),
               child: Text(
                 title,
-                style: textStyleRegular,
+                style: textStyleMedium,
               ),
             ),
           )
