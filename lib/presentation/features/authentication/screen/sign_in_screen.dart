@@ -46,15 +46,9 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _checkEnableButton() {
-    if (emailCtrl.text.isNotEmpty && passwordCtrl.text.isNotEmpty) {
-      setState(() {
-        _enableButton = true;
-      });
-    } else {
-      setState(() {
-        _enableButton = false;
-      });
-    }
+    setState(() {
+      _enableButton = emailCtrl.text.isNotEmpty && passwordCtrl.text.isNotEmpty;
+    });
   }
 
   bool get _validateAndSave {

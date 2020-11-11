@@ -42,6 +42,7 @@ dependencies:
   equatable: ^1.2.5
   flutter_styled_toast: ^1.4.0+1
   path_provider: ^1.6.24
+  geolocation: ^1.1.2
 
 dev_dependencies:
   flutter_test:

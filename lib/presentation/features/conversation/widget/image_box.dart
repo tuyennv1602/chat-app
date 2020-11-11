@@ -23,23 +23,12 @@ class ImageBox extends StatelessWidget {
     this.token,
   }) : super(key: key);
 
-  BorderRadius _getBorderRadius() {
-    if (isMine) {
-      return BorderRadius.only(
+  BorderRadius _getBorderRadius() => BorderRadius.only(
         topLeft: const Radius.circular(15),
         topRight: const Radius.circular(15),
-        bottomLeft: const Radius.circular(15),
-        bottomRight: Radius.circular(isNextBySender ? 15 : 6),
+        bottomLeft: isMine ? const Radius.circular(15) : Radius.circular(isNextBySender ? 15 : 6),
+        bottomRight: isMine ? Radius.circular(isNextBySender ? 15 : 6) : const Radius.circular(15),
       );
-    } else {
-      return BorderRadius.only(
-        topLeft: const Radius.circular(15),
-        topRight: const Radius.circular(15),
-        bottomRight: const Radius.circular(15),
-        bottomLeft: Radius.circular(isNextBySender ? 15 : 6),
-      );
-    }
-  }
 
   Widget _buildLoading() => SizedBox.expand(
         child: Container(

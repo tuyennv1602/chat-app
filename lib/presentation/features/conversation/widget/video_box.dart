@@ -41,26 +41,20 @@ class _VideoBoxState extends State<VideoBox> {
       _tempDir = d.path;
       _loadVideoThumbnail();
     });
-
     super.initState();
   }
 
   BorderRadius _getBorderRadius() {
-    if (widget.isMine) {
-      return BorderRadius.only(
-        topLeft: const Radius.circular(15),
-        topRight: const Radius.circular(15),
-        bottomLeft: const Radius.circular(15),
-        bottomRight: Radius.circular(widget.isNextBySender ? 15 : 6),
-      );
-    } else {
-      return BorderRadius.only(
-        topLeft: const Radius.circular(15),
-        topRight: const Radius.circular(15),
-        bottomRight: const Radius.circular(15),
-        bottomLeft: Radius.circular(widget.isNextBySender ? 15 : 6),
-      );
-    }
+    return BorderRadius.only(
+      topLeft: const Radius.circular(15),
+      topRight: const Radius.circular(15),
+      bottomLeft: widget.isMine
+          ? const Radius.circular(15)
+          : Radius.circular(widget.isNextBySender ? 15 : 6),
+      bottomRight: widget.isMine
+          ? Radius.circular(widget.isNextBySender ? 15 : 6)
+          : const Radius.circular(15),
+    );
   }
 
   Future<void> _loadVideoThumbnail() async {
@@ -69,7 +63,7 @@ class _VideoBoxState extends State<VideoBox> {
         video: widget.message.content,
         thumbnailPath: _tempDir,
         imageFormat: ImageFormat.JPEG,
-        quality: 50,
+        quality: 10,
       );
       setState(() {
         thumPath = path;

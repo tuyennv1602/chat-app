@@ -33,7 +33,7 @@ class MessageBubble extends StatefulWidget {
   _MessageState createState() => _MessageState();
 }
 
-class _MessageState extends State<MessageBubble> {
+class _MessageState extends State<MessageBubble> with AutomaticKeepAliveClientMixin<MessageBubble> {
   bool isShowTime = false;
   UserEntity _currentUser;
   String _token;
@@ -195,6 +195,7 @@ class _MessageState extends State<MessageBubble> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -234,4 +235,7 @@ class _MessageState extends State<MessageBubble> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

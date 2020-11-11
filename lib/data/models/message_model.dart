@@ -1,8 +1,7 @@
 import 'package:chat_app/data/models/user_model.dart';
 import 'package:chat_app/domain/entities/message_entity.dart';
-import 'package:equatable/equatable.dart';
 
-class MessageModel extends MessageEntity with EquatableMixin {
+class MessageModel extends MessageEntity {
   String fileExtension;
 
   MessageModel({
@@ -41,7 +40,4 @@ class MessageModel extends MessageEntity with EquatableMixin {
     }
     return data;
   }
-
-  @override
-  List<Object> get props => [id, content];
 }

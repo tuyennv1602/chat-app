@@ -32,9 +32,9 @@ class AudioBox extends StatefulWidget {
 class _AudioBoxState extends State<AudioBox> {
   final AudioPlayer audioPlayer = AudioPlayer();
   String _url;
-  final ValueNotifier<String> _durationNotifier = ValueNotifier('00:00');
+  final ValueNotifier<Duration> _durationNotifier = ValueNotifier(const Duration());
   final ValueNotifier<bool> _playNotifier = ValueNotifier(false);
-  Duration _duration;
+  Duration _duration = const Duration(microseconds: 1);
 
   @override
   void initState() {
@@ -46,9 +46,9 @@ class _AudioBoxState extends State<AudioBox> {
 
   @override
   void dispose() {
-    _playNotifier.dispose();
-    _durationNotifier.dispose();
-    audioPlayer.dispose();
+    _playNotifier?.dispose();
+    _durationNotifier?.dispose();
+    audioPlayer?.dispose();
     super.dispose();
   }
 
@@ -61,16 +61,16 @@ class _AudioBoxState extends State<AudioBox> {
     audioPlayer.onPlayerStateChanged.listen((AudioPlayerState state) {
       _playNotifier.value = state == AudioPlayerState.PLAYING;
       if (state != AudioPlayerState.PLAYING) {
-        _durationNotifier.value = durationStr(_duration);
+        _durationNotifier.value = const Duration();
       }
     });
     audioPlayer.onDurationChanged.listen((Duration data) {
-      _duration = data;
-      _durationNotifier.value = durationStr(data);
+      setState(() {
+        _duration = data;
+      });
     });
     audioPlayer.onAudioPositionChanged.listen((Duration data) {
-      _durationNotifier.value =
-          durationStr(Duration(microseconds: _duration.inMicroseconds - data.inMicroseconds));
+      _durationNotifier.value = data;
     });
   }
 
@@ -92,21 +92,16 @@ class _AudioBoxState extends State<AudioBox> {
   }
 
   BorderRadius _getBorderRadius() {
-    if (widget.isMine) {
-      return BorderRadius.only(
-        topLeft: const Radius.circular(15),
-        topRight: const Radius.circular(15),
-        bottomLeft: const Radius.circular(15),
-        bottomRight: Radius.circular(widget.isNextBySender ? 15 : 6),
-      );
-    } else {
-      return BorderRadius.only(
-        topLeft: const Radius.circular(15),
-        topRight: const Radius.circular(15),
-        bottomRight: const Radius.circular(15),
-        bottomLeft: Radius.circular(widget.isNextBySender ? 15 : 6),
-      );
-    }
+    return BorderRadius.only(
+      topLeft: const Radius.circular(15),
+      topRight: const Radius.circular(15),
+      bottomLeft: widget.isMine
+          ? const Radius.circular(15)
+          : Radius.circular(widget.isNextBySender ? 15 : 6),
+      bottomRight: widget.isMine
+          ? Radius.circular(widget.isNextBySender ? 15 : 6)
+          : const Radius.circular(15),
+    );
   }
 
   Widget _buildPlayButton() => ValueListenableBuilder<bool>(
@@ -186,18 +181,42 @@ class _AudioBoxState extends State<AudioBox> {
                 Center(
                   child: SvgPicture.asset(
                     IconConst.mp3,
-                    width: 30.w,
-                    height: 20.w,
+                    width: 25.w,
+                    height: 18.w,
                     color: AppColors.warmGrey,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 10.w, bottom: 12.w),
-                  child: ValueListenableBuilder<String>(
+                  padding: EdgeInsets.only(left: 10.w, bottom: 15.w),
+                  child: ValueListenableBuilder<Duration>(
                     valueListenable: _durationNotifier,
-                    builder: (_, value, __) => Text(
-                      value,
-                      style: textStyleRegular.copyWith(fontSize: 12.sp),
+                    builder: (_, value, __) => Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          width: 100.w,
+                          height: 6.w,
+                          margin: EdgeInsets.only(bottom: 3.w),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(3.w),
+                            child: LinearProgressIndicator(
+                              backgroundColor: AppColors.line,
+                              value: value.inMicroseconds / _duration.inMicroseconds,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 50.w,
+                          alignment: Alignment.bottomCenter,
+                          child: Text(
+                            durationStr(
+                              Duration(
+                                  microseconds: _duration.inMicroseconds - value.inMicroseconds),
+                            ),
+                            style: textStyleRegular.copyWith(fontSize: 12.sp),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

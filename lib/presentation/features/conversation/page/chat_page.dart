@@ -190,38 +190,56 @@ class _ChatPageState extends State<ChatPage> {
                     controller: _refershController,
                     footer: const LoadMoreLoading(),
                     onLoading: _loadMoreMessage,
-                    child: ListView.builder(
+                    child: ListView.custom(
                       reverse: true,
                       physics: const BouncingScrollPhysics(),
                       padding: EdgeInsets.only(left: 10.w, right: 10.w),
-                      itemCount: state.messages.length,
-                      itemBuilder: (context, index) {
-                        final _message = state.messages[index];
-                        final _previous = index == 0 ? null : state.messages[index - 1];
-                        final _next =
-                            index == state.messages.length - 1 ? null : state.messages[index + 1];
-                        if (_message.id == null && _message.contentType != MessageType.text) {
-                          return SendFileBubble(
-                            message: _message,
-                            previous: _next,
-                            next: _previous,
-                            socketBloc: widget.socketBloc,
-                          );
-                        }
-                        return MessageBubble(
-                          message: _message,
-                          previousMessage: _next,
-                          nextMessage: _previous,
-                          showSenderName: true,
-                          onTapSender: (sender) => AlertUtil.show(
-                            context,
-                            child: SenderDetailWidget(
-                              user: sender,
+                      childrenDelegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          final _message = state.messages[index];
+                          final _previous = index == 0 ? null : state.messages[index - 1];
+                          final _next =
+                              index == state.messages.length - 1 ? null : state.messages[index + 1];
+                          if (_message.id == null && _message.contentType != MessageType.text) {
+                            return Builder(
+                              key: ValueKey<String>('MESSAGE-${_message.createdAt}'),
+                              builder: (_) => SendFileBubble(
+                                message: _message,
+                                previous: _next,
+                                next: _previous,
+                                socketBloc: widget.socketBloc,
+                              ),
+                            );
+                          }
+                          return Builder(
+                            key: ValueKey<String>('MESSAGE-${_message.id}'),
+                            builder: (_) => MessageBubble(
+                              message: _message,
+                              previousMessage: _next,
+                              nextMessage: _previous,
+                              showSenderName: true,
+                              onTapSender: (sender) => AlertUtil.show(
+                                context,
+                                child: SenderDetailWidget(
+                                  user: sender,
+                                ),
+                                begin: const Offset(-1, 0),
+                              ),
                             ),
-                            begin: const Offset(-1, 0),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                        childCount: state.messages.length,
+                        findChildIndexCallback: (key) {
+                          final ValueKey<String> valueKey = key;
+                          final index = state.messages.indexWhere((m) {
+                            if (m.id == null) {
+                              return 'MESSAGE-${m.createdAt}' == valueKey.value;
+                            }
+                            return 'MESSAGE-${m.id}' == valueKey.value;
+                          });
+                          return index != -1 ? index : null;
+                        },
+                      ),
                     ),
                   );
                 },
@@ -243,8 +261,9 @@ class _ChatPageState extends State<ChatPage> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.w),
+                Container(
+                  height: 38.w,
+                  padding: EdgeInsets.symmetric(horizontal: 15.w),
                   child: AnimatedButtonWidget(
                     key: _keyFabButton,
                     buttonSize: 25.w,
@@ -256,6 +275,7 @@ class _ChatPageState extends State<ChatPage> {
                 ),
                 Expanded(
                   child: Container(
+                    constraints: BoxConstraints(minHeight: 38.w),
                     padding: EdgeInsets.symmetric(vertical: 8.w, horizontal: 15.w),
                     decoration: BoxDecoration(
                       border: Border.all(color: AppColors.line),
@@ -283,25 +303,28 @@ class _ChatPageState extends State<ChatPage> {
                 ),
                 ValueListenableBuilder(
                   valueListenable: _inputMessageNotifier,
-                  builder: (context, enable, child) => IconButton(
-                    iconSize: 25.w,
-                    padding: EdgeInsets.symmetric(horizontal: 15.w),
-                    icon: SvgPicture.asset(
-                      IconConst.send,
-                      color: enable ? AppColors.primaryColor : AppColors.grey,
+                  builder: (context, enable, child) => Container(
+                    height: 38.w,
+                    child: IconButton(
+                      iconSize: 25.w,
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      icon: SvgPicture.asset(
+                        IconConst.send,
+                        color: enable ? AppColors.primaryColor : AppColors.grey,
+                      ),
+                      onPressed: () {
+                        if (enable) {
+                          widget.socketBloc.add(
+                            SendMessageEvent(
+                              message: createMessage
+                                ..type = 1
+                                ..content = messageCtrl.text.trim(),
+                            ),
+                          );
+                          messageCtrl.text = '';
+                        }
+                      },
                     ),
-                    onPressed: () {
-                      if (enable) {
-                        widget.socketBloc.add(
-                          SendMessageEvent(
-                            message: createMessage
-                              ..type = 1
-                              ..content = messageCtrl.text.trim(),
-                          ),
-                        );
-                        messageCtrl.text = '';
-                      }
-                    },
                   ),
                 ),
               ],

@@ -50,6 +50,7 @@ class App extends StatelessWidget {
           initialRoute: SplashScreen.route,
           theme: ThemeData(
             primaryColor: AppColors.primaryColor,
+            accentColor: AppColors.primaryColor,
             fontFamily: 'Roboto',
           ),
           localizationsDelegates: [
