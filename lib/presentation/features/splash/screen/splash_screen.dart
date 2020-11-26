@@ -9,40 +9,12 @@ import 'package:chat_app/presentation/features/home/screen/home_screen.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:socket_io_client/socket_io_client.dart';
 
 class SplashScreen extends StatelessWidget {
   static const String route = '/splash';
 
   SplashScreen() {
     Injector.resolve<AuthBloc>().add(CheckAuthEvent());
-    // _testSocket();
-  }
-
-  void _testSocket() {
-    final socket = io('http://54.249.191.109:5000/chat', <String, dynamic>{
-      'transports': ['websocket'],
-      'autoConnect': true,
-      'extraHeaders': {
-        'token':
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDQ5ODA2MjAsImVtYWlsIjoidGVzdGVyM0BnbWFpbC5jb20ifQ.4s0W3SMciPl4yAtqaAFAWpi_GpXS9ZuJ7od-JpljGoc',
-        'room': 1,
-      }
-    });
-    socket
-      ..on('connect', (_) {
-        debugPrint('>>>>>>>connect');
-        socket.emit('joined ', {});
-      })
-      ..on('connecting', (_) {
-        debugPrint('>>>>>>>connecting');
-      })
-      ..on('error', (_) {
-        debugPrint('>>>>>>>error');
-      })
-      ..on('disconnect', (_) {
-        debugPrint('>>>>>>>disconnect');
-      });
   }
 
   @override

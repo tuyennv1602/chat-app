@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:flutter_translate/localization_delegate.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'common/blocs/supervisor_bloc/supervisor_bloc.dart';
 
@@ -29,6 +30,7 @@ class MyHttpOverrides extends HttpOverrides {
 Future<void> main() async {
   // init kiwi
   Injector.setup();
+  // bloc supervisor
   Bloc.observer = SupervisorBloc();
 
   // set up multiple languages

@@ -54,7 +54,7 @@ class _AudioBoxState extends State<AudioBox> {
 
   Future<void> _initDuration() async {
     await audioPlayer.setUrl(_url);
-    await audioPlayer.setReleaseMode(ReleaseMode.STOP);
+    await audioPlayer.setReleaseMode(ReleaseMode.LOOP);
   }
 
   void _listenAudioPlay() {
@@ -109,7 +109,7 @@ class _AudioBoxState extends State<AudioBox> {
         builder: (_, isPlaying, __) => GestureDetector(
           onTap: () async {
             if (isPlaying) {
-              await audioPlayer.stop();
+              await audioPlayer.pause();
             } else {
               await audioPlayer.resume();
             }
@@ -166,15 +166,8 @@ class _AudioBoxState extends State<AudioBox> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Visibility(
-            visible: !widget.isMine,
-            child: widget.message.id == null ? _buildLoading() : _buildPlayButton(),
-          ),
           Container(
-            padding: EdgeInsets.only(
-              left: widget.isMine ? 15.w : 0,
-              right: widget.isMine ? 0 : 15.w,
-            ),
+            padding: EdgeInsets.only(left: 15.w),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -206,14 +199,14 @@ class _AudioBoxState extends State<AudioBox> {
                           ),
                         ),
                         Container(
-                          width: 50.w,
-                          alignment: Alignment.bottomCenter,
+                          width: 40.w,
                           child: Text(
                             durationStr(
                               Duration(
                                   microseconds: _duration.inMicroseconds - value.inMicroseconds),
                             ),
                             style: textStyleRegular.copyWith(fontSize: 12.sp),
+                            textAlign: TextAlign.right,
                           ),
                         ),
                       ],
@@ -223,10 +216,7 @@ class _AudioBoxState extends State<AudioBox> {
               ],
             ),
           ),
-          Visibility(
-            visible: widget.isMine,
-            child: widget.message.id == null ? _buildLoading() : _buildPlayButton(),
-          ),
+          widget.message.id == null ? _buildLoading() : _buildPlayButton(),
         ],
       ),
     );

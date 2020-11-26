@@ -70,8 +70,6 @@ class Routes {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case SplashScreen.route:
-        return FadeInRoute(widget: SplashScreen());
       case SignInScreen.route:
         return FadeInRoute(widget: SignInScreen());
       case SignUpScreen.route:
@@ -123,29 +121,7 @@ class Routes {
       case MyProfileScreen.route:
         return SlideLeftRoute(widget: MyProfileScreen());
       default:
-        return _emptyRoute(settings);
+        return FadeInRoute(widget: SplashScreen());
     }
-  }
-
-  static MaterialPageRoute _emptyRoute(RouteSettings settings) {
-    return MaterialPageRoute(
-      builder: (context) => Scaffold(
-        backgroundColor: Colors.green,
-        appBar: AppBar(
-          leading: InkWell(
-            onTap: () => Navigator.of(context).pop(),
-            child: const Center(
-              child: Text(
-                'Back',
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          ),
-        ),
-        body: Center(
-          child: Text('No path for ${settings.name}'),
-        ),
-      ),
-    );
   }
 }
