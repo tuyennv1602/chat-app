@@ -1,5 +1,4 @@
 import 'package:chat_app/common/constants/icons.dart';
-import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
@@ -7,16 +6,16 @@ import 'package:chat_app/domain/entities/member_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 
-enum MemberAction { delete, select }
+enum MemberAction { delete, select, completed }
 
 class ItemMember extends StatefulWidget {
   final MemberEntity member;
   final MemberAction memberAction;
   final bool isSelected;
   final Function onDelete;
-  final Function onTap;
+  final Function(MemberEntity member) onTap;
+  final Function onCompleted;
 
   const ItemMember({
     Key key,
@@ -25,6 +24,7 @@ class ItemMember extends StatefulWidget {
     this.isSelected = false,
     this.onDelete,
     this.onTap,
+    this.onCompleted,
   }) : super(key: key);
 
   @override
@@ -46,6 +46,20 @@ class _ItemMemberState extends State<ItemMember> {
         ),
       );
     }
+    if (widget.memberAction == MemberAction.completed) {
+      return InkWell(
+        onTap: widget.onCompleted,
+        child: Padding(
+          padding: EdgeInsets.all(10.w),
+          child: SvgPicture.asset(
+            IconConst.newspaper,
+            width: 16.w,
+            height: 16.w,
+            color: Colors.blue,
+          ),
+        ),
+      );
+    }
     return widget.isSelected
         ? Padding(
             padding: EdgeInsets.all(10.w),
@@ -61,13 +75,11 @@ class _ItemMemberState extends State<ItemMember> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: widget.onTap,
+      onTap: () => widget.onTap?.call(widget.member),
       child: Row(
         children: [
-          CircleAvatarWidget(source: null),
-          SizedBox(
-            width: 15.w,
-          ),
+          CircleAvatarWidget(source: 'null'),
+          SizedBox(width: 15.w),
           Expanded(
             child: Container(
               decoration: const BoxDecoration(
@@ -85,13 +97,13 @@ class _ItemMemberState extends State<ItemMember> {
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 4.h),
                           child: Text(
-                            widget.member.nickname,
+                            widget.member.fullname,
                             style: textStyleMedium,
                           ),
                         ),
                         Text(
                           // ignore: lines_longer_than_80_chars
-                          '${translate(StringConst.code)}: ${widget.member.code}',
+                          '${widget.member.nickname} (MQN: ${widget.member.code})',
                           style: TextStyle(
                             fontSize: 13.sp,
                             color: AppColors.greyText,

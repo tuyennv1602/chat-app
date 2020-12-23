@@ -1,44 +1,24 @@
-import 'dart:convert';
-
-import 'package:chat_app/data/models/user_model.dart';
-import 'package:chat_app/domain/entities/user_entity.dart';
-
-import 'app_shared_preference.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalDataSource {
   static const String accessTokenKey = 'access-token';
-  static const String userKey = 'user';
-
-  final AppSharedPreference sharedPreferences;
-  LocalDataSource({this.sharedPreferences});
 
   Future<bool> setToken(String accessToken) async {
-    return sharedPreferences.instance.setString(accessTokenKey, accessToken);
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setString(accessTokenKey, accessToken);
   }
 
   Future<String> getToken() async {
-    return sharedPreferences.instance.getString(accessTokenKey);
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(accessTokenKey);
   }
 
   Future<bool> clearToken() async {
-    return sharedPreferences.instance.remove(accessTokenKey);
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.remove(accessTokenKey);
   }
 
-  Future<bool> setUser(UserModel user) async {
-    return sharedPreferences.instance.setString(userKey, jsonEncode(user));
-  }
-
-  Future<UserEntity> getUser() async {
-    final data = sharedPreferences.instance.getString(userKey);
-    return data == null ? null : UserModel.fromJson(jsonDecode(data));
-  }
-
-  Future<bool> clearUser() async {
-    return sharedPreferences.instance.remove(userKey);
-  }
-
-  Future<void> clearAll() async {
-    await clearToken();
-    await clearUser();
+  Future<bool> clearAll() async {
+    return clearToken();
   }
 }

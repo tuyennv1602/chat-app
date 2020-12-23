@@ -9,7 +9,12 @@
         "full_name": "Full name",
         "nick_name": "Nickname",
         "phone": "Phone number",
-        "confirm_password": "Confirm password"
+        "confirm_password": "Confirm password",
+        "create_task": "Create task",
+        "time": "Time",
+        "content_task": "Task content",
+        "task": "Task",
+        "to": "to"
     },
     "message": {
         "error_full_name": "Full name is not in the correct format",

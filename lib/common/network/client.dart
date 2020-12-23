@@ -54,4 +54,12 @@ class Client {
       ),
     );
   }
+
+  Future<Response<dynamic>> uploadFile(String endPoint, {dynamic body}) async {
+    return dio.post(
+      endPoint,
+      data: body,
+      options: Options(headers: header?.toJson(), contentType: 'multipart/form-data'),
+    );
+  }
 }

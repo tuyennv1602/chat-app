@@ -1,8 +1,11 @@
+import 'package:chat_app/common/network/configs.dart';
 import 'package:chat_app/domain/entities/user_entity.dart';
 
+// ignore: must_be_immutable
 class MemberEntity extends UserEntity {
-  final double lat;
-  final double lng;
+  double lat;
+  double lng;
+  bool isOnline;
 
   MemberEntity({
     int id,
@@ -11,8 +14,10 @@ class MemberEntity extends UserEntity {
     String fullname,
     String phoneNumber,
     String email,
+    String avatar,
     this.lat,
     this.lng,
+    this.isOnline,
   }) : super(
           id: id,
           code: code,
@@ -20,6 +25,7 @@ class MemberEntity extends UserEntity {
           fullname: fullname,
           phoneNumber: phoneNumber,
           email: email,
+          avatar: avatar,
         );
 
   String get getShortName {

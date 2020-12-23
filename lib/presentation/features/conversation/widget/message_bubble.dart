@@ -1,5 +1,6 @@
 import 'package:chat_app/common/blocs/auth_bloc/auth_bloc.dart';
-import 'package:chat_app/common/blocs/auth_bloc/auth_state.dart';
+import 'package:chat_app/common/constants/icons.dart';
+import 'package:chat_app/common/injector/injector.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
 import 'package:chat_app/domain/entities/message_entity.dart';
@@ -9,14 +10,15 @@ import 'package:chat_app/presentation/features/conversation/widget/image_box.dar
 import 'package:chat_app/presentation/features/conversation/widget/text_box.dart';
 import 'package:chat_app/presentation/features/conversation/widget/video_box.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
+import 'package:flutter_svg/svg.dart';
 
 class MessageBubble extends StatefulWidget {
   final MessageEntity message;
   final MessageEntity nextMessage;
   final MessageEntity previousMessage;
   final bool showSenderName;
+  final Function(UserEntity sender) onTapSender;
 
   const MessageBubble({
     Key key,
@@ -24,15 +26,25 @@ class MessageBubble extends StatefulWidget {
     this.nextMessage,
     this.previousMessage,
     this.showSenderName = false,
+    this.onTapSender,
   }) : super(key: key);
 
   @override
   _MessageState createState() => _MessageState();
 }
 
-class _MessageState extends State<MessageBubble> {
+class _MessageState extends State<MessageBubble> with AutomaticKeepAliveClientMixin<MessageBubble> {
   bool isShowTime = false;
   UserEntity _currentUser;
+  String _token;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentUser = Injector.resolve<AuthBloc>().state.user;
+    _token = Injector.resolve<AuthBloc>().state.token;
+  }
+
   bool get _isNextBySender => widget.message.sender.id == widget?.nextMessage?.sender?.id;
   bool get _isMine => _currentUser?.id == widget.message.sender.id;
   bool get _isPreviousDiff =>
@@ -52,8 +64,9 @@ class _MessageState extends State<MessageBubble> {
     return Padding(
       padding: EdgeInsets.only(right: 10.w),
       child: CircleAvatarWidget(
-        source: null,
-        size: 25.w,
+        source: widget.message.sender.fullAvatar,
+        size: 25,
+        onTap: () => widget.onTapSender?.call(widget.message.sender),
       ),
     );
   }
@@ -63,10 +76,10 @@ class _MessageState extends State<MessageBubble> {
         child: Padding(
           padding: EdgeInsets.only(left: 35.w),
           child: Text(
-            widget.message.sender.nickname,
+            widget.message?.sender?.nickname ?? '',
             style: TextStyle(
               fontWeight: FontWeight.w300,
-              color: AppColors.warmGrey,
+              color: AppColors.greyText,
               fontSize: 11.sp,
             ),
           ),
@@ -155,18 +168,21 @@ class _MessageState extends State<MessageBubble> {
           message: widget.message,
           isMine: _isMine,
           isNextBySender: _isNextBySender,
+          token: _token,
         );
       case MessageType.video:
         return VideoBox(
           message: widget.message,
           isMine: _isMine,
           isNextBySender: _isNextBySender,
+          token: _token,
         );
       case MessageType.audio:
         return AudioBox(
           message: widget.message,
           isMine: _isMine,
           isNextBySender: _isNextBySender,
+          token: _token,
         );
       default:
         return TextBox(
@@ -179,38 +195,47 @@ class _MessageState extends State<MessageBubble> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthBloc, AuthState>(
-      builder: (context, state) {
-        if (state is AuthenticatedState) {
-          _currentUser = state.user;
-        }
-        return GestureDetector(
-          onTap: () {
-            setState(() {
-              isShowTime = !isShowTime;
-            });
-          },
-          child: Container(
-            margin: _itemMargin(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    super.build(context);
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isShowTime = !isShowTime;
+        });
+      },
+      child: Container(
+        margin: _itemMargin(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _renderSeperator(),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                _renderSeperator(),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    _renderAvatar(),
-                    _getLeftTime(),
-                    _renderContent(),
-                    _getRightTime(),
-                  ],
+                _renderAvatar(),
+                _getLeftTime(),
+                Visibility(
+                  visible: widget.message.id == null,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5.w),
+                    child: SvgPicture.asset(
+                      IconConst.sending,
+                      width: 13.w,
+                      height: 13.w,
+                      color: AppColors.warmGrey,
+                    ),
+                  ),
                 ),
-                _renderSender(),
+                _renderContent(),
+                _getRightTime(),
               ],
             ),
-          ),
-        );
-      },
+            _renderSender(),
+          ],
+        ),
+      ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

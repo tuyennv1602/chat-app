@@ -1,4 +1,6 @@
+import 'package:chat_app/common/blocs/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/common/constants/images.dart';
+import 'package:chat_app/common/injector/injector.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/domain/entities/message_entity.dart';
@@ -18,16 +20,18 @@ class VideoPlayerScreen extends StatefulWidget {
 }
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
-  final VideoPlayerController videoPlayerController;
+  VideoPlayerController videoPlayerController;
   final MessageEntity message;
   double videoDuration = 0;
   double currentDuration = 0;
+  String _token;
 
-  _VideoPlayerScreenState(this.message)
-      : videoPlayerController = VideoPlayerController.network(message.videoUrl);
+  _VideoPlayerScreenState(this.message);
 
   @override
   void initState() {
+    _token = Injector.resolve<AuthBloc>().state.token;
+    videoPlayerController = VideoPlayerController.network('${message.getMediaUrl}?token=$_token');
     super.initState();
     videoPlayerController.initialize().then((_) {
       setState(() {
@@ -60,7 +64,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 children: <Widget>[
                   Container(
                     color: Colors.black,
-                    height: 55.w,
+                    height: 60.w,
                     child: Row(
                       children: [
                         IconButton(
@@ -77,14 +81,18 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             padding: const EdgeInsets.symmetric(vertical: 5),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
                                   widget.message.sender.nickname,
                                   style: textStyleAppbar.copyWith(color: Colors.white),
                                 ),
-                                Text(
-                                  '${widget.message.getFullCreatedTime}',
-                                  style: const TextStyle(color: Colors.white),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 3),
+                                  child: Text(
+                                    '${widget.message.getFullCreatedTime}',
+                                    style: TextStyle(color: Colors.white, fontSize: 13.sp),
+                                  ),
                                 ),
                               ],
                             ),

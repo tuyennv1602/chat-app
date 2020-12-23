@@ -61,6 +61,8 @@ class AnimatedButtonWidgetState extends State<AnimatedButtonWidget>
     }
   }
 
+  double get _iconSize => max(widget.buttonSize.w / 3, 15);
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -79,8 +81,8 @@ class AnimatedButtonWidgetState extends State<AnimatedButtonWidget>
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5,
+              color: AppColors.shadow,
+              blurRadius: 15,
               offset: Offset(0, 2),
             ),
           ],
@@ -91,8 +93,8 @@ class AnimatedButtonWidgetState extends State<AnimatedButtonWidget>
             angle: angle.value * (pi / 4),
             child: SvgPicture.asset(
               IconConst.add,
-              width: (widget.buttonSize / 2).w,
-              height: (widget.buttonSize / 2).w,
+              width: _iconSize,
+              height: _iconSize,
             ),
           ),
         ),
