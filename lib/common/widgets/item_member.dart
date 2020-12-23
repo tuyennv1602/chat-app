@@ -78,7 +78,7 @@ class _ItemMemberState extends State<ItemMember> {
       onTap: () => widget.onTap?.call(widget.member),
       child: Row(
         children: [
-          CircleAvatarWidget(source: null),
+          CircleAvatarWidget(source: 'null'),
           SizedBox(width: 15.w),
           Expanded(
             child: Container(

@@ -4,6 +4,7 @@ import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/domain/entities/task_entity.dart';
+import 'package:chat_app/presentation/features/task/screen/create_task.dart';
 import 'package:chat_app/presentation/features/task/screen/task_detail.dart';
 import 'package:chat_app/presentation/features/task/widgets/item_task.dart';
 import 'package:chat_app/presentation/routes.dart';
@@ -30,10 +31,13 @@ class _TaskListScreenState extends State<TaskListScreen> {
               translate(StringConst.task),
               style: textStyleAppbar,
             ),
-            trailing: SvgPicture.asset(
-              IconConst.addTask,
-              width: 20.w,
-              height: 20.w,
+            trailing: GestureDetector(
+              onTap: () => Routes.instance.navigate(CreateTaskScreen.router),
+              child: SvgPicture.asset(
+                IconConst.addTask,
+                width: 20.w,
+                height: 20.w,
+              ),
             ),
           ),
           Expanded(

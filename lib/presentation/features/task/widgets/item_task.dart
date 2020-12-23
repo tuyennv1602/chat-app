@@ -95,7 +95,7 @@ class ItemTask extends StatelessWidget {
                           alignment: Alignment.center,
                           child: CircleAvatarWidget(
                             size: index == 0 ? 26 : 20,
-                            source: null,
+                            source: 'null',
                           ),
                         );
                       },

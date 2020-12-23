@@ -83,6 +83,7 @@ class InputWidget extends StatelessWidget {
       enabled: editAble,
       inputFormatters: formatters,
       decoration: InputDecoration(
+        alignLabelWithHint: true,
         suffix: suffixWidget,
         prefix: prefixWidget,
         labelText: placeHolder,
