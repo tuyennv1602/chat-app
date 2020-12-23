@@ -46,15 +46,9 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _checkEnableButton() {
-    if (emailCtrl.text.isNotEmpty && passwordCtrl.text.isNotEmpty) {
-      setState(() {
-        _enableButton = true;
-      });
-    } else {
-      setState(() {
-        _enableButton = false;
-      });
-    }
+    setState(() {
+      _enableButton = emailCtrl.text.isNotEmpty && passwordCtrl.text.isNotEmpty;
+    });
   }
 
   bool get _validateAndSave {
@@ -73,15 +67,14 @@ class _SignInScreenState extends State<SignInScreen> {
       child: BlocListener<SignInBloc, SignInState>(
         listener: (_, state) {
           if (state is SignedInState) {
-            Routes.instance.navigate(HomeScreen.route);
+            Routes.instance.navigateAndRemove(HomeScreen.route);
           }
           if (state is AccountInActiveState) {
             AlertUtil.show(
               context,
-              child: CustomAlertWidget(
+              child: CustomAlertWidget.warning(
                 title: translate(StringConst.notification),
                 message: state.message,
-                alertType: AlertType.warning,
                 confirmTitle: translate(StringConst.verify),
                 cancelTitle: translate(StringConst.cancel),
                 onConfirmed: () => Routes.instance.navigate(
@@ -97,7 +90,7 @@ class _SignInScreenState extends State<SignInScreen> {
           if (state is ErroredSignInState) {
             AlertUtil.show(
               context,
-              child: CustomAlertWidget(
+              child: CustomAlertWidget.error(
                 title: translate(StringConst.signInFailed),
                 message: state.error,
               ),
@@ -128,6 +121,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         InputWidget(
                           placeHolder: translate(StringConst.email),
                           validator: Validator.validEmail,
+                          inputType: TextInputType.emailAddress,
                           onChanged: (text) {
                             _checkEnableButton();
                           },
@@ -165,9 +159,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           children: [
                             Text(
                               translate(StringConst.signIn),
-                              style: textStyleLabel.copyWith(
-                                fontSize: 24.sp,
-                              ),
+                              style: textStyleBold,
                             ),
                             CircleButtonWidget(
                               isEnable: _enableButton,

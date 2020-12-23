@@ -1,20 +1,17 @@
 import 'package:chat_app/common/constants/strings.dart';
-import 'package:chat_app/domain/entities/user_entity.dart';
+import 'package:chat_app/common/network/configs.dart';
+import 'package:chat_app/data/models/user_model.dart';
 import 'package:flutter_translate/global.dart';
 import 'package:intl/intl.dart';
 
 enum MessageType { text, image, audio, video }
 
 class MessageEntity {
-  String id;
-  UserEntity sender;
+  int id;
+  UserModel sender;
   String content;
-  int createdAt;
+  String createdAt;
   int type;
-  List<String> images;
-  String audioUrl;
-  String videoUrl;
-  int status;
 
   MessageEntity({
     this.id,
@@ -22,13 +19,15 @@ class MessageEntity {
     this.content,
     this.createdAt,
     this.type,
-    this.images,
-    this.audioUrl,
-    this.videoUrl,
-    this.status,
   });
 
-  DateTime get getCreatedAt => DateTime.fromMillisecondsSinceEpoch(createdAt * 1000);
+  DateTime get getCreatedAt {
+    try {
+      return DateFormat('yyyy-MM-dd HH:mm:ss').parse(createdAt);
+    } catch (e) {
+      return DateTime.now();
+    }
+  }
 
   String get getCreatedDay => getCreatedAt.difference(DateTime.now()).inDays == 0
       ? translate(StringConst.today)
@@ -37,6 +36,8 @@ class MessageEntity {
   String get getCreatedTime => DateFormat('HH:mm').format(getCreatedAt);
 
   String get getFullCreatedTime => DateFormat('dd/MM/yyyy HH:mm').format(getCreatedAt);
+
+  String get getMediaUrl => '${Configurations.fileUrl}/$content';
 
   MessageType get contentType {
     switch (type) {

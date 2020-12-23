@@ -26,16 +26,28 @@
     "room_name": "Tên phòng",
     "all_member": "Tất cả thành viên",
     "verify_code": "Mã xác thực",
+    "finish_in": "Kết thúc trong",
+    "task": "Nhiệm vụ",
+    "image": "Hình ảnh",
     "create_task": "Tạo nhiệm vụ",
     "time": "Thời gian",
     "content_task": "Nội dung nhiệm vụ",
-    "task": "Nhiệm vụ",
     "to": "đến",
-    "image": "Ảnh",
     "camera": "Máy ảnh",
     "video": "Video",
     "audio": "Thông điệp",
-    "gallery": "Thư viện"
+    "gallery": "Thư viện",
+    "option": "Tuỳ chọn",
+    "loading": "Đang tải...",
+    "share": "Chia sẻ",
+    "joinCode": "Mã tham gia",
+    "resultSearch": "Kết quả tìm kiếm",
+    "connected": "Đã kết nối",
+    "connecting": "Đang kết nối",
+    "connectError": "Lỗi",
+    "disconnect": "Mất kết nối",
+    "logout": "Đăng xuất",
+    "changePassword": "Đổi mật khẩu"
   },
   "message": {
     "network_error": "Lỗi kết nối, vui lòng kiểm tra đường truyền internet!",
@@ -60,16 +72,21 @@
     "forgot_password_done": "Một mật khẩu đã được gửi tới email của bạn! Vui lòng kiểm tra email để lấy lại mật khẩu.",
     "account_inactive": "Tài khoản của bạn chưa được xác thực",
     "account_existed": "Tài khoản này đang tồn tại. Vui lòng kiểm tra email, mã quân nhân hoặc biệt danh",
-    "error_verify_code": "Không thể xác minh mã cho tài khoản này. Vui lòng kiểm tra kích hoạt mã và kích hoạt lại tài khoản của bạn."
+    "error_verify_code": "Không thể xác minh mã cho tài khoản này. Vui lòng kiểm tra kích hoạt mã và kích hoạt lại tài khoản của bạn.",
+    "login_fail": "Đăng nhập thất bại! Email hoặc mật khẩu không hợp lệ, vui lòng kiểm tra và thử lại."
   },
   "time": {
     "just_now": "vừa xong",
     "min_ago": "phút trước",
-    "hour_ago": "giờ trước"
+    "hour_ago": "giờ trước",
+    "day": "ngày",
+    "hour": "giờ",
+    "minute": "phút"
   },
   "home": {
     "join_conversation": "Tham gia tác chiến",
-    "create_conversation": "Tạo phòng tác chiến"
+    "create_conversation": "Tạo phòng tác chiến",
+    "emptyConversation": "Chưa có phòng tác chiến"
   },
   "button": {
     "verify": "Xác thực"
@@ -79,6 +96,16 @@
     "location": "Vị trí",
     "activeNow": "Đang hoạt động",
     "inputMessage": "Nhập tin nhắn",
-    "today": "Hôm nay"
+    "today": "Hôm nay",
+    "task_combat": "Nhiệm vụ tác chiến",
+    "memberLocation": "Vị trí thành viên",
+    "memberList": "Danh sách thành viên",
+    "deleteRoom": "Huỷ bỏ tác chiến",
+    "leaveRoom": "Rời phòng tác chiến",
+    "emptyMessage": "Chưa có tin nhắn",
+    "joinCode": "Lấy mã tham gia tác chiến",
+    "getCodeSuccess": "Mã tham gia tác chiến là %s.",
+    "shareCode": "Nhập mã tác chiến %s để tham gia tác chiến ngay!",
+    "memberCount": "%d thành viên"
   }
 }

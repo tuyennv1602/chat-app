@@ -28,6 +28,8 @@ class StringConst {
   static const signInFailed = 'label.sign_in_failed';
   static const signUpFailed = 'label.sign_up_failed';
   static const activeAccountFailed = 'label.active_account_failed';
+  static const share = 'label.share';
+  static const finishIn = 'label.finish_in';
   static const createTask = 'label.create_task';
   static const time = 'label.time';
   static const to = 'label.to';
@@ -51,6 +53,7 @@ class StringConst {
   static const enterVerifyCode = 'message.enter_verify_code';
   static const registerSuccess = 'message.register_success';
   static const forgotPasswordDone = 'message.forgot_password_done';
+  static const loginFail = 'message.login_fail';
 
   static const passwordNotMatch = 'message.password_not_match';
   static const joinConversation = 'home.join_conversation';
@@ -58,6 +61,9 @@ class StringConst {
   static const justNow = 'time.just_now';
   static const minAgo = 'time.min_ago';
   static const hourAgo = 'time.hour_ago';
+  static const day = 'time.day';
+  static const hour = 'time.hour';
+  static const minute = 'time.minute';
 
   static const verify = 'button.verify';
   static const accountInActive = 'message.account_inactive';
@@ -73,4 +79,25 @@ class StringConst {
   static const video = 'label.video';
   static const audio = 'label.audio';
   static const gallery = 'label.gallery';
+  static const option = 'label.option';
+  static const taskCombat = 'conversation.task_combat';
+  static const memberLocation = 'conversation.memberLocation';
+  static const memberList = 'conversation.memberList';
+  static const deleteRoom = 'conversation.deleteRoom';
+  static const leaveRoom = 'conversation.leaveRoom';
+  static const loading = 'label.loading';
+  static const emptyMessage = 'conversation.emptyMessage';
+  static const joinCode = 'conversation.joinCode';
+  static const getCodeSuccess = 'conversation.getCodeSuccess';
+  static const shareCode = 'conversation.shareCode';
+  static const emptyConversation = 'home.emptyConversation';
+  static const joinCodeLabel = 'label.joinCode';
+  static const memberCount = 'conversation.memberCount';
+  static const resultSearch = 'label.resultSearch';
+  static const connected = 'label.connected';
+  static const connecting = 'label.connecting';
+  static const connectError = 'label.connectError';
+  static const disconnect = 'label.disconnect';
+  static const logout = 'label.logout';
+  static const changePassword = 'label.changePassword';
 }

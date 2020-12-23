@@ -14,6 +14,10 @@ class IconConst {
   static const String close = '${path}close.svg';
   static const String success = '${path}success.svg';
   static const String registerDone = '${path}register_done.svg';
+  static const String pending = '${path}pending.svg';
+  static const String done = '${path}done.svg';
+  static const String cancel = '${path}cancel.svg';
+  static const String addTask = '${path}add_task.svg';
   static const String menu = '${path}menu.svg';
   static const String send = '${path}send.svg';
   static const String play = '${path}play.svg';
@@ -23,4 +27,25 @@ class IconConst {
   static const String camera = '${path}camera.svg';
   static const String audio = '${path}micro_phone.svg';
   static const String video = '${path}video.svg';
+  static const String newspaper = '${path}newspaper.svg';
+  static const String task = '${path}task.svg';
+  static const String mapPin = '${path}map_pin.svg';
+  static const String addMember = '${path}add_user.svg';
+  static const String logout = '${path}logout.svg';
+  static const String focus = '${path}focus.svg';
+  static const String share = '${path}share.svg';
+  static const String shareCode = '${path}share_code.svg';
+  static const String empty = '${path}empty.svg';
+  static const String clear = '${path}clear.svg';
+  static const String error2 = '${path}error2.svg';
+  static const String code = '${path}code.svg';
+  static const String mail = '${path}mail.svg';
+  static const String name = '${path}name.svg';
+  static const String pin = '${path}pin.svg';
+  static const String telephone = '${path}telephone.svg';
+  static const String padlock = '${path}padlock.svg';
+  static const String arrowRight = '${path}arrow_right.svg';
+  static const String sending = '${path}sending.svg';
+  static const String mp3 = '${path}mp3.svg';
+  static const String pause = '${path}pause.svg';
 }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
@@ -19,15 +21,16 @@ class CircleButtonWidget extends StatelessWidget {
     this.padding,
   }) : super(key: key);
 
+  double get _iconSize => max(size.w / 3, 12);
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: isEnable ? onTap : null,
       borderRadius: BorderRadius.circular(size.w / 2),
       child: Container(
         width: size.w,
         height: size.w,
-        padding: padding ?? EdgeInsets.all(20.w),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: LinearGradient(
@@ -42,7 +45,12 @@ class CircleButtonWidget extends StatelessWidget {
           ),
         ),
         child: Center(
-          child: SvgPicture.asset(urlIcon),
+          child: SvgPicture.asset(
+            urlIcon,
+            width: _iconSize,
+            height: _iconSize,
+            color: Colors.white,
+          ),
         ),
       ),
     );

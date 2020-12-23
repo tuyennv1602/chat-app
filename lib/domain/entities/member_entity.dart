@@ -1,21 +1,38 @@
-class MemberEntity {
-  final int id;
-  final String name;
-  final String nickName;
-  final String code;
+import 'package:chat_app/common/network/configs.dart';
+import 'package:chat_app/domain/entities/user_entity.dart';
+
+// ignore: must_be_immutable
+class MemberEntity extends UserEntity {
+  double lat;
+  double lng;
+  bool isOnline;
 
   MemberEntity({
-    this.id,
-    this.name,
-    this.nickName,
-    this.code,
-  });
+    int id,
+    String code,
+    String nickname,
+    String fullname,
+    String phoneNumber,
+    String email,
+    String avatar,
+    this.lat,
+    this.lng,
+    this.isOnline,
+  }) : super(
+          id: id,
+          code: code,
+          nickname: nickname,
+          fullname: fullname,
+          phoneNumber: phoneNumber,
+          email: email,
+          avatar: avatar,
+        );
 
   String get getShortName {
-    final splits = name.split(' ');
+    final splits = nickname.split(' ');
     if (splits.length > 1) {
       return '${splits[0]} ${splits[splits.length - 1]}';
     }
-    return name;
+    return nickname;
   }
 }

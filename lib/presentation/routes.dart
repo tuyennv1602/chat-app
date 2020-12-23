@@ -1,15 +1,21 @@
 import 'package:chat_app/common/navigation/fade_in_route.dart';
 import 'package:chat_app/common/navigation/slide_left_route.dart';
-import 'package:chat_app/presentation/create_task.dart';
+import 'package:chat_app/presentation/features/task/screen/create_task.dart';
 import 'package:chat_app/common/navigation/slide_up_router.dart';
 import 'package:chat_app/presentation/features/conversation/screen/conversatiton_screen.dart';
 import 'package:chat_app/presentation/features/conversation/screen/gallery_photo_screen.dart';
+import 'package:chat_app/presentation/features/conversation/screen/map_screen.dart';
+import 'package:chat_app/presentation/features/conversation/screen/option_screen.dart';
 import 'package:chat_app/presentation/features/conversation/screen/video_player_screen.dart';
 import 'package:chat_app/presentation/features/home/screen/create_room_screen.dart';
 import 'package:chat_app/presentation/features/authentication/screen/active_account_screen.dart';
 import 'package:chat_app/presentation/features/authentication/screen/forgot_password_success_screen.dart';
 import 'package:chat_app/presentation/features/home/screen/home_screen.dart';
+import 'package:chat_app/presentation/features/profile/screen/my_profile_screen.dart';
 import 'package:chat_app/presentation/features/select_member/screen/select_member_screen.dart';
+import 'package:chat_app/presentation/features/splash/screen/splash_screen.dart';
+import 'package:chat_app/presentation/features/task/screen/task_detail.dart';
+import 'package:chat_app/presentation/features/task/screen/task_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'features/authentication/screen/forgot_password.dart';
 import 'features/authentication/screen/sign_in_screen.dart';
@@ -56,8 +62,9 @@ class Routes {
     );
   }
 
-  void pop({dynamic result}) {
+  Future<void> pop({dynamic result}) async {
     if (navigatorKey.currentState.canPop()) {
+      await Future.delayed(const Duration(milliseconds: 5));
       navigatorKey.currentState.pop(result);
     }
   }
@@ -74,59 +81,50 @@ class Routes {
         return SlideLeftRoute(widget: ForgotPasswordScreen());
       case HomeScreen.route:
         return FadeInRoute(widget: HomeScreen());
+      case TaskDetailScreen.route:
+        return SlideLeftRoute(widget: TaskDetailScreen());
       case CreateRoomScreen.route:
         return SlideLeftRoute(widget: CreateRoomScreen());
       case SelectMemberScreen.route:
-        return SlideLeftRoute(widget: SelectMemberScreen());
+        final Map arguments = settings.arguments;
+        return SlideLeftRoute(
+            widget: SelectMemberScreen(
+          selectMemberBloc: arguments['bloc'],
+        ));
       case ForgotPasswordSuccessScreen.router:
         return FadeInRoute(widget: ForgotPasswordSuccessScreen());
+      case TaskListScreen.router:
+        return FadeInRoute(widget: TaskListScreen());
       case ActiveAccountScreen.route:
         final Map arguments = settings.arguments;
         return FadeInRoute(
-          widget: ActiveAccountScreen(
-            email: arguments['email'],
-            name: arguments['name'],
-          ),
-        );
+            widget: ActiveAccountScreen(
+          email: arguments['email'],
+          name: arguments['name'],
+        ));
       case ConversationScreen.route:
-        return SlideLeftRoute(widget: ConversationScreen());
+        final Map arguments = settings.arguments;
+        return SlideLeftRoute(widget: ConversationScreen(room: arguments['room']));
       case GalleryPhotoScreen.route:
         final Map arguments = settings.arguments;
         return SlideUpRoute(
-          widget: GalleryPhotoScreen(
-            message: arguments['message'],
-            index: arguments['index'],
-          ),
-        );
+            widget: GalleryPhotoScreen(
+          message: arguments['message'],
+          index: arguments['index'],
+        ));
       case VideoPlayerScreen.route:
         final Map arguments = settings.arguments;
         return SlideUpRoute(
           widget: VideoPlayerScreen(arguments['message']),
         );
+      case OptionScreen.route:
+        return SlideLeftRoute(widget: OptionScreen());
+      case MapScreen.route:
+        return SlideLeftRoute(widget: MapScreen());
+      case MyProfileScreen.route:
+        return SlideLeftRoute(widget: MyProfileScreen());
       default:
-        return _emptyRoute(settings);
+        return FadeInRoute(widget: SplashScreen());
     }
-  }
-
-  static MaterialPageRoute _emptyRoute(RouteSettings settings) {
-    return MaterialPageRoute(
-      builder: (context) => Scaffold(
-        backgroundColor: Colors.green,
-        appBar: AppBar(
-          leading: InkWell(
-            onTap: () => Navigator.of(context).pop(),
-            child: const Center(
-              child: Text(
-                'Back',
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          ),
-        ),
-        body: Center(
-          child: Text('No path for ${settings.name}'),
-        ),
-      ),
-    );
   }
 }

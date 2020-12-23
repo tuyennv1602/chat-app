@@ -39,11 +39,10 @@ class ActiveAccountScreen extends StatelessWidget {
             if (state is ActiveAccountSuccessState) {
               AlertUtil.show(
                 context,
-                child: CustomAlertWidget(
+                child: CustomAlertWidget.error(
                   confirmTitle: translate(StringConst.signIn),
                   title: 'Thành công',
-                  message:
-                      'Tài khoản đã được kích hoạt. Vui lòng đăng nhập lại.',
+                  message: 'Tài khoản đã được kích hoạt. Vui lòng đăng nhập lại.',
                   onConfirmed: () {
                     Routes.instance.navigateAndRemove(SignInScreen.route);
                   },
@@ -53,7 +52,7 @@ class ActiveAccountScreen extends StatelessWidget {
             if (state is ErroredActiveAccountState) {
               AlertUtil.show(
                 context,
-                child: CustomAlertWidget(
+                child: CustomAlertWidget.error(
                   title: translate(StringConst.activeAccountFailed),
                   message: state.error,
                 ),
