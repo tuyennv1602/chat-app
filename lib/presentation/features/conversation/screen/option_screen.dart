@@ -21,6 +21,9 @@ import 'package:sprintf/sprintf.dart';
 
 class OptionScreen extends StatefulWidget {
   static const String route = '/option';
+  final int roomId;
+
+  OptionScreen({Key key, this.roomId}) : super(key: key);
 
   @override
   _OptionScreenState createState() => _OptionScreenState();
@@ -87,7 +90,9 @@ class _OptionScreenState extends State<OptionScreen> {
                       ItemConversationOption(
                         icon: IconConst.task,
                         title: translate(StringConst.task),
-                        onTap: () => Routes.instance.navigate(TaskListScreen.router),
+                        onTap: () => Routes.instance.navigate(TaskListScreen.router, arguments: {
+                          'roomId': widget.roomId
+                        }),
                       ),
                       ItemConversationOption(
                         icon: IconConst.group,

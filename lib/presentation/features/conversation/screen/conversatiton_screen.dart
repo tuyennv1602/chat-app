@@ -65,10 +65,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
     return BaseScaffold(
       dismissKeyboard: false,
       child: MultiBlocProvider(
-        providers: [
-          BlocProvider.value(value: _messageBloc),
-          BlocProvider.value(value: _socketBloc)
-        ],
+        providers: [BlocProvider.value(value: _messageBloc), BlocProvider.value(value: _socketBloc)],
         child: MultiBlocListener(
           listeners: [
             BlocListener<SocketBloc, SocketState>(
@@ -113,8 +110,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                               style: textStyleAppbar,
                             ),
                             Text(
-                              sprintf(
-                                  translate(StringConst.memberCount), [widget.room.totalMember]),
+                              sprintf(translate(StringConst.memberCount), [widget.room.totalMember]),
                               style: TextStyle(
                                 fontSize: 12.sp,
                                 color: AppColors.warmGrey,
@@ -127,7 +123,12 @@ class _ConversationScreenState extends State<ConversationScreen> {
                   ],
                 ),
                 trailing: SvgPicture.asset(IconConst.menu),
-                onTapTrailing: () => Routes.instance.navigate(OptionScreen.route),
+                onTapTrailing: () => Routes.instance.navigate(
+                  OptionScreen.route,
+                  arguments: {
+                    'roomId': widget.room.id,
+                  },
+                ),
               ),
               Expanded(
                 child: ChatPage(
