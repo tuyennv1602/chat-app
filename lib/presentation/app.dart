@@ -52,6 +52,7 @@ class App extends StatelessWidget {
             primaryColor: AppColors.primaryColor,
             accentColor: AppColors.primaryColor,
             fontFamily: 'Roboto',
+            canvasColor: Colors.transparent,
           ),
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,

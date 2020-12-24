@@ -6,6 +6,7 @@ import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/item_member.dart';
 import 'package:chat_app/domain/entities/member_entity.dart';
+import 'package:chat_app/presentation/features/task/screen/task_option.dart';
 import 'package:chat_app/presentation/features/task/widgets/count_down_widget.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 
 class TaskDetailScreen extends StatefulWidget {
   static const String route = '/task_detail';
+
   @override
   _TaskDetailScreenState createState() => _TaskDetailScreenState();
 }
@@ -31,10 +33,19 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
               'Nội dung nhiệm vụ',
               style: textStyleAppbar,
             ),
-            trailing: SvgPicture.asset(
-              IconConst.menu,
-              width: 20.w,
-              height: 20.w,
+            trailing: GestureDetector(
+              onTap: () => showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return TaskOptionSheet();
+                },
+                isScrollControlled: true,
+              ),
+              child: SvgPicture.asset(
+                IconConst.menu,
+                width: 20.w,
+                height: 20.w,
+              ),
             ),
           ),
           Expanded(
@@ -55,8 +66,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                       ],
                     ),
                     margin: EdgeInsets.only(top: 10.w),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
+                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -85,8 +95,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Thành viên thực hiện',
-                      style: textStyleInput.copyWith(
-                          color: AppColors.greyText, fontSize: 13.sp),
+                      style: textStyleInput.copyWith(color: AppColors.greyText, fontSize: 13.sp),
                     ),
                   ),
                   SizedBox(height: 10.w),
