@@ -17,6 +17,7 @@
     "active_account_failed": "Kích hoạt thất bại",
     "room_id": "Mã phòng",
     "cancel": "Huỷ",
+    "close": "Đóng",
     "send_request": "Gửi yêu cầu",
     "create_room": "Tạo phòng",
     "member": "Thành viên",
@@ -90,6 +91,12 @@
   },
   "button": {
     "verify": "Xác thực"
+  },
+  "task_option": {
+    "edit_task": "Chỉnh sửa nhiệm vụ",
+    "report_task": "Báo cáo kết quả",
+    "completed_task": "Nhiệm vụ hoàn thành",
+    "close_task": "Hủy bỏ nhiệm vụ"
   },
   "conversation": {
     "conversation": "Hội thoại",
