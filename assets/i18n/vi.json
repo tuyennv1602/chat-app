@@ -49,7 +49,9 @@
     "disconnect": "Mất kết nối",
     "logout": "Đăng xuất",
     "changePassword": "Đổi mật khẩu",
-    "boss": "Chỉ huy"
+    "boss": "Chỉ huy",
+    "member_implement": "Thành viên thực hiện",
+    "priority": "Mức độ ưu tiên:"
   },
   "message": {
     "network_error": "Lỗi kết nối, vui lòng kiểm tra đường truyền internet!",

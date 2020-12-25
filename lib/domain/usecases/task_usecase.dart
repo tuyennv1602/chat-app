@@ -8,4 +8,6 @@ class TaskUseCase {
 
   Future<List<TaskEntity>> loadTasks(int roomId) => taskRepository.loadTasks(roomId);
 
+  Future<TaskEntity> getTaskDetail(int taskId) => taskRepository.getTaskDetail(taskId);
+
 }

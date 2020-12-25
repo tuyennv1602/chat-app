@@ -15,4 +15,10 @@ class TaskRemoteDataSource {
     });
     return tasks;
   }
+
+  Future<TaskEntity> getTaskDetail(int taskId) async {
+    final resp = await client.get('mission/$taskId');
+     final task =  TaskModel.fromJson(resp.data['data']);
+    return task;
+  }
 }

@@ -35,6 +35,7 @@ import 'package:chat_app/presentation/features/home/bloc/room_bloc/room_bloc.dar
 import 'package:chat_app/presentation/features/profile/bloc/avatar_bloc/update_avatar_bloc.dart';
 import 'package:chat_app/presentation/features/select_member/bloc/search_member_bloc/search_member_bloc.dart';
 import 'package:chat_app/presentation/features/select_member/bloc/select_member_bloc/select_member_bloc.dart';
+import 'package:chat_app/presentation/features/task/bloc/task_detail_bloc/task_detail_bloc.dart';
 import 'package:chat_app/presentation/features/task/bloc/task_list_bloc/task_list_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 
@@ -67,6 +68,7 @@ abstract class Injector {
   @Register.singleton(LoadingBloc)
   @Register.singleton(RoomBloc)
   @Register.singleton(TaskListBloc)
+  @Register.factory(TaskDetailBloc)
   @Register.factory(OptionBloc)
   @Register.factory(SignInBloc)
   @Register.factory(SignUpBloc)

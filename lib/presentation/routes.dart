@@ -82,7 +82,11 @@ class Routes {
       case HomeScreen.route:
         return FadeInRoute(widget: HomeScreen());
       case TaskDetailScreen.route:
-        return SlideLeftRoute(widget: TaskDetailScreen());
+        final Map arguments = settings.arguments;
+        return SlideLeftRoute(widget: TaskDetailScreen(
+          taskId: arguments['taskId'],
+          taskTitle: arguments['taskTitle'],
+        ));
       case CreateRoomScreen.route:
         return SlideLeftRoute(widget: CreateRoomScreen());
       case SelectMemberScreen.route:

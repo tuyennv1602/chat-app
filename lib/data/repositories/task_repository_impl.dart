@@ -11,4 +11,9 @@ class TaskRepositoryImpl implements TaskRepository {
   Future<List<TaskEntity>> loadTasks(int roomId) {
     return taskRemoteDataSource.loadTask(roomId);
   }
+
+  @override
+  Future<TaskEntity> getTaskDetail(int taskId) {
+    return taskRemoteDataSource.getTaskDetail(taskId);
+  }
 }
