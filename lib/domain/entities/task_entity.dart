@@ -1,4 +1,6 @@
+import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/data/models/member_model.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 enum TaskStatus {
@@ -38,6 +40,17 @@ class TaskEntity {
         return TaskStatus.done;
       default:
         return TaskStatus.none;
+    }
+  }
+
+  Color get taskPriority {
+    switch (priority) {
+      case 'Trung bình':
+        return AppColors.yellow;
+      case 'Cao':
+        return AppColors.red;
+      default:
+        return Colors.transparent;
     }
   }
 

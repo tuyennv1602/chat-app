@@ -37,7 +37,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
   @override
   void initState() {
     super.initState();
-    _taskListBloc = Injector.resolve<TaskListBloc>()..add(OnGetAllTasksEvent(roomId: widget.roomId));
+    _taskListBloc = Injector.resolve<TaskListBloc>()..add(OnGetAllTasksEvent(roomId: 1));
   }
 
   @override
