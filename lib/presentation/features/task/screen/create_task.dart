@@ -9,12 +9,14 @@ import 'package:chat_app/common/widgets/circle_button.dart';
 import 'package:chat_app/common/widgets/input_widget.dart';
 import 'package:chat_app/common/widgets/item_member.dart';
 import 'package:chat_app/domain/entities/member_entity.dart';
+import 'package:chat_app/presentation/features/task/widgets/custom_prioriry_dropdown.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:intl/intl.dart';
 
+final _listPriority = <String>['Thấp', 'Trung bình', 'Cao'];
 class CreateTaskScreen extends StatefulWidget {
   static const String router = '/create_task';
   @override
@@ -24,11 +26,13 @@ class CreateTaskScreen extends StatefulWidget {
 class _CreateTaskScreenState extends State<CreateTaskScreen> {
   DateTime _createDate = DateTime.now();
   DateTime _finishDate = DateTime.now();
+  String priority;
 
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppBarWidget(
             onTapLeading: () => Routes.instance.pop(),
@@ -37,6 +41,8 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
               style: textStyleAppbar,
             ),
           ),
+          SizedBox(height: 15.w),
+          CustomPriorityDropDownList(),
           Form(
             child: Padding(
               padding: EdgeInsets.only(top: 15.w, right: 15.w, left: 15.w),
@@ -123,30 +129,11 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: Row(
-              children: [
-                Text(
-                  translate(StringConst.member),
-                  style: textStyleMedium.copyWith(
-                    color: AppColors.primaryColor,
-                  ),
-                ),
-                InkWell(
-                  onTap: null,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 12.w,
-                      vertical: 5.h,
-                    ),
-                    child: CircleButtonWidget(
-                      size: 16.h,
-                      isEnable: true,
-                      padding: EdgeInsets.all(3.w),
-                      urlIcon: IconConst.add,
-                    ),
-                  ),
-                )
-              ],
+            child: Text(
+              translate(StringConst.member),
+              style: textStyleMedium.copyWith(
+                color: AppColors.primaryColor,
+              ),
             ),
           ),
           SizedBox(height: 5.w),

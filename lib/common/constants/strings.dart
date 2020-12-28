@@ -36,6 +36,7 @@ class StringConst {
   static const contentTask = 'label.content_task';
   static const task = 'label.task';
   static const close = 'label.close';
+  static const priority = 'label.priority';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';

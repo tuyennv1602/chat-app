@@ -48,7 +48,8 @@
     "connectError": "Lỗi",
     "disconnect": "Mất kết nối",
     "logout": "Đăng xuất",
-    "changePassword": "Đổi mật khẩu"
+    "changePassword": "Đổi mật khẩu",
+    "priority": "Độ ưu tiên"
   },
   "message": {
     "network_error": "Lỗi kết nối, vui lòng kiểm tra đường truyền internet!",
