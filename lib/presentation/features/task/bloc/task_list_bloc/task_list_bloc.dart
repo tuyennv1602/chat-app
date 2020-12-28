@@ -12,7 +12,6 @@ import 'package:meta/meta.dart';
 import 'package:chat_app/common/extensions/dio_ext.dart';
 
 part 'task_list_event.dart';
-
 part 'task_list_state.dart';
 
 class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
@@ -34,8 +33,8 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
   Stream<TaskListState> _mapGetTasksToState(OnGetAllTasksEvent event) async* {
     try {
       yield LoadingTasksState();
-      final tasks = await taskUseCase.loadTasks(event.roomId);
-      yield LoadedTasksState(tasks: tasks);
+      final data = await taskUseCase.loadTasks(event.roomId);
+      yield LoadedTasksState(tasks: data.tasks);
     } on DioError catch (e) {
       yield* _handleError(e.errorMessage);
     } on NetworkException catch (e) {
