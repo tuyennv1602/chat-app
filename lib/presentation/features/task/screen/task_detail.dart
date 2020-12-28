@@ -130,7 +130,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
                         Padding(
                           padding: EdgeInsets.only(top: 15.w),
                           child: Text(
-                            '${translate(StringConst.priority)} ${_task.priority ?? ''}',
+                            '${translate(StringConst.priority)}: ${_task.priority ?? ''}',
                             style: textStyleInput,
                           ),
                         ),
