@@ -48,7 +48,8 @@
     "connectError": "Lỗi",
     "disconnect": "Mất kết nối",
     "logout": "Đăng xuất",
-    "changePassword": "Đổi mật khẩu"
+    "changePassword": "Đổi mật khẩu",
+    "boss": "Chỉ huy"
   },
   "message": {
     "network_error": "Lỗi kết nối, vui lòng kiểm tra đường truyền internet!",
@@ -74,7 +75,8 @@
     "account_inactive": "Tài khoản của bạn chưa được xác thực",
     "account_existed": "Tài khoản này đang tồn tại. Vui lòng kiểm tra email, mã quân nhân hoặc biệt danh",
     "error_verify_code": "Không thể xác minh mã cho tài khoản này. Vui lòng kiểm tra kích hoạt mã và kích hoạt lại tài khoản của bạn.",
-    "login_fail": "Đăng nhập thất bại! Email hoặc mật khẩu không hợp lệ, vui lòng kiểm tra và thử lại."
+    "login_fail": "Đăng nhập thất bại! Email hoặc mật khẩu không hợp lệ, vui lòng kiểm tra và thử lại.",
+    "no_task": "Chưa có nhiệm vụ nào được tạo!"
   },
   "time": {
     "just_now": "vừa xong",
