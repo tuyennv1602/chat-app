@@ -12,6 +12,7 @@ class TaskModel extends TaskEntity {
     int roomId,
     String priority,
     MemberModel leader,
+    List<MemberModel> members,
   }) : super(
           id: id,
           status: status,
@@ -22,6 +23,7 @@ class TaskModel extends TaskEntity {
           roomId: roomId,
           priority: priority,
           leader: leader,
+          members: members,
         );
 
   TaskModel.fromJson(Map<String, dynamic> json) {
@@ -34,6 +36,12 @@ class TaskModel extends TaskEntity {
     roomId = json['room_id'];
     priority = json['priority'];
     leader = json['created_by'] != null ? MemberModel.fromJson(json['created_by']) : null;
+    if (json['members'] != null) {
+      members = <MemberModel>[];
+      json['members'].forEach((v) {
+        members.add(MemberModel.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -48,6 +56,9 @@ class TaskModel extends TaskEntity {
     data['priority'] = priority;
     if (leader != null) {
       data['created_by'] = leader.toJson();
+    }
+    if (members != null) {
+      data['members'] = members.map((v) => v.toJson()).toList();
     }
     return data;
   }

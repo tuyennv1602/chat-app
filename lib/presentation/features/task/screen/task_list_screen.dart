@@ -7,10 +7,10 @@ import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/custom_alert.dart';
 import 'package:chat_app/common/widgets/loading_widget.dart';
+import 'package:chat_app/domain/entities/room_entity.dart';
 import 'package:chat_app/domain/entities/task_entity.dart';
 import 'package:chat_app/presentation/features/task/bloc/task_list_bloc/task_list_bloc.dart';
 import 'package:chat_app/presentation/features/task/screen/create_task.dart';
-import 'package:chat_app/presentation/features/task/screen/task_detail.dart';
 import 'package:chat_app/presentation/features/task/widgets/item_task.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +22,9 @@ import 'package:flutter_translate/flutter_translate.dart';
 class TaskListScreen extends StatefulWidget {
   static const String router = '/task_list';
 
-  final int roomId;
+  final RoomEntity room;
 
-  const TaskListScreen({Key key, this.roomId}) : super(key: key);
+  const TaskListScreen({Key key, this.room}) : super(key: key);
 
   @override
   _TaskListScreenState createState() => _TaskListScreenState();
@@ -37,7 +37,12 @@ class _TaskListScreenState extends State<TaskListScreen> {
   @override
   void initState() {
     super.initState();
-    _taskListBloc = Injector.resolve<TaskListBloc>()..add(OnGetAllTasksEvent(roomId: widget.roomId));
+    _taskListBloc = Injector.resolve<TaskListBloc>()..add(OnGetAllTasksEvent(roomId: widget.room.id));
+  }
+  @override
+  void dispose() {
+    _taskListBloc.close();
+    super.dispose();
   }
 
   @override

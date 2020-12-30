@@ -24,7 +24,10 @@ class ItemTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Routes.instance.navigate(TaskDetailScreen.route),
+      onTap: () => Routes.instance.navigate(TaskDetailScreen.route, arguments: {
+        'taskId': task.id,
+        'taskTitle': task.name,
+      }),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
         decoration: BoxDecoration(
