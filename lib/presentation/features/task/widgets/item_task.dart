@@ -1,20 +1,25 @@
 import 'package:chat_app/common/constants/icons.dart';
+import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
 import 'package:chat_app/domain/entities/task_entity.dart';
 import 'package:chat_app/presentation/features/task/screen/task_detail.dart';
+import 'package:chat_app/presentation/features/task/screen/task_option.dart';
 import 'package:chat_app/presentation/features/task/widgets/item_status.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
+import 'package:chat_app/common/extensions/date_time_ext.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class ItemTask extends StatelessWidget {
-  final TaskStatus status;
+  final TaskEntity task;
   int size = 20;
-  ItemTask({Key key, this.status = TaskStatus.none}) : super(key: key);
+
+  ItemTask({Key key, this.task}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +54,14 @@ class ItemTask extends StatelessWidget {
                   margin: EdgeInsets.symmetric(vertical: 5.w),
                   width: 1.w,
                   height: 28.h,
-                  color: status == 0
+                  color: task.checkTaskStatus == TaskStatus.none
                       ? AppColors.yellow
-                      : status == 1
+                      : task.checkTaskStatus == TaskStatus.done
                           ? AppColors.primaryColor
                           : AppColors.red,
                 ),
                 ItemStatusWidget(
-                  status: status,
+                  status: task.checkTaskStatus,
                 ),
               ],
             ),
@@ -70,37 +75,100 @@ class ItemTask extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Đi tuần vùng biên giới',
-                    style: textStyleLabel,
-                  ),
-                  SizedBox(height: 5.h),
-                  Text(
-                    'Thời gian: 09:00 10/08 - 13:00 10/08',
-                    style: textStyleRegular,
-                  ),
-                  Text(
-                    'Chỉ huy: Nguyễn Khắc Tư',
-                    style: textStyleRegular,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          task.content ?? '',
+                          style: textStyleLabel,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return TaskOptionSheet();
+                          },
+                          isScrollControlled: true,
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 15, bottom: 10, top: 5),
+                          child: SvgPicture.asset(
+                            IconConst.ellipsis,
+                            width: 10,
+                            height: 12,
+                            color: AppColors.black,
+                          ),
+                        ),
+                      )
+
+                    ],
                   ),
                   SizedBox(height: 10.h),
-                  SizedBox(
-                    height: 26.w,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      separatorBuilder: (BuildContext context, int index) => SizedBox(width: 5.w),
-                      itemCount: 3,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          alignment: Alignment.center,
-                          child: CircleAvatarWidget(
-                            size: index == 0 ? 26 : 20,
-                            source: 'null',
-                          ),
-                        );
-                      },
-                    ),
-                  )
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        IconConst.calendar,
+                        width: 13,
+                        height: 13,
+                        color: AppColors.black,
+                      ),
+                      const SizedBox(width: 17),
+                      Text(
+                        '${task.startTime.toFormat('HH:mm dd/MM/yy') ?? ''} - ${task.endTime.toFormat('HH:mm dd/MM/yy') ?? ''}',
+                        style: textStyleRegular,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              child: CircleAvatarWidget(
+                                size: 20,
+                                source: task.leader.avatar,
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Text(
+                              '${translate(StringConst.boss)}: ${task.leader.fullname ?? ''}',
+                              style: textStyleRegular,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SvgPicture.asset(
+                        IconConst.flag,
+                        width: 18,
+                        height: 18,
+                        color: task.taskPriority,
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 10.h),
+                  // SizedBox(
+                  //   height: 26.w,
+                  //   child: ListView.separated(
+                  //     scrollDirection: Axis.horizontal,
+                  //     separatorBuilder: (BuildContext context, int index) => SizedBox(width: 5.w),
+                  //     itemCount: 3,
+                  //     itemBuilder: (context, index) {
+                  //       return Container(
+                  //         alignment: Alignment.center,
+                  //         child: CircleAvatarWidget(
+                  //           size: index == 0 ? 26 : 20,
+                  //           source: task.leader.avatar,
+                  //         ),
+                  //       );
+                  //     },
+                  //   ),
+                  // )
                 ],
               ),
             )
