@@ -38,9 +38,12 @@ class StringConst {
   static const close = 'label.close';
   static const boss = 'label.boss';
   static const noTask = 'message.no_task';
+  static const memberImplement = 'label.member_implement';
   static const priority = 'label.priority';
   static const selectAll = 'label.selectAll';
   static const unChecked = 'label.unChecked';
+  static const memberImplement = 'label.member_implement';
+  static const priority = 'label.priority';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';

@@ -19,6 +19,7 @@ class TaskEntity {
   int roomId;
   String priority;
   MemberModel leader;
+  List<MemberModel> members;
 
   TaskEntity({
     this.status,
@@ -30,6 +31,7 @@ class TaskEntity {
     this.roomId,
     this.priority,
     this.leader,
+    this.members,
   });
 
   TaskStatus get checkTaskStatus {
