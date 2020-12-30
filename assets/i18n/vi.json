@@ -52,9 +52,9 @@
     "boss": "Chỉ huy",
     "priority": "Độ ưu tiên",
     "member_implement": "Thành viên thực hiện",
-    "priority": "Độ ưu tiên",
     "selectAll": "Chọn tất cả",
-    "unChecked": "Bỏ chọn"
+    "unChecked": "Bỏ chọn",
+    "edit": "Chỉnh sửa"
   },
   "message": {
     "network_error": "Lỗi kết nối, vui lòng kiểm tra đường truyền internet!",

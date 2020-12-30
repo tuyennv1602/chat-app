@@ -65,7 +65,14 @@ class _TaskListScreenState extends State<TaskListScreen> {
             ),
             trailing: _isAdmin
                 ? GestureDetector(
-                    onTap: () => Routes.instance.navigate(CreateTaskScreen.router),
+                    onTap: () async {
+                     final result = await Routes.instance.navigate(CreateTaskScreen.router, arguments: {
+                       'room': widget.room,
+                     });
+                     if(result != null && result){
+                       _taskListBloc.add(OnGetAllTasksEvent(roomId: widget.room.id));
+                     }
+                    },
                     child: SvgPicture.asset(
                       IconConst.addTask,
                       width: 20.w,

@@ -6,6 +6,7 @@ import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/exception/network_exception.dart';
 import 'package:chat_app/common/extensions/dio_ext.dart';
 import 'package:chat_app/data/models/request/create_task_request_model.dart';
+import 'package:chat_app/domain/usecases/task_usecase.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:meta/meta.dart';
@@ -15,9 +16,10 @@ part 'create_task_event.dart';
 part 'create_task_state.dart';
 
 class CreateTaskBloc extends Bloc<CreateTaskEvent, CreateTaskState> {
-  LoadingBloc loadingBloc;
+  final LoadingBloc loadingBloc;
+  final TaskUseCase taskUseCase;
 
-  CreateTaskBloc() : super(CreateTaskInitial());
+  CreateTaskBloc(this.loadingBloc, this.taskUseCase) : super(CreateTaskInitial());
 
   @override
   Stream<CreateTaskState> mapEventToState(CreateTaskEvent event,) async* {
@@ -39,7 +41,9 @@ class CreateTaskBloc extends Bloc<CreateTaskEvent, CreateTaskState> {
       ..finishDate = event.finishDate ?? state.createTaskRequestModel.finishDate
       ..priorityId = event.priorityId ?? state.createTaskRequestModel.priorityId
       ..taskTitle = event.taskTitle ?? state.createTaskRequestModel.taskTitle
-      ..taskContent = event.taskContent ?? state.createTaskRequestModel.taskContent;
+      ..taskContent = event.taskContent ?? state.createTaskRequestModel.taskContent
+      ..roomId = event.roomId ?? state.createTaskRequestModel.roomId
+      ..createBy = event.leaderId ?? state.createTaskRequestModel.createBy;
 
     final _enableButton = state.createTaskRequestModel.taskTitle.isNotEmpty && state.createTaskRequestModel.taskContent.isNotEmpty && state.createTaskRequestModel.createDate.isBefore(state.createTaskRequestModel.finishDate) && state.createTaskRequestModel.listSelectedMemberId.isNotEmpty;
 
@@ -51,9 +55,7 @@ class CreateTaskBloc extends Bloc<CreateTaskEvent, CreateTaskState> {
   Stream<CreateTaskState> _onSubmitCreateTask(OnSubmitCreateTaskEvent event) async* {
     try {
       yield CreatingTaskState(state);
-
-      /// TO DO
-
+      await taskUseCase.createTask(state.createTaskRequestModel);
       yield CreateTaskSuccessState(state);
     } on DioError catch (e) {
       yield* _handleError(e.errorMessage);

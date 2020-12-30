@@ -1,3 +1,5 @@
+import 'package:chat_app/common/extensions/date_time_ext.dart';
+
 class CreateTaskRequestModel {
   List<int> listSelectedMemberId;
   DateTime createDate;
@@ -21,14 +23,14 @@ class CreateTaskRequestModel {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['listSelectedMemberId'] = listSelectedMemberId;
-    data['createDate'] = createDate;
-    data['finishDate'] = finishDate;
-    data['priorityId'] = priorityId;
-    data['taskTitle'] = taskTitle;
-    data['taskContent'] = taskContent;
-    data['roomId'] = roomId;
-    data['createBy'] = createBy;
+    data['mission_members'] = listSelectedMemberId;
+    data['time_start'] = createDate.toFormat('yyyy-MM-dd HH:mm');
+    data['deadline'] = finishDate.toFormat('yyyy-MM-dd HH:mm');
+    data['mission_priority_id'] = priorityId;
+    data['name'] = taskTitle;
+    data['content'] = taskContent;
+    data['room_id'] = roomId;
+    data['created_by'] = createBy;
     return data;
   }
 }

@@ -2,12 +2,18 @@ import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/utils/screen_utils.dart';
+import 'package:chat_app/domain/entities/task_entity.dart';
+import 'package:chat_app/presentation/features/task/screen/create_task.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 class TaskOptionSheet extends StatelessWidget {
+  final TaskEntity task;
+
+  TaskOptionSheet({Key key, this.task}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +29,12 @@ class TaskOptionSheet extends StatelessWidget {
         children: [
           ItemBottomSheet(
             label: translate(StringConst.editTask),
-            onTap: () {},
+            onTap: () {
+              Routes.instance.pop();
+              Routes.instance.navigate(CreateTaskScreen.router, arguments: {
+                'task': task
+              });
+            },
           ),
           ItemBottomSheet(
             label: translate(StringConst.reportTask),

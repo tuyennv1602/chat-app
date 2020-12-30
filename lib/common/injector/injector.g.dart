@@ -19,10 +19,14 @@ class _$Injector extends Injector {
     container.registerSingleton((c) => LoadingBloc());
     container.registerSingleton((c) =>
         RoomBloc(roomUseCase: c<RoomUseCase>(), loadingBloc: c<LoadingBloc>()));
-    container.registerSingleton((c) => TaskListBloc(
+    container.registerFactory((c) => TaskListBloc(
+        loadingBloc: c<LoadingBloc>(), taskUseCase: c<TaskUseCase>()));
+    container.registerFactory((c) => TaskDetailBloc(
         loadingBloc: c<LoadingBloc>(), taskUseCase: c<TaskUseCase>()));
     container.registerFactory((c) => OptionBloc(
         loadingBloc: c<LoadingBloc>(), roomUseCase: c<RoomUseCase>()));
+    container.registerFactory(
+        (c) => CreateTaskBloc(c<LoadingBloc>(), c<TaskUseCase>()));
     container.registerFactory((c) => SignInBloc(
         loadingBloc: c<LoadingBloc>(),
         authenticationUseCase: c<AuthenticationUseCase>(),
@@ -74,8 +78,8 @@ class _$Injector extends Injector {
         RoomRepositoryImpl(
             roomRemoteDataSource: c<RoomRemoteDataSource>(),
             networkInfo: c<NetworkInfoImpl>()));
-    container.registerSingleton<TaskRepository, TaskRepositoryImpl>(
-        (c) => TaskRepositoryImpl(c<TaskRemoteDataSource>()));
+    container.registerSingleton<TaskRepository, TaskRepositoryImpl>((c) =>
+        TaskRepositoryImpl(c<TaskRemoteDataSource>(), c<NetworkInfoImpl>()));
     container.registerSingleton<UserRepository, UserRepositoryImpl>((c) =>
         UserRepositoryImpl(
             userRemoteDataSource: c<UserRemoteDataSource>(),

@@ -10,8 +10,10 @@ class OnValidateCreateTaskEvent extends CreateTaskEvent {
   final int priorityId;
   final bool enableButton;
   final String taskTitle, taskContent;
+  final int roomId;
+  final int leaderId;
 
-  OnValidateCreateTaskEvent({
+  OnValidateCreateTaskEvent( {
     this.listSelectedMemberId,
     this.createDate,
     this.finishDate,
@@ -19,9 +21,8 @@ class OnValidateCreateTaskEvent extends CreateTaskEvent {
     this.enableButton,
     this.taskTitle,
     this.taskContent,
+    this.roomId, this.leaderId,
   });
 }
 
-class OnSubmitCreateTaskEvent extends CreateTaskEvent{
-
-}
+class OnSubmitCreateTaskEvent extends CreateTaskEvent{}
