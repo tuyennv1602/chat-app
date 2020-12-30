@@ -1,32 +1,80 @@
-import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/strings.dart';
+import 'package:chat_app/common/injector/injector.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
+import 'package:chat_app/common/utils/validator.dart';
 import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/button_widget.dart';
-import 'package:chat_app/common/widgets/circle_button.dart';
 import 'package:chat_app/common/widgets/input_widget.dart';
-import 'package:chat_app/common/widgets/item_member.dart';
 import 'package:chat_app/domain/entities/member_entity.dart';
+import 'package:chat_app/domain/entities/room_entity.dart';
+import 'package:chat_app/domain/entities/task_entity.dart';
+import 'package:chat_app/presentation/features/task/bloc/create_task_bloc/create_task_bloc.dart';
 import 'package:chat_app/presentation/features/task/widgets/custom_prioriry_dropdown.dart';
+import 'package:chat_app/presentation/features/task/widgets/list_member_create_task.dart';
+import 'package:chat_app/presentation/features/task/widgets/task_time_widget.dart';
 import 'package:chat_app/presentation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:intl/intl.dart';
 
-final _listPriority = <String>['Thấp', 'Trung bình', 'Cao'];
 class CreateTaskScreen extends StatefulWidget {
   static const String router = '/create_task';
+  final RoomEntity room;
+  final TaskEntity task;
+
+  CreateTaskScreen({Key key, this.room, this.task}) : super(key: key);
+
   @override
   _CreateTaskScreenState createState() => _CreateTaskScreenState();
 }
 
 class _CreateTaskScreenState extends State<CreateTaskScreen> {
-  DateTime _createDate = DateTime.now();
-  DateTime _finishDate = DateTime.now();
-  String priority;
+  TextEditingController _taskTitleCtrl;
+  TextEditingController _taskContentCtrl;
+  List<int> _listSelectedMemberId;
+  DateTime _createDate;
+  DateTime _finishDate;
+  int _priorityId;
+
+  final _listMem = [
+    MemberEntity(id: 1, fullname: 'Lê Văn Luyện', nickname: 'luyen_nguyen'),
+    MemberEntity(id: 2, fullname: 'Lê Văn Luyện', nickname: 'luyen_nguyen'),
+    MemberEntity(id: 3, fullname: 'Lê Văn Luyện', nickname: 'luyen_nguyen'),
+    MemberEntity(id: 4, fullname: 'Lê Văn Luyện', nickname: 'luyen_nguyen'),
+    MemberEntity(id: 5, fullname: 'Lê Văn Luyện', nickname: 'luyen_nguyen'),
+    MemberEntity(id: 6, fullname: 'Lê Văn Luyện', nickname: 'luyen_nguyen'),
+  ];
+
+  CreateTaskBloc _createTaskBloc;
+
+  @override
+  void initState() {
+    _createDate = DateTime.now();
+    _finishDate = _createDate.add(const Duration(minutes: 15));
+    _listSelectedMemberId = [];
+
+    _taskTitleCtrl = TextEditingController()..addListener(() {
+      _createTaskBloc.add(OnValidateCreateTaskEvent(taskTitle: _taskTitleCtrl.text));
+    });
+    _taskContentCtrl = TextEditingController()..addListener(() {
+      _createTaskBloc.add(OnValidateCreateTaskEvent(taskContent: _taskContentCtrl.text));
+    });
+    _createTaskBloc = Injector.resolve<CreateTaskBloc>()
+      ..add(
+        OnValidateCreateTaskEvent(
+          createDate: _createDate,
+          finishDate: _finishDate,
+          listSelectedMemberId: _listSelectedMemberId,
+          taskTitle: '_taskTitleCtrl.text',
+          taskContent: ' _taskContentCtrl.text',
+          priorityId: _priorityId,
+        ),
+      );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,23 +90,33 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
             ),
           ),
           SizedBox(height: 15.w),
-          CustomPriorityDropDownList(),
-          Form(
-            child: Padding(
-              padding: EdgeInsets.only(top: 15.w, right: 15.w, left: 15.w),
-              child: Column(
-                children: [
-                  InputWidget(
+          CustomPriorityDropDownList(
+            createTaskBloc: _createTaskBloc,
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 15.w, right: 15.w, left: 15.w),
+            child: Column(
+              children: [
+                Form(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  child: InputWidget(
                     placeHolder: translate(StringConst.task),
+                    controller: _taskTitleCtrl,
+                    validator: Validator.validTaskTitle,
                   ),
-                  SizedBox(height: 15.w),
-                  InputWidget(
+                ),
+                SizedBox(height: 15.w),
+                Form(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  child: InputWidget(
                     placeHolder: translate(StringConst.contentTask),
+                    controller: _taskContentCtrl,
+                    validator: Validator.validTaskContent,
                     textAlignVertical: TextAlignVertical.top,
                     maxLines: 3,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Padding(
@@ -74,145 +132,37 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                   ),
                 ),
                 SizedBox(height: 10.w),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: TimeWidget(
-                        time: _createDate,
-                        onTap: (date, time) {
-                          if (date != null && time != null) {
-                            setState(() {
-                              _createDate = DateTime(
-                                date.year,
-                                date.month,
-                                date.day,
-                                time.hour,
-                                time.minute,
-                              );
-                            });
-                          }
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 13.w),
-                      child: Text(
-                        translate(StringConst.to),
-                        style: textStyleInput.copyWith(
-                          fontSize: 13.sp,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: TimeWidget(
-                        time: _finishDate,
-                        onTap: (date, time) {
-                          if (date != null && time != null) {
-                            setState(() {
-                              _finishDate = DateTime(
-                                date.year,
-                                date.month,
-                                date.day,
-                                time.hour,
-                                time.minute,
-                              );
-                            });
-                          }
-                        },
-                      ),
-                    ),
-                  ],
+                TaskTimeWidget(
+                  startTime: _createDate,
+                  finishTime: _finishDate,
+                  createTaskBloc: _createTaskBloc,
                 ),
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: Text(
-              translate(StringConst.member),
-              style: textStyleMedium.copyWith(
-                color: AppColors.primaryColor,
-              ),
-            ),
-          ),
-          SizedBox(height: 5.w),
           Expanded(
-            child: ListView.separated(
-              padding: EdgeInsets.symmetric(horizontal: 15.w),
-              itemBuilder: (_, index) => ItemMember(
-                member: MemberEntity(
-                  code: index.toString(),
-                  fullname: 'Lê Văn Luyện',
-                  nickname: 'luyen_nguyen',
-                ),
-                memberAction: MemberAction.delete,
-              ),
-              separatorBuilder: (_, index) => SizedBox(
-                height: 10.h,
-              ),
-              itemCount: 10,
+            child: ListMemberCreateTask(
+              listAllMember: _listMem,
+              listSelectedMemberId: _listSelectedMemberId,
+              createTaskBloc: _createTaskBloc,
             ),
           ),
-          ButtonWidget(
-            label: translate(StringConst.createTask),
-            margin: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-            onTap: () {},
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class TimeWidget extends StatelessWidget {
-  final Function(DateTime, TimeOfDay) onTap;
-  final DateTime time;
-
-  TimeWidget({Key key, this.onTap, this.time}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () async {
-        final selectedDate = showDatePicker(
-          context: context,
-          firstDate: DateTime(2020),
-          lastDate: DateTime(2030),
-          initialDate: DateTime.now(),
-          helpText: '',
-        );
-
-        await selectedDate.then(
-          (date) {
-            if (date == null) {
-              return;
-            }
-            showTimePicker(
-              initialTime: TimeOfDay(
-                  hour: DateTime.now().hour, minute: DateTime.now().minute),
-              context: context,
-              helpText: '',
-            )..then(
-                (time) {
-                  onTap(date, time);
+          BlocBuilder(
+            cubit: _createTaskBloc,
+            builder: (context, state) {
+              return ButtonWidget(
+                label: translate(StringConst.createTask),
+                margin: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+                isEnable: state.enableButton,
+                onTap: () {
+                  if (state.enableButton) {
+                    debugPrint('Hung DQ: On submit create task!');
+                  }
                 },
               );
-          },
-        );
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: AppColors.line, width: 1.w),
-          borderRadius: BorderRadius.all(Radius.circular(5.w)),
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 7.w),
-        child: Text(
-          '${DateFormat('HH:mm dd/MM/yyyy').format(time)}',
-          style: textStyleInput.copyWith(
-            fontSize: 13.sp,
-          ),
-        ),
+            },
+          )
+        ],
       ),
     );
   }

@@ -74,4 +74,18 @@ class Validator {
     }
     return null;
   }
+
+  static String validTaskTitle(String taskTitle) {
+    if (taskTitle.isEmptyOrNull) {
+      return translate(StringConst.enterTaskTitle);
+    }
+    return null;
+  }
+
+  static String validTaskContent(String taskContent) {
+    if (taskContent.isEmptyOrNull) {
+      return translate(StringConst.enterTaskContent);
+    }
+    return null;
+  }
 }

@@ -1,14 +1,17 @@
 import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
+import 'package:chat_app/presentation/features/task/bloc/create_task_bloc/create_task_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
+final _listPriority = <String>['Cao','Trung bình','Thấp'];
 class CustomPriorityDropDownList extends StatefulWidget {
   final String priority;
+  final CreateTaskBloc createTaskBloc;
 
-  CustomPriorityDropDownList({Key key, this.priority}) : super(key: key);
+  CustomPriorityDropDownList({Key key, this.priority, this.createTaskBloc}) : super(key: key);
 
   @override
   _CustomPriorityDropDownListState createState() => _CustomPriorityDropDownListState();
@@ -20,7 +23,7 @@ class _CustomPriorityDropDownListState extends State<CustomPriorityDropDownList>
   @override
   void initState() {
     super.initState();
-    _priority = widget.priority ?? 'Thấp';
+    _priority = widget.priority ?? _listPriority[2];
   }
   @override
   Widget build(BuildContext context) {
@@ -66,12 +69,14 @@ class _CustomPriorityDropDownListState extends State<CustomPriorityDropDownList>
           setState(() {
            _priority = value;
           });
+          final index = _listPriority.indexOf(_priority);
+          widget.createTaskBloc.add(OnValidateCreateTaskEvent(priorityId: index + 1));
         },
-        items: <String>['Thấp', 'Trung bình', 'Cao'].map((String priority) {
+        items: _listPriority.map((String priority) {
           return  DropdownMenuItem<String>(
-            value: _priority,
+            value: priority,
             child: Text(
-              _priority,
+              priority,
               style: const TextStyle(color: Colors.black),
             ),
           );

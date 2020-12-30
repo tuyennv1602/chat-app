@@ -49,7 +49,9 @@
     "disconnect": "Mất kết nối",
     "logout": "Đăng xuất",
     "changePassword": "Đổi mật khẩu",
-    "priority": "Độ ưu tiên"
+    "priority": "Độ ưu tiên",
+    "selectAll": "Chọn tất cả",
+    "unChecked": "Bỏ chọn"
   },
   "message": {
     "network_error": "Lỗi kết nối, vui lòng kiểm tra đường truyền internet!",
@@ -69,6 +71,8 @@
     "enter_code": "Hãy nhập mã quân nhân",
     "enter_room_id": "Hãy nhập mã phòng",
     "enter_room_name": "Hãy nhập tên phòng",
+    "enter_task_content": "Hãy nhập nội dung nhiệm vụ",
+    "enter_task_title": "Hãy nhập tiêu đề nhiệm vụ",
     "enter_verify_code": "Hãy nhập mã xác thực",
     "register_success": "Đăng ký thành công! Vui lòng kiểm tra email để kích hoạt tài khoản.",
     "forgot_password_done": "Một mật khẩu đã được gửi tới email của bạn! Vui lòng kiểm tra email để lấy lại mật khẩu.",
