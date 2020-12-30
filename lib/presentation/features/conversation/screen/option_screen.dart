@@ -6,6 +6,7 @@ import 'package:chat_app/common/utils/alert_utils.dart';
 import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/custom_alert.dart';
+import 'package:chat_app/domain/entities/room_entity.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/option_bloc/option_bloc.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/option_bloc/option_event.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/option_bloc/option_state.dart';
@@ -21,9 +22,9 @@ import 'package:sprintf/sprintf.dart';
 
 class OptionScreen extends StatefulWidget {
   static const String route = '/option';
-  final int roomId;
+  final RoomEntity room;
 
-  OptionScreen({Key key, this.roomId}) : super(key: key);
+  OptionScreen({Key key, this.room}) : super(key: key);
 
   @override
   _OptionScreenState createState() => _OptionScreenState();
@@ -91,7 +92,7 @@ class _OptionScreenState extends State<OptionScreen> {
                         icon: IconConst.task,
                         title: translate(StringConst.task),
                         onTap: () => Routes.instance.navigate(TaskListScreen.router, arguments: {
-                          'roomId': widget.roomId
+                          'room': widget.room
                         }),
                       ),
                       ItemConversationOption(

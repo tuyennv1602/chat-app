@@ -67,7 +67,7 @@ abstract class Injector {
   @Register.singleton(AuthBloc)
   @Register.singleton(LoadingBloc)
   @Register.singleton(RoomBloc)
-  @Register.singleton(TaskListBloc)
+  @Register.factory(TaskListBloc)
   @Register.factory(OptionBloc)
   @Register.factory(CreateTaskBloc)
   @Register.factory(SignInBloc)

@@ -95,7 +95,7 @@ class Routes {
         return FadeInRoute(widget: ForgotPasswordSuccessScreen());
       case TaskListScreen.router:
         final Map arguments = settings.arguments;
-        return FadeInRoute(widget: TaskListScreen(roomId: arguments['roomId']));
+        return FadeInRoute(widget: TaskListScreen(room: arguments['room']));
       case ActiveAccountScreen.route:
         final Map arguments = settings.arguments;
         return FadeInRoute(
@@ -120,7 +120,7 @@ class Routes {
         );
       case OptionScreen.route:
         final Map arguments = settings.arguments;
-        return SlideLeftRoute(widget: OptionScreen(roomId: arguments['roomId']));
+        return SlideLeftRoute(widget: OptionScreen(room: arguments['room']));
       case MapScreen.route:
         return SlideLeftRoute(widget: MapScreen());
       case MyProfileScreen.route:
