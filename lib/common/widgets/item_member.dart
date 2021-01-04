@@ -61,15 +61,23 @@ class _ItemMemberState extends State<ItemMember> {
       );
     }
     return widget.isSelected
-        ? Padding(
-            padding: EdgeInsets.all(10.w),
+        ? Container(
+            // padding: EdgeInsets.all(10.w),
             child: SvgPicture.asset(
               IconConst.checked,
               width: 16.w,
               height: 16.w,
             ),
           )
-        : const SizedBox();
+        : Container(
+            width: 16.w,
+            height: 16.w,
+            padding: EdgeInsets.all(10.w),
+            decoration: BoxDecoration(
+              border: Border.all(width: 1.w, color: AppColors.grey),
+              shape: BoxShape.circle,
+            ),
+          );
   }
 
   @override

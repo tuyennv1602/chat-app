@@ -91,7 +91,7 @@ class ItemTask extends StatelessWidget {
                         onTap: () => showModalBottomSheet(
                           context: context,
                           builder: (context) {
-                            return TaskOptionSheet();
+                            return TaskOptionSheet(task: task);
                           },
                           isScrollControlled: true,
                         ),

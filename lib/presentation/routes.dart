@@ -74,7 +74,13 @@ class Routes {
       case SignInScreen.route:
         return FadeInRoute(widget: SignInScreen());
       case CreateTaskScreen.router:
-        return FadeInRoute(widget: CreateTaskScreen());
+        final Map arguments = settings.arguments;
+        return SlideLeftRoute(
+          widget: CreateTaskScreen(
+            room: arguments['room'],
+            task: arguments['task'],
+          ),
+        );
       case SignUpScreen.route:
         return SlideLeftRoute(widget: SignUpScreen());
       case ForgotPasswordScreen.route:
@@ -83,7 +89,8 @@ class Routes {
         return FadeInRoute(widget: HomeScreen());
       case TaskDetailScreen.route:
         final Map arguments = settings.arguments;
-        return SlideLeftRoute(widget: TaskDetailScreen(
+        return SlideLeftRoute(
+            widget: TaskDetailScreen(
           taskId: arguments['taskId'],
           taskTitle: arguments['taskTitle'],
         ));

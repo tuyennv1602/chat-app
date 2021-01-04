@@ -14,7 +14,6 @@ import 'package:chat_app/data/repositories/message_repository_impl.dart';
 import 'package:chat_app/data/repositories/room_repository_impl.dart';
 import 'package:chat_app/data/repositories/task_repository_impl.dart';
 import 'package:chat_app/data/repositories/user_repository_impl.dart';
-import 'package:chat_app/domain/entities/task_entity.dart';
 import 'package:chat_app/domain/repositories/authentication_repository.dart';
 import 'package:chat_app/domain/repositories/message_repository.dart';
 import 'package:chat_app/domain/repositories/room_repository.dart';
@@ -35,6 +34,7 @@ import 'package:chat_app/presentation/features/home/bloc/room_bloc/room_bloc.dar
 import 'package:chat_app/presentation/features/profile/bloc/avatar_bloc/update_avatar_bloc.dart';
 import 'package:chat_app/presentation/features/select_member/bloc/search_member_bloc/search_member_bloc.dart';
 import 'package:chat_app/presentation/features/select_member/bloc/select_member_bloc/select_member_bloc.dart';
+import 'package:chat_app/presentation/features/task/bloc/create_task_bloc/create_task_bloc.dart';
 import 'package:chat_app/presentation/features/task/bloc/task_detail_bloc/task_detail_bloc.dart';
 import 'package:chat_app/presentation/features/task/bloc/task_list_bloc/task_list_bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -70,6 +70,7 @@ abstract class Injector {
   @Register.factory(TaskListBloc)
   @Register.factory(TaskDetailBloc)
   @Register.factory(OptionBloc)
+  @Register.factory(CreateTaskBloc)
   @Register.factory(SignInBloc)
   @Register.factory(SignUpBloc)
   @Register.factory(ActiveAccountBloc)

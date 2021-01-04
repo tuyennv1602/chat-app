@@ -1,3 +1,4 @@
+import 'package:chat_app/common/blocs/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/injector/injector.dart';
@@ -32,16 +33,22 @@ class TaskListScreen extends StatefulWidget {
 
 class _TaskListScreenState extends State<TaskListScreen> {
   TaskListBloc _taskListBloc;
+  AuthBloc _authBloc;
   List<TaskEntity> _tasks = [];
+  bool _isAdmin;
 
   @override
   void initState() {
     super.initState();
     _taskListBloc = Injector.resolve<TaskListBloc>()..add(OnGetAllTasksEvent(roomId: widget.room.id));
+    _authBloc = Injector.resolve<AuthBloc>();
+    _isAdmin = _authBloc.state.user.id == widget.room.adminId;
   }
+
   @override
   void dispose() {
     _taskListBloc.close();
+    _authBloc.close();
     super.dispose();
   }
 
@@ -56,14 +63,23 @@ class _TaskListScreenState extends State<TaskListScreen> {
               translate(StringConst.task),
               style: textStyleAppbar,
             ),
-            trailing: GestureDetector(
-              onTap: () => Routes.instance.navigate(CreateTaskScreen.router),
-              child: SvgPicture.asset(
-                IconConst.addTask,
-                width: 20.w,
-                height: 20.w,
-              ),
-            ),
+            trailing: _isAdmin
+                ? GestureDetector(
+                    onTap: () async {
+                     final result = await Routes.instance.navigate(CreateTaskScreen.router, arguments: {
+                       'room': widget.room,
+                     });
+                     if(result != null && result){
+                       _taskListBloc.add(OnGetAllTasksEvent(roomId: widget.room.id));
+                     }
+                    },
+                    child: SvgPicture.asset(
+                      IconConst.addTask,
+                      width: 20.w,
+                      height: 20.w,
+                    ),
+                  )
+                : const SizedBox(),
           ),
           Expanded(
             child: BlocBuilder<TaskListBloc, TaskListState>(

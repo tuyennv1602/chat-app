@@ -355,3 +355,6 @@ This command will analyze all lint rules. It looks good if no issues found. Or e
 # Screenshots or GIFs
 
 (Taking a few seconds to provide images will likely save you explanation time in code-review... )
+
+flutter build apk --profile
+flutter build apk --release
