@@ -36,6 +36,13 @@ class StringConst {
   static const contentTask = 'label.content_task';
   static const task = 'label.task';
   static const close = 'label.close';
+  static const boss = 'label.boss';
+  static const noTask = 'message.no_task';
+  static const memberImplement = 'label.member_implement';
+  static const priority = 'label.priority';
+  static const selectAll = 'label.selectAll';
+  static const unChecked = 'label.unChecked';
+  static const edit = 'label.edit';
 
   static const errorEmail = 'message.error_email';
   static const errorPassword = 'message.error_password';
@@ -44,6 +51,8 @@ class StringConst {
   static const errorFullName = 'message.error_full_name';
 
   static const enterEmail = 'message.enter_email';
+  static const enterTaskTitle = 'message.enter_task_title';
+  static const enterTaskContent = 'message.enter_task_content';
   static const enterPassword = 'message.enter_password';
   static const enterNickName = 'message.enter_nick_name';
   static const enterPhone = 'message.enter_phone';

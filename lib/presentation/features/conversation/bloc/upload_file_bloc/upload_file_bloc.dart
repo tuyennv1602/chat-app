@@ -1,3 +1,4 @@
+import 'package:chat_app/common/utils/error_utils.dart';
 import 'package:chat_app/domain/usecases/message_usecase.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/socket_bloc/socket_bloc.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/socket_bloc/socket_event.dart';
@@ -22,7 +23,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
       yield UploadedFileState();
       socketBloc.add(SendMessageEvent(message: _message..content = resp));
     } catch (e) {
-      yield ErroredUploadFileState('Error');
+      yield ErroredUploadFileState(ErrorUtils.parseError(e));
     }
   }
 }

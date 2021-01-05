@@ -32,6 +32,7 @@ class ActiveAccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: BlocProvider.value(
         value: activeAccountBloc,
         child: BlocListener<ActiveAccountBloc, ActiveAccountState>(

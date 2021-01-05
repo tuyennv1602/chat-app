@@ -152,8 +152,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
                 onTapTrailing: () => Routes.instance.navigate(
                   OptionScreen.route,
                   arguments: {
+                    'room': widget.room,
                     'locationBloc': _locationBloc,
-                    'roomId': widget.room.id,
                   },
                 ),
               ),

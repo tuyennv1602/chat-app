@@ -1,14 +1,10 @@
 import 'package:chat_app/common/blocs/loading_bloc/loading_bloc.dart';
 import 'package:chat_app/common/blocs/loading_bloc/loading_event.dart';
-import 'package:chat_app/common/constants/strings.dart';
-import 'package:chat_app/common/exception/network_exception.dart';
+import 'package:chat_app/common/utils/error_utils.dart';
 import 'package:chat_app/domain/usecases/room_usecase.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/option_bloc/option_event.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/option_bloc/option_state.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:chat_app/common/extensions/dio_ext.dart';
-import 'package:flutter_translate/global.dart';
 
 class OptionBloc extends Bloc<OptionEvent, OptionState> {
   final LoadingBloc loadingBloc;
@@ -35,17 +31,9 @@ class OptionBloc extends Bloc<OptionEvent, OptionState> {
       final resp = await roomUseCase.getJoinCode(event.roomId);
       loadingBloc.add(FinishLoading());
       yield LoadedJoinCodeOptionState(resp.roomCode);
-    } on DioError catch (e) {
-      yield* _handleError(e.errorMessage);
-    } on NetworkException catch (e) {
-      yield* _handleError(e.message);
     } catch (e) {
-      yield* _handleError(translate(StringConst.unknowError));
+      loadingBloc.add(FinishLoading());
+      yield ErroredOptionState(ErrorUtils.parseError(e));
     }
-  }
-
-  Stream<OptionState> _handleError(String message) async* {
-    loadingBloc.add(FinishLoading());
-    yield ErroredOptionState(message);
   }
 }

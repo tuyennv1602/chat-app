@@ -74,7 +74,13 @@ class Routes {
       case SignInScreen.route:
         return FadeInRoute(widget: SignInScreen());
       case CreateTaskScreen.router:
-        return FadeInRoute(widget: CreateTaskScreen());
+        final Map arguments = settings.arguments;
+        return SlideLeftRoute(
+          widget: CreateTaskScreen(
+            room: arguments['room'],
+            task: arguments['task'],
+          ),
+        );
       case SignUpScreen.route:
         return SlideLeftRoute(widget: SignUpScreen());
       case ForgotPasswordScreen.route:
@@ -82,7 +88,12 @@ class Routes {
       case HomeScreen.route:
         return FadeInRoute(widget: HomeScreen());
       case TaskDetailScreen.route:
-        return SlideLeftRoute(widget: TaskDetailScreen());
+        final Map arguments = settings.arguments;
+        return SlideLeftRoute(
+            widget: TaskDetailScreen(
+          taskId: arguments['taskId'],
+          taskTitle: arguments['taskTitle'],
+        ));
       case CreateRoomScreen.route:
         return SlideLeftRoute(widget: CreateRoomScreen());
       case SelectMemberScreen.route:
@@ -92,9 +103,10 @@ class Routes {
           selectMemberBloc: arguments['bloc'],
         ));
       case ForgotPasswordSuccessScreen.router:
-        return FadeInRoute(widget: ForgotPasswordSuccessScreen());
+        return SlideLeftRoute(widget: ForgotPasswordSuccessScreen());
       case TaskListScreen.router:
-        return FadeInRoute(widget: TaskListScreen());
+        final Map arguments = settings.arguments;
+        return SlideLeftRoute(widget: TaskListScreen(room: arguments['room']));
       case ActiveAccountScreen.route:
         final Map arguments = settings.arguments;
         return FadeInRoute(
@@ -120,14 +132,13 @@ class Routes {
       case OptionScreen.route:
         final Map arguments = settings.arguments;
         return SlideLeftRoute(
-          widget: OptionScreen(
-            locationBloc: arguments['locationBloc'],
-            roomId: arguments['roomId'],
-          ),
-        );
+            widget: OptionScreen(
+          room: arguments['room'],
+          locationBloc: arguments['locationBloc'],
+        ));
       case MapScreen.route:
         final Map arguments = settings.arguments;
-        return SlideLeftRoute(
+        return FadeInRoute(
           widget: MapScreen(
             locationBloc: arguments['locationBloc'],
             roomId: arguments['roomId'],

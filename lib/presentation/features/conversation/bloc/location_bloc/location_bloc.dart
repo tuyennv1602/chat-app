@@ -1,11 +1,7 @@
-import 'package:chat_app/common/constants/strings.dart';
-import 'package:chat_app/common/exception/network_exception.dart';
+import 'package:chat_app/common/utils/error_utils.dart';
 import 'package:chat_app/data/models/position_model.dart';
 import 'package:chat_app/domain/usecases/room_usecase.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_translate/global.dart';
-import 'package:chat_app/common/extensions/dio_ext.dart';
 import 'package:geocoder/geocoder.dart';
 
 import 'location_event.dart';
@@ -47,12 +43,8 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
         event.roomId,
       );
       yield UpdatedLocationState(event.location);
-    } on DioError catch (e) {
-      yield ErroredUpdateLocationState(e.errorMessage);
-    } on NetworkException catch (e) {
-      yield ErroredUpdateLocationState(e.message);
     } catch (e) {
-      yield ErroredUpdateLocationState(translate(StringConst.unknowError));
+      yield ErroredUpdateLocationState(ErrorUtils.parseError(e));
     }
   }
 }

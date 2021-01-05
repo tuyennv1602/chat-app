@@ -19,4 +19,5 @@ class AppColors {
   static const shadow = Color(0xFFD9d9d9);
   static const messageBox = Color(0xffEDEDED);
   static const placeHolder = Color(0xffecece0);
+  static const blue = Colors.blue;
 }

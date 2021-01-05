@@ -49,4 +49,7 @@ class IconConst {
   static const String mp3 = '${path}mp3.svg';
   static const String pause = '${path}pause.svg';
   static const String refresh = '${path}refresh.svg';
+  static const String flag = '${path}flag.svg';
+  static const String calendar = '${path}calendar.svg';
+  static const String ellipsis = '${path}ellipsis.svg';
 }
