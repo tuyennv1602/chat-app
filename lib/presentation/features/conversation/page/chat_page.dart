@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:chat_app/common/blocs/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/strings.dart';
+import 'package:chat_app/common/enum/message_type.dart';
 import 'package:chat_app/common/injector/injector.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/utils/alert_utils.dart';
@@ -53,7 +54,7 @@ class _ChatPageState extends State<ChatPage> {
   final RefreshController _refershController = RefreshController(initialRefresh: false);
   final ValueNotifier<bool> _inputMessageNotifier = ValueNotifier(false);
   final ValueNotifier<bool> _attachNotifier = ValueNotifier(false);
-  static final GlobalKey<AnimatedButtonWidgetState> _keyFabButton = GlobalKey();
+  final GlobalKey<AnimatedButtonWidgetState> _keyFabButton = GlobalKey();
   int userId;
 
   @override
@@ -200,7 +201,8 @@ class _ChatPageState extends State<ChatPage> {
                           final _previous = index == 0 ? null : state.messages[index - 1];
                           final _next =
                               index == state.messages.length - 1 ? null : state.messages[index + 1];
-                          if (_message.id == null && _message.contentType != MessageType.text) {
+                          if (_message.id == null &&
+                              _message.type.toMessageType != MessageType.text) {
                             return Builder(
                               key: ValueKey<String>('MESSAGE-${_message.createdAt}'),
                               builder: (_) => SendFileBubble(

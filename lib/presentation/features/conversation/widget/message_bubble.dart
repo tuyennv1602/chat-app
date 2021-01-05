@@ -1,5 +1,6 @@
 import 'package:chat_app/common/blocs/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/common/constants/icons.dart';
+import 'package:chat_app/common/enum/message_type.dart';
 import 'package:chat_app/common/injector/injector.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
@@ -162,7 +163,7 @@ class _MessageState extends State<MessageBubble> with AutomaticKeepAliveClientMi
       );
 
   Widget _renderContent() {
-    switch (widget.message.contentType) {
+    switch (widget.message.type.toMessageType) {
       case MessageType.image:
         return ImageBox(
           message: widget.message,

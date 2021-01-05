@@ -4,6 +4,7 @@ import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:chat_app/common/widgets/circle_avatar.dart';
 import 'package:chat_app/domain/entities/member_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:chat_app/common/extensions/string_ext.dart';
 
 class GroupAvatartWidget extends StatelessWidget {
   final List<MemberEntity> members;
@@ -20,14 +21,16 @@ class GroupAvatartWidget extends StatelessWidget {
       );
 
   Widget _renderImage(String source) => SizedBox.expand(
-        child: CachedNetworkImage(
-          placeholder: (context, url) => _defaultAvatar(),
-          errorWidget: (context, url, error) => _defaultAvatar(),
-          imageUrl: source,
-          fit: BoxFit.cover,
-          fadeInDuration: Duration.zero,
-          fadeOutDuration: Duration.zero,
-        ),
+        child: source.isEmptyOrNull
+            ? _defaultAvatar()
+            : CachedNetworkImage(
+                placeholder: (context, url) => _defaultAvatar(),
+                errorWidget: (context, url, error) => _defaultAvatar(),
+                imageUrl: source,
+                fit: BoxFit.cover,
+                fadeInDuration: Duration.zero,
+                fadeOutDuration: Duration.zero,
+              ),
       );
 
   @override
@@ -36,7 +39,7 @@ class GroupAvatartWidget extends StatelessWidget {
     final _memberSize = 22.w;
     return members.length == 1
         ? CircleAvatarWidget(
-            source: members[0].fullAvatar,
+            source: members[0]?.fullAvatar,
             isActive: members[0].isOnline,
             onTap: onTap,
           )
@@ -58,7 +61,7 @@ class GroupAvatartWidget extends StatelessWidget {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(_ownerSize / 2),
-                          child: _renderImage(members[0].fullAvatar),
+                          child: _renderImage(members[0]?.fullAvatar),
                         ),
                       ),
                     ),

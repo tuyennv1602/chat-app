@@ -39,20 +39,4 @@ class RoomResponseModel {
     prevNum = json['prev_num'];
     total = json['total'];
   }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['has_next'] = hasNext;
-    data['has_prev'] = hasPrev;
-    if (rooms != null) {
-      data['items'] = rooms.map((v) => v.toJson()).toList();
-    }
-    data['next_num'] = nextNum;
-    data['page'] = page;
-    data['pages'] = pages;
-    data['per_page'] = perPage;
-    data['prev_num'] = prevNum;
-    data['total'] = total;
-    return data;
-  }
 }

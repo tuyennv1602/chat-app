@@ -15,8 +15,6 @@ class MarkerUtils {
     String url, {
     int targetWidth = 100,
   }) async {
-    assert(url != null, 'url non null');
-
     Uint8List markerImageBytes;
 
     if (url.isEmptyOrNull) {

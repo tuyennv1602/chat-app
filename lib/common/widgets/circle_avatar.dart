@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
+import 'package:chat_app/common/extensions/string_ext.dart';
 
 class CircleAvatarWidget extends StatelessWidget {
   final String source;
@@ -32,16 +33,18 @@ class CircleAvatarWidget extends StatelessWidget {
             onTap: onTap,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(_size / 2),
-              child: CachedNetworkImage(
-                placeholder: (context, url) => _defaultAvatar(),
-                errorWidget: (context, url, error) => _defaultAvatar(),
-                imageUrl: source,
-                fit: BoxFit.cover,
-                height: _size,
-                width: _size,
-                fadeInDuration: Duration.zero,
-                fadeOutDuration: Duration.zero,
-              ),
+              child: source.isEmptyOrNull
+                  ? _defaultAvatar()
+                  : CachedNetworkImage(
+                      placeholder: (context, url) => _defaultAvatar(),
+                      errorWidget: (context, url, error) => _defaultAvatar(),
+                      imageUrl: source,
+                      fit: BoxFit.cover,
+                      height: _size,
+                      width: _size,
+                      fadeInDuration: Duration.zero,
+                      fadeOutDuration: Duration.zero,
+                    ),
             ),
           ),
           if (isActive)

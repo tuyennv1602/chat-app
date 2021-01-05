@@ -2,6 +2,7 @@ import 'package:chat_app/common/blocs/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/common/constants/icons.dart';
 import 'package:chat_app/common/constants/strings.dart';
 import 'package:chat_app/common/injector/injector.dart';
+import 'package:chat_app/common/platform/location_check.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/utils/alert_utils.dart';
@@ -12,6 +13,8 @@ import 'package:chat_app/common/widgets/custom_alert.dart';
 import 'package:chat_app/common/widgets/toast_widget.dart';
 import 'package:chat_app/common/widgets/group_avatar.dart';
 import 'package:chat_app/domain/entities/room_entity.dart';
+import 'package:chat_app/presentation/features/conversation/bloc/location_bloc/location_bloc.dart';
+import 'package:chat_app/presentation/features/conversation/bloc/location_bloc/location_event.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/message_bloc/message_bloc.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/message_bloc/message_event.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/message_bloc/message_state.dart';
@@ -26,6 +29,7 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
 import 'package:flutter_translate/global.dart';
+import 'package:location/location.dart';
 import 'package:sprintf/sprintf.dart';
 
 class ConversationScreen extends StatefulWidget {
@@ -41,15 +45,20 @@ class ConversationScreen extends StatefulWidget {
 class _ConversationScreenState extends State<ConversationScreen> {
   MessageBloc _messageBloc;
   SocketBloc _socketBloc;
+  LocationBloc _locationBloc;
+  int _userId;
 
   @override
   void initState() {
+    _userId = Injector.resolve<AuthBloc>().state.user.id;
     _messageBloc = Injector.resolve<MessageBloc>()..add(LoadMessagesEvent(widget.room.id));
     _socketBloc = SocketBloc(
       roomId: widget.room.id,
       messageBloc: _messageBloc,
-      userId: Injector.resolve<AuthBloc>().state.user.id,
+      userId: _userId,
     );
+    _locationBloc = Injector.resolve<LocationBloc>();
+    _initLocation();
     super.initState();
   }
 
@@ -57,7 +66,20 @@ class _ConversationScreenState extends State<ConversationScreen> {
   void dispose() {
     _messageBloc.close();
     _socketBloc.close();
+    _locationBloc.close();
     super.dispose();
+  }
+
+  Future<void> _initLocation() async {
+    final _location = await LocationCheck.initLocation();
+    if (_location == null) {
+      return;
+    }
+    final _locationData = await _location.getLocation();
+    _locationBloc.add(UpdateLocationEvent(_locationData, widget.room.id, _userId));
+    _location.onLocationChanged.listen((LocationData currentLocation) {
+      _locationBloc.add(UpdateLocationEvent(currentLocation, widget.room.id, _userId));
+    });
   }
 
   @override
@@ -65,7 +87,10 @@ class _ConversationScreenState extends State<ConversationScreen> {
     return BaseScaffold(
       dismissKeyboard: false,
       child: MultiBlocProvider(
-        providers: [BlocProvider.value(value: _messageBloc), BlocProvider.value(value: _socketBloc)],
+        providers: [
+          BlocProvider.value(value: _messageBloc),
+          BlocProvider.value(value: _socketBloc)
+        ],
         child: MultiBlocListener(
           listeners: [
             BlocListener<SocketBloc, SocketState>(
@@ -110,7 +135,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
                               style: textStyleAppbar,
                             ),
                             Text(
-                              sprintf(translate(StringConst.memberCount), [widget.room.totalMember]),
+                              sprintf(
+                                  translate(StringConst.memberCount), [widget.room.totalMember]),
                               style: TextStyle(
                                 fontSize: 12.sp,
                                 color: AppColors.warmGrey,
@@ -127,6 +153,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                   OptionScreen.route,
                   arguments: {
                     'room': widget.room,
+                    'locationBloc': _locationBloc,
                   },
                 ),
               ),

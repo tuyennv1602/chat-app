@@ -1,6 +1,8 @@
 import 'package:chat_app/common/network/client.dart';
+import 'package:chat_app/data/models/position_model.dart';
 import 'package:chat_app/data/models/response/join_code_response_model.dart';
 import 'package:chat_app/data/models/response/join_room_response_model.dart';
+import 'package:chat_app/data/models/response/member_position_response_model.dart';
 import 'package:chat_app/data/models/response/rooms_response_model.dart';
 
 class RoomRemoteDataSource {
@@ -31,5 +33,19 @@ class RoomRemoteDataSource {
       'members': memberIDs,
     });
     return JoinRoomResponseModel.fromJson(resp.data['data']);
+  }
+
+  Future<dynamic> updateLocation(PositionModel position, int userId, int roomId) async {
+    final body = <String, dynamic>{
+      'room_id': roomId,
+      'user_id': userId,
+    };
+    final resp = await client.put('position', body: body..addAll(position.toJson()));
+    return resp.data;
+  }
+
+  Future<MemberPositionResponseModel> getMemberPositions(int roomId) async {
+    final resp = await client.get('positions/room', queryParams: {'room_id': roomId});
+    return MemberPositionResponseModel.fromJson(resp.data);
   }
 }

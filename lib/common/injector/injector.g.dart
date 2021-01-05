@@ -46,6 +46,10 @@ class _$Injector extends Injector {
         roomUseCase: c<RoomUseCase>()));
     container.registerFactory(
         (c) => MessageBloc(messageUseCase: c<MessageUseCase>()));
+    container
+        .registerFactory((c) => LocationBloc(roomUseCase: c<RoomUseCase>()));
+    container.registerFactory(
+        (c) => MemberPositionBloc(roomUseCase: c<RoomUseCase>()));
   }
 
   void _configureUseCases() {
@@ -66,24 +70,18 @@ class _$Injector extends Injector {
     final Container container = Container();
     container.registerSingleton<MessageRepository, MessageRepositoryImpl>((c) =>
         MessageRepositoryImpl(
-            messageRemoteDataSource: c<MessageRemoteDataSource>(),
-            networkInfo: c<NetworkInfoImpl>()));
+            messageRemoteDataSource: c<MessageRemoteDataSource>()));
     container.registerSingleton<AuthenticationRepository,
             AuthenticationRepositoryImpl>(
         (c) => AuthenticationRepositoryImpl(
             remoteDataSource: c<AuthenticationRemoteDataSource>(),
-            networkInfo: c<NetworkInfoImpl>(),
             localDataSource: c<LocalDataSource>()));
     container.registerSingleton<RoomRepository, RoomRepositoryImpl>((c) =>
-        RoomRepositoryImpl(
-            roomRemoteDataSource: c<RoomRemoteDataSource>(),
-            networkInfo: c<NetworkInfoImpl>()));
-    container.registerSingleton<TaskRepository, TaskRepositoryImpl>((c) =>
-        TaskRepositoryImpl(c<TaskRemoteDataSource>(), c<NetworkInfoImpl>()));
+        RoomRepositoryImpl(roomRemoteDataSource: c<RoomRemoteDataSource>()));
+    container.registerSingleton<TaskRepository, TaskRepositoryImpl>(
+        (c) => TaskRepositoryImpl(c<TaskRemoteDataSource>()));
     container.registerSingleton<UserRepository, UserRepositoryImpl>((c) =>
-        UserRepositoryImpl(
-            userRemoteDataSource: c<UserRemoteDataSource>(),
-            networkInfo: c<NetworkInfoImpl>()));
+        UserRepositoryImpl(userRemoteDataSource: c<UserRemoteDataSource>()));
   }
 
   void _configureRemoteDataSources() {

@@ -103,7 +103,7 @@ class Routes {
           selectMemberBloc: arguments['bloc'],
         ));
       case ForgotPasswordSuccessScreen.router:
-        return FadeInRoute(widget: ForgotPasswordSuccessScreen());
+        return SlideLeftRoute(widget: ForgotPasswordSuccessScreen());
       case TaskListScreen.router:
         final Map arguments = settings.arguments;
         return SlideLeftRoute(widget: TaskListScreen(room: arguments['room']));
@@ -131,9 +131,19 @@ class Routes {
         );
       case OptionScreen.route:
         final Map arguments = settings.arguments;
-        return SlideLeftRoute(widget: OptionScreen(room: arguments['room']));
+        return SlideLeftRoute(
+            widget: OptionScreen(
+          room: arguments['room'],
+          locationBloc: arguments['locationBloc'],
+        ));
       case MapScreen.route:
-        return SlideLeftRoute(widget: MapScreen());
+        final Map arguments = settings.arguments;
+        return FadeInRoute(
+          widget: MapScreen(
+            locationBloc: arguments['locationBloc'],
+            roomId: arguments['roomId'],
+          ),
+        );
       case MyProfileScreen.route:
         return SlideLeftRoute(widget: MyProfileScreen());
       default:

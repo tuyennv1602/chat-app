@@ -42,7 +42,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static final GlobalKey<AnimatedButtonWidgetState> _keyFabButton = GlobalKey();
+  final GlobalKey<AnimatedButtonWidgetState> _keyFabButton = GlobalKey();
   final RefreshController _refershController = RefreshController(initialRefresh: false);
 
   FabMenuOverlay _fabMenu;
@@ -135,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         center: Center(
                           child: BlocBuilder<AuthBloc, AuthState>(
                             builder: (_, state) => CircleAvatarWidget(
-                              source: state.user.fullAvatar,
+                              source: state.user?.fullAvatar ?? '',
                               isActive: true,
                               onTap: () => Navigator.of(context).pushNamed(MyProfileScreen.route),
                             ),

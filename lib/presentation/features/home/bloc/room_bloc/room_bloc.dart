@@ -1,14 +1,10 @@
 import 'package:chat_app/common/blocs/loading_bloc/loading_bloc.dart';
 import 'package:chat_app/common/blocs/loading_bloc/loading_event.dart';
-import 'package:chat_app/common/constants/strings.dart';
-import 'package:chat_app/common/exception/network_exception.dart';
+import 'package:chat_app/common/utils/error_utils.dart';
 import 'package:chat_app/domain/usecases/room_usecase.dart';
 import 'package:chat_app/presentation/features/home/bloc/room_bloc/room_event.dart';
 import 'package:chat_app/presentation/features/home/bloc/room_bloc/room_state.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_translate/global.dart';
-import 'package:chat_app/common/extensions/dio_ext.dart';
 
 class RoomBloc extends Bloc<RoomEvent, RoomState> {
   final RoomUseCase roomUseCase;
@@ -47,12 +43,14 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
         canLoadMore: resp.hasNext,
         page: resp.page,
       );
-    } on DioError catch (e) {
-      yield* _handleError(e.errorMessage);
-    } on NetworkException catch (e) {
-      yield* _handleError(e.message);
     } catch (e) {
-      yield* _handleError(translate(StringConst.unknowError));
+      loadingBloc.add(FinishLoading());
+      yield ErrorLoadRoomState(
+        ErrorUtils.parseError(e),
+        rooms: state.rooms,
+        page: state.page,
+        canLoadMore: state.canLoadMore,
+      );
     }
   }
 
@@ -65,12 +63,14 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
         canLoadMore: resp.hasNext,
         page: resp.page,
       );
-    } on DioError catch (e) {
-      yield* _handleError(e.errorMessage);
-    } on NetworkException catch (e) {
-      yield* _handleError(e.message);
     } catch (e) {
-      yield* _handleError(translate(StringConst.unknowError));
+      loadingBloc.add(FinishLoading());
+      yield ErrorLoadRoomState(
+        ErrorUtils.parseError(e),
+        rooms: state.rooms,
+        page: state.page,
+        canLoadMore: state.canLoadMore,
+      );
     }
   }
 
@@ -83,12 +83,14 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
         canLoadMore: resp.hasNext,
         page: resp.page,
       );
-    } on DioError catch (e) {
-      yield* _handleError(e.errorMessage);
-    } on NetworkException catch (e) {
-      yield* _handleError(e.message);
     } catch (e) {
-      yield* _handleError(translate(StringConst.unknowError));
+      loadingBloc.add(FinishLoading());
+      yield ErrorLoadRoomState(
+        ErrorUtils.parseError(e),
+        rooms: state.rooms,
+        page: state.page,
+        canLoadMore: state.canLoadMore,
+      );
     }
   }
 
@@ -103,22 +105,14 @@ class RoomBloc extends Bloc<RoomEvent, RoomState> {
         canLoadMore: resp.hasNext,
         page: resp.page,
       );
-    } on DioError catch (e) {
-      yield* _handleError(e.errorMessage);
-    } on NetworkException catch (e) {
-      yield* _handleError(e.message);
     } catch (e) {
-      yield* _handleError(translate(StringConst.unknowError));
+      loadingBloc.add(FinishLoading());
+      yield ErrorLoadRoomState(
+        ErrorUtils.parseError(e),
+        rooms: state.rooms,
+        page: state.page,
+        canLoadMore: state.canLoadMore,
+      );
     }
-  }
-
-  Stream<RoomState> _handleError(String message) async* {
-    loadingBloc.add(FinishLoading());
-    yield ErrorLoadRoomState(
-      message,
-      rooms: state.rooms,
-      page: state.page,
-      canLoadMore: state.canLoadMore,
-    );
   }
 }

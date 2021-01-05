@@ -6,6 +6,7 @@ import 'package:chat_app/common/utils/alert_utils.dart';
 import 'package:chat_app/common/widgets/app_bar.dart';
 import 'package:chat_app/common/widgets/base_scaffold.dart';
 import 'package:chat_app/common/widgets/custom_alert.dart';
+import 'package:chat_app/presentation/features/conversation/bloc/location_bloc/location_bloc.dart';
 import 'package:chat_app/domain/entities/room_entity.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/option_bloc/option_bloc.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/option_bloc/option_event.dart';
@@ -23,8 +24,9 @@ import 'package:sprintf/sprintf.dart';
 class OptionScreen extends StatefulWidget {
   static const String route = '/option';
   final RoomEntity room;
+  final LocationBloc locationBloc;
 
-  OptionScreen({Key key, this.room}) : super(key: key);
+  OptionScreen({Key key, this.room, this.locationBloc}) : super(key: key);
 
   @override
   _OptionScreenState createState() => _OptionScreenState();
@@ -86,14 +88,16 @@ class _OptionScreenState extends State<OptionScreen> {
                       ItemConversationOption(
                         icon: IconConst.mapPin,
                         title: translate(StringConst.memberLocation),
-                        onTap: () => Routes.instance.navigate(MapScreen.route),
+                        onTap: () => Routes.instance.navigate(MapScreen.route, arguments: {
+                          'locationBloc': widget.locationBloc,
+                          'roomId': widget.room.id,
+                        }),
                       ),
                       ItemConversationOption(
                         icon: IconConst.task,
                         title: translate(StringConst.task),
-                        onTap: () => Routes.instance.navigate(TaskListScreen.router, arguments: {
-                          'room': widget.room
-                        }),
+                        onTap: () => Routes.instance
+                            .navigate(TaskListScreen.router, arguments: {'room': widget.room}),
                       ),
                       ItemConversationOption(
                         icon: IconConst.group,
@@ -107,7 +111,7 @@ class _OptionScreenState extends State<OptionScreen> {
                         icon: IconConst.shareCode,
                         title: translate(StringConst.joinCode),
                         onTap: () {
-                          _optionBloc.add(GetJoinCodeEvent(5));
+                          _optionBloc.add(GetJoinCodeEvent(widget.room.id));
                         },
                       ),
                       ItemConversationOption(

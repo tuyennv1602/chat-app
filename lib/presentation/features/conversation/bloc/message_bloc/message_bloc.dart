@@ -1,13 +1,9 @@
-import 'package:chat_app/common/constants/strings.dart';
-import 'package:chat_app/common/exception/network_exception.dart';
+import 'package:chat_app/common/utils/error_utils.dart';
 import 'package:chat_app/data/models/message_model.dart';
 import 'package:chat_app/domain/usecases/message_usecase.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/message_bloc/message_event.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/message_bloc/message_state.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:chat_app/common/extensions/dio_ext.dart';
-import 'package:flutter_translate/global.dart';
 
 class MessageBloc extends Bloc<MessageEvent, MessageState> {
   final _pageSize = 30;
@@ -55,12 +51,13 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
         canLoadMore: resp.hasNext,
         page: resp.page,
       );
-    } on DioError catch (e) {
-      yield* _handleError(e.errorMessage);
-    } on NetworkException catch (e) {
-      yield* _handleError(e.message);
     } catch (e) {
-      yield* _handleError(translate(StringConst.unknowError));
+      yield ErroredMessageState(
+        error: ErrorUtils.parseError(e),
+        messages: state.messages,
+        page: state.page,
+        canLoadMore: state.canLoadMore,
+      );
     }
   }
 
@@ -75,21 +72,13 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
         canLoadMore: resp.hasNext,
         page: resp.page,
       );
-    } on DioError catch (e) {
-      yield* _handleError(e.errorMessage);
-    } on NetworkException catch (e) {
-      yield* _handleError(e.message);
     } catch (e) {
-      yield* _handleError(translate(StringConst.unknowError));
+      yield ErroredMessageState(
+        error: ErrorUtils.parseError(e),
+        messages: state.messages,
+        page: state.page,
+        canLoadMore: state.canLoadMore,
+      );
     }
-  }
-
-  Stream<MessageState> _handleError(String message) async* {
-    yield ErroredMessageState(
-      error: message,
-      messages: state.messages,
-      page: state.page,
-      canLoadMore: state.canLoadMore,
-    );
   }
 }

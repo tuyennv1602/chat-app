@@ -27,6 +27,8 @@ import 'package:chat_app/domain/usecases/user_usecase.dart';
 import 'package:chat_app/presentation/features/authentication/bloc/active_account/active_account_bloc.dart';
 import 'package:chat_app/presentation/features/authentication/bloc/sign_in/sign_in_bloc.dart';
 import 'package:chat_app/presentation/features/authentication/bloc/sign_up/sign_up_bloc.dart';
+import 'package:chat_app/presentation/features/conversation/bloc/location_bloc/location_bloc.dart';
+import 'package:chat_app/presentation/features/conversation/bloc/member_position_bloc/member_position_bloc.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/message_bloc/message_bloc.dart';
 import 'package:chat_app/presentation/features/conversation/bloc/option_bloc/option_bloc.dart';
 import 'package:chat_app/presentation/features/home/bloc/create_room_bloc/create_room_bloc.dart';
@@ -78,6 +80,8 @@ abstract class Injector {
   @Register.factory(SelectMemberBloc)
   @Register.factory(CreateRoomBloc)
   @Register.factory(MessageBloc)
+  @Register.factory(LocationBloc)
+  @Register.factory(MemberPositionBloc)
   void _configureBlocs();
 
   // ============USE CASES==============
