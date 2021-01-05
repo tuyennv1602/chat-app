@@ -1,4 +1,3 @@
-import 'package:chat_app/common/network/configs.dart';
 import 'package:chat_app/domain/entities/user_entity.dart';
 
 // ignore: must_be_immutable

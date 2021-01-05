@@ -8,7 +8,9 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CAMERA"/>
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="chat_app"
@@ -50,5 +52,6 @@
             android:value="2" />
         <meta-data android:name="com.google.android.geo.API_KEY"
                    android:value="AIzaSyDqosCiyh1Mo-5CyKqbGgtCcpR962DWy_k"/>
+       
     </application>
 </manifest>

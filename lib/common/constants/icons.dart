@@ -48,4 +48,5 @@ class IconConst {
   static const String sending = '${path}sending.svg';
   static const String mp3 = '${path}mp3.svg';
   static const String pause = '${path}pause.svg';
+  static const String refresh = '${path}refresh.svg';
 }

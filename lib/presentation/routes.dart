@@ -118,9 +118,21 @@ class Routes {
           widget: VideoPlayerScreen(arguments['message']),
         );
       case OptionScreen.route:
-        return SlideLeftRoute(widget: OptionScreen());
+        final Map arguments = settings.arguments;
+        return SlideLeftRoute(
+          widget: OptionScreen(
+            locationBloc: arguments['locationBloc'],
+            roomId: arguments['roomId'],
+          ),
+        );
       case MapScreen.route:
-        return SlideLeftRoute(widget: MapScreen());
+        final Map arguments = settings.arguments;
+        return SlideLeftRoute(
+          widget: MapScreen(
+            locationBloc: arguments['locationBloc'],
+            roomId: arguments['roomId'],
+          ),
+        );
       case MyProfileScreen.route:
         return SlideLeftRoute(widget: MyProfileScreen());
       default:

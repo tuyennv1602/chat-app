@@ -1,8 +1,8 @@
 import 'package:chat_app/common/constants/strings.dart';
+import 'package:chat_app/common/enum/message_type.dart';
 import 'package:chat_app/common/themes/app_colors.dart';
 import 'package:chat_app/common/themes/app_text_theme.dart';
 import 'package:chat_app/common/widgets/group_avatar.dart';
-import 'package:chat_app/domain/entities/message_entity.dart';
 import 'package:chat_app/domain/entities/room_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/extensions/screen_ext.dart';
@@ -23,7 +23,7 @@ class ItemConversationWidget extends StatelessWidget {
     if (room.lastMessage == null) {
       return '[${translate(StringConst.emptyMessage)}]';
     }
-    switch (room.lastMessage.contentType) {
+    switch (room.lastMessage.type.toMessageType) {
       case MessageType.text:
         return room.lastMessage.content;
       case MessageType.audio:

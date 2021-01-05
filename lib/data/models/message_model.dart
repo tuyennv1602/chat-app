@@ -1,12 +1,13 @@
 import 'package:chat_app/data/models/user_model.dart';
 import 'package:chat_app/domain/entities/message_entity.dart';
+import 'package:chat_app/domain/entities/user_entity.dart';
 
 class MessageModel extends MessageEntity {
   String fileExtension;
 
   MessageModel({
     int id,
-    UserModel sender,
+    UserEntity sender,
     String content,
     String createdAt,
     int type,
@@ -27,17 +28,5 @@ class MessageModel extends MessageEntity {
     type = json['content_type'];
     content = json['content'];
     createdAt = json['created_at'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['content'] = content;
-    data['content_type'] = type;
-    data['created_at'] = createdAt;
-    if (sender != null) {
-      data['created_by'] = sender.toJson();
-    }
-    return data;
   }
 }

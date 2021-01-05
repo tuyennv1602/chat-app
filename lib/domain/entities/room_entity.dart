@@ -1,13 +1,14 @@
-import 'package:chat_app/data/models/member_model.dart';
-import 'package:chat_app/data/models/message_model.dart';
+import 'package:chat_app/domain/entities/message_entity.dart';
+
+import 'member_entity.dart';
 
 class RoomEntity {
   int id;
   String name;
   int adminId;
   int totalMember;
-  List<MemberModel> members;
-  MessageModel lastMessage;
+  List<MemberEntity> members;
+  MessageEntity lastMessage;
   bool isRead;
 
   RoomEntity({

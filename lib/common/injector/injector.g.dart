@@ -40,6 +40,10 @@ class _$Injector extends Injector {
         roomUseCase: c<RoomUseCase>()));
     container.registerFactory(
         (c) => MessageBloc(messageUseCase: c<MessageUseCase>()));
+    container
+        .registerFactory((c) => LocationBloc(roomUseCase: c<RoomUseCase>()));
+    container.registerFactory(
+        (c) => MemberPositionBloc(roomUseCase: c<RoomUseCase>()));
   }
 
   void _configureUseCases() {
