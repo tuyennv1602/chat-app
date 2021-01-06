@@ -24,8 +24,9 @@ class TaskDetailScreen extends StatefulWidget {
   static const String route = '/task_detail';
   final String taskTitle;
   final int taskId;
+  final bool isAdmin;
 
-  TaskDetailScreen({Key key, this.taskTitle, this.taskId}) : super(key: key);
+  TaskDetailScreen({Key key, this.taskTitle, this.taskId, this.isAdmin}) : super(key: key);
 
   @override
   _TaskDetailScreenState createState() => _TaskDetailScreenState();
@@ -63,7 +64,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
               onTap: () => showModalBottomSheet(
                 context: context,
                 builder: (context) {
-                  return TaskOptionSheet();
+                  return TaskOptionSheet(task: _task, isAdmin: widget.isAdmin);
                 },
                 isScrollControlled: true,
               ),

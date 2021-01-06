@@ -38,7 +38,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
   TextEditingController _taskTitleCtrl;
   TextEditingController _taskContentCtrl;
   List<MemberEntity> _listMember;
-  List<int> _listSelectedMemberId;
+  List<int> _listSelectedMemberId = [];
   DateTime _createDate;
   DateTime _finishDate;
   int _priorityId;
@@ -51,8 +51,8 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
     _createDate = widget.task?.startTime ?? DateTime.now();
     _finishDate = widget.task?.endTime ?? _createDate.add(const Duration(minutes: 15));
     _listMember = widget.room?.members ?? widget.task?.members;
-    _listSelectedMemberId = widget.task?.members ?? [];
     _isEditTask = widget.task != null;
+    _getListSelectedMemberId();
     /// TO DO convert priority
     _priorityId = 3;
 
@@ -80,6 +80,18 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
         ),
       );
     super.initState();
+  }
+
+  void _getListSelectedMemberId() {
+    if (widget.task != null) {
+      widget.task.members == null
+          ? _listSelectedMemberId = []
+          : widget.task.members.forEach((e) {
+              _listSelectedMemberId.add(e.id);
+            });
+    } else {
+      _listSelectedMemberId = [];
+    }
   }
 
   @override
@@ -181,7 +193,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                           isEnable: state.enableButton,
                           onTap: () {
                             if (state.enableButton) {
-                              if(!_isEditTask){
+                              if (!_isEditTask) {
                                 _createTaskBloc.add(OnSubmitCreateTaskEvent());
                               }
                             }

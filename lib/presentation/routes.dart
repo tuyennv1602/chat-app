@@ -93,6 +93,7 @@ class Routes {
             widget: TaskDetailScreen(
           taskId: arguments['taskId'],
           taskTitle: arguments['taskTitle'],
+          isAdmin: arguments['isAdmin'],
         ));
       case CreateRoomScreen.route:
         return SlideLeftRoute(widget: CreateRoomScreen());

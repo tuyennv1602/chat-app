@@ -114,6 +114,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                         itemBuilder: (context, index) {
                           return ItemTask(
                             task: _tasks[index],
+                            isAdmin: _isAdmin,
                           );
                         },
                       );

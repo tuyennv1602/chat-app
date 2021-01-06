@@ -11,13 +11,14 @@ import 'package:flutter_translate/flutter_translate.dart';
 
 class TaskOptionSheet extends StatelessWidget {
   final TaskEntity task;
+  final bool isAdmin;
 
-  TaskOptionSheet({Key key, this.task}) : super(key: key);
+  TaskOptionSheet({Key key, this.task, this.isAdmin}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250.h,
+      height: isAdmin ? 200.h : 100.h,
       padding: EdgeInsets.symmetric(horizontal: 15.w),
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -27,30 +28,40 @@ class TaskOptionSheet extends StatelessWidget {
       ),
       child: Column(
         children: [
-          ItemBottomSheet(
-            label: translate(StringConst.editTask),
-            onTap: () {
-              Routes.instance.pop();
-              Routes.instance.navigate(CreateTaskScreen.router, arguments: {
-                'task': task
-              });
-            },
+          Visibility(
+            visible: isAdmin,
+            child: Column(
+              children: [
+                ItemBottomSheet(
+                  label: translate(StringConst.editTask),
+                  onTap: () {
+                    Routes.instance.pop();
+                    Routes.instance.navigate(CreateTaskScreen.router, arguments: {
+                      'task': task
+                    });
+                  },
+                ),
+                ItemBottomSheet(
+                  label: translate(StringConst.completedTask),
+                  onTap: () {},
+                ) ,
+                ItemBottomSheet(
+                  label: translate(StringConst.closeTask),
+                  onTap: () {},
+                ),
+              ],
+            ),
           ),
-          ItemBottomSheet(
-            label: translate(StringConst.reportTask),
-            onTap: () {
-              // hide bottom sheet
-              // Routes.instance.pop();
-              // Routes.instance.navigate(TaskReportScreen.router);
-            },
-          ),
-          ItemBottomSheet(
-            label: translate(StringConst.completedTask),
-            onTap: () {},
-          ),
-          ItemBottomSheet(
-            label: translate(StringConst.closeTask),
-            onTap: () {},
+          Visibility(
+            visible: !isAdmin,
+            child: ItemBottomSheet(
+              label: translate(StringConst.reportTask),
+              onTap: () {
+                // hide bottom sheet
+                // Routes.instance.pop();
+                // Routes.instance.navigate(TaskReportScreen.router);
+              },
+            ),
           ),
           ItemBottomSheet(
             label: translate(StringConst.close),

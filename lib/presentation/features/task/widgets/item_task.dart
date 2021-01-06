@@ -17,9 +17,10 @@ import 'package:flutter_translate/flutter_translate.dart';
 
 class ItemTask extends StatelessWidget {
   final TaskEntity task;
+  final bool isAdmin;
   int size = 20;
 
-  ItemTask({Key key, this.task}) : super(key: key);
+  ItemTask({Key key, this.task, this.isAdmin}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,7 @@ class ItemTask extends StatelessWidget {
       onTap: () => Routes.instance.navigate(TaskDetailScreen.route, arguments: {
         'taskId': task.id,
         'taskTitle': task.name,
+        'isAdmin': isAdmin,
       }),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
@@ -91,7 +93,7 @@ class ItemTask extends StatelessWidget {
                         onTap: () => showModalBottomSheet(
                           context: context,
                           builder: (context) {
-                            return TaskOptionSheet(task: task);
+                            return TaskOptionSheet(task: task, isAdmin: isAdmin);
                           },
                           isScrollControlled: true,
                         ),
@@ -105,7 +107,6 @@ class ItemTask extends StatelessWidget {
                           ),
                         ),
                       )
-
                     ],
                   ),
                   SizedBox(height: 10.h),
